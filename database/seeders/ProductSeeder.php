@@ -1,0 +1,167 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+class ProductSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('products')->delete();
+        $products = [
+            [
+                'id' => '1',
+                'product_name' => 'Xe ô tô con Toyota Camry, biển kiểm soát 68A-079.98 đã qua sử dụng.',
+                'categories_id' => '1',
+                'main_image' => 'eula.png',
+                'city_province' => 'Kiên Giang',
+                'description' => 'Xe ô tô con Toyota Camry, biển kiểm soát 68A-079.98 đã qua sử dụng.',
+                'more_description' => 'Biển số đăng ký 68A-079.98',
+                'ownership' => 'Công ty Cổ phần Thương mại Kiên Giang',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '07:00:00 08/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 19/09/2023'),
+                'starting_price' => '275000000',
+                'price_step' => '1000000',
+                'participation_costs' => '200000',
+                'auction_deposit' => '55000000',
+            ],
+            [
+                'id' => '2',
+                'categories_id' => '2',
+                'product_name' => 'Quyền sử dụng đất và tài sản gắn liền với đất tại thửa đất số: 507, Tờ bản đồ số: 5; Địa chỉ: Thôn Hà Xá, xã Triệu Ái, huyện Triệu Phong, tỉnh Quảng Trị',
+                'main_image' => 'eula.png',
+                'city_province' => 'Quảng Trị',
+                'description' => 'Quyền sử dụng đất và tài sản gắn liền với đất tại thửa đất số: 507, Tờ bản đồ số: 5; Địa chỉ: Thôn Hà Xá, xã Triệu Ái, huyện Triệu Phong, tỉnh Quảng Trị',
+                'more_description' => 'Quyền sử dụng đất và tài sản gắn liền với đất tại thửa đất số: 507, Tờ bản đồ số: 5; Địa chỉ: Thôn Hà Xá, xã Triệu Ái, huyện Triệu Phong, tỉnh Quảng Trị; Diện tích: 1125 m2; Hình thức sử dụng: Riêng: 1125 m2, Chung: Không; Mục đích sử dụng: Đất ở tại nông thôn: 550 m2, đất trồng cây hàng năm khác 575 m2; Thời hạn sử dụng: Đất ở tại nông thôn: Lâu dài, Đất trồng cây hàng năm khác 575m2 sử dụng đất đến ngày 01/07/2064; theo Giấy chứng nhận QSD đất, quyền sở hữu nhà ở và tài sản khác gắn liền với đất số: CX 912012, số vào sổ cấp GCN: CS 01730 do Sở Tài nguyên và Môi trường Quảng Trị cấp ngày 18/11/2020 cho bà Hồ Thị Thú. (Chi tiết theo Báo cáo kết quả thẩm định giá trị tài sản số 811/2023/BC-TĐTS ngày 31/03/2023 của Trung tâm Thẩm định tài sản – Ban điều hành kinh doanh Ngân hàng TMCP Sài Gòn - Hà Nội). ',
+                'ownership' => 'Ngân hàng TMCP Sài Gòn – Hà Nội (SHB)',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 08/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '17:00:00 15/09/2023'),
+                'starting_price' => '3583000000',
+                'price_step' => '10000000',
+                'participation_costs' => '500000',
+                'auction_deposit' => '358000000',
+            ],
+            [
+                'id' => '3',
+                'categories_id' => '3',
+                'product_name' => 'Quyền sử dụng 1.206 m2 đất và tài sản gắn liền trên đất của hộ ông Kiều Văn Phong',
+                'main_image' => 'eula.png',
+                'city_province' => 'Hòa Bình',
+                'description' => 'Quyền sử dụng 1.206 m2 đất và tài sản gắn liền trên đất của hộ ông Kiều Văn Phong',
+                'more_description' => 'Quyền sử dụng 1.206 m2 đất và tài sản gắn liền trên đất của hộ ông Kiều Văn Phong, địa chỉ thửa đất: khu 4, thị trấn Kỳ Sơn, huyện Kỳ Sơn, tỉnh Hòa Bình, nay là khu 2 phường Kỳ Sơn thành phố Hòa Bình',
+                'ownership' => 'Chi cục thi hành án dân sự Thành phố Hòa Bình, tỉnh Hòa Bình',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 12/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 22/09/2023'),
+                'starting_price' => '1341293063',
+                'price_step' => '20000000',
+                'participation_costs' => '500000',
+                'auction_deposit' => '200000000',
+            ],
+            [
+                'id' => '4',
+                'categories_id' => '4',
+                'product_name' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Đấu giá 01 xe ô tô khách nhãn hiệu Toyota Hiace, số chỗ ngồi 16 chỗ, BKS 31A-5188 của Sở Nội vụ thành phố Hà Nội',
+                'main_image' => 'eula.png',
+                'city_province' => 'Hà Nội',
+                'description' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Đấu giá 01 xe ô tô khách nhãn hiệu Toyota Hiace, số chỗ ngồi 16 chỗ, BKS 31A-5188 của Sở Nội vụ thành phố Hà Nội',
+                'more_description' => 'Đấu giá 01 xe ô tô khách nhãn hiệu Toyota Hiace, số chỗ ngồi 16 chỗ, BKS 31A-5188 của Sở Nội vụ thành phố Hà Nội; màu sơn: Xanh; Loại xe: Khách; Năm sản xuất: 2001; Nước sản xuất: Nhật Bản',
+                'ownership' => 'Sở Nội vụ Thành phố Hà Nội',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 21/09/2023'),
+                'starting_price' => '18730000',
+                'price_step' => '500000',
+                'participation_costs' => '50000',
+                'auction_deposit' => '3746000',
+            ],
+            [
+                'id' => '5',
+                'categories_id' => '5',
+                'product_name' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số CB490765, số vào sổ cấp GCN CT02341 do UBND tỉnh Lai Châu cấp ngày 15/08/2016',
+                'main_image' => 'eula.png',
+                'city_province' => 'Lai Châu',
+                'description' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số CB490765, số vào sổ cấp GCN CT02341 do UBND tỉnh Lai Châu cấp ngày 15/08/2016',
+                'more_description' => 'Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số CB490765, số vào sổ cấp GCN CT02341 do UBND tỉnh Lai Châu cấp ngày 15/08/2016. Là tài sản phát mại của Agribank Chi nhánh thành phố Lai Châu',
+                'ownership' => 'Agribank - Chi nhánh thành phố Lai Châu',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 15/09/2023'),
+                'starting_price' => '4617000000',
+                'price_step' => '20000000',
+                'participation_costs' => '500000',
+                'auction_deposit' => '300000000',
+            ],
+            [
+                'id' => '6',
+                'categories_id' => '4',
+                'product_name' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Xe ô tô con TOYOTA màu đen; BKS 25A-008.52',
+                'main_image' => 'eula.png',
+                'city_province' => 'Lai Châu',
+                'description' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Xe ô tô con TOYOTA màu đen; BKS 25A-008.52',
+                'more_description' => 'Đấu giá Xe ô tô con TOYOTA màu đen; BKS 25A-008.52; số máy 1NZX021251; số khung: 9133A9501900; 05 chỗ; Năm sản xuất: 2010; Nước sản xuất: Việt Nam. Là tài sản phát mại của Agribank Chi nhánh thành phố Lai Châu',
+                'ownership' => 'Agribank - Chi nhánh thành phố Lai Châu',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 13/09/2023'),
+                'starting_price' => '91854000',
+                'price_step' => '5000000',
+                'participation_costs' => '150000',
+                'auction_deposit' => '10000000',
+            ],
+            [
+                'id' => '7',
+                'categories_id' => '3',
+                'product_name' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số BT 009338, số vào sổ cấp GCN CH 00525 do UBND tỉnh Lai Châu cấp',
+                'main_image' => 'eula.png',
+                'city_province' => 'Lai Châu',
+                'description' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số BT 009338, số vào sổ cấp GCN CH 00525 do UBND tỉnh Lai Châu cấp',
+                'more_description' => 'Đấu giá Quyền sử dụng đất và tài sản khác gắn liền với đất theo GCN số BT 009338, số vào sổ cấp GCN CH 00525 do UBND tỉnh Lai Châu cấp ngày 17/12/2014. Là tài sản phát mại của Agribank Chi nhánh thành phố Lai Châu',
+                'ownership' => 'Agribank - Chi nhánh thành phố Lai Châu',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 27/09/2023'),
+                'starting_price' => '2300000000',
+                'price_step' => '10000000',
+                'participation_costs' => '500000',
+                'auction_deposit' => '120000000',
+            ],
+            [
+                'id' => '8',
+                'categories_id' => '2',
+                'product_name' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Đấu giá Lô tài sản của Công ty TNHH MTV Phúc Lộc LC thuộc dự án Nhà máy sản xuất gạch không nung tại Bản Nậm Cung, xã Mường So, huyện Phong Thổ, tỉnh Lai Châu',
+                'main_image' => 'eula.png',
+                'city_province' => 'Lai Châu',
+                'description' => 'Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá Đấu giá Lô tài sản của Công ty TNHH MTV Phúc Lộc LC thuộc dự án Nhà máy sản xuất gạch không nung tại Bản Nậm Cung, xã Mường So, huyện Phong Thổ, tỉnh Lai Châu',
+                'more_description' => 'Đấu giá Xe ô tô con TOYOTA màu đen; BKS 25A-008.52; số máy 1NZX021251; số khung: 9133A9501900; 05 chỗ; Năm sản xuất: 2010; Nước sản xuất: Việt Nam. Là tài sản phát mại của Agribank Chi nhánh thành phố Lai Châu',
+                'ownership' => 'Agribank - Chi nhánh thành phố Lai Châu',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2023'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 15/09/2023'),
+                'starting_price' => '10935000000',
+                'price_step' => '30000000',
+                'participation_costs' => '500000',
+                'auction_deposit' => '550000000',
+            ],
+            [
+                'id' => '9',
+                'categories_id' => '1',
+                'product_name' => 'Hàng hóa các loại tịch thu đã được phê duyệt chuyển bán đấu giá theo quyết định số 3214/QĐ-XPVPHC ngày 09/7/2021 của đội QLTT số 22',
+                'main_image' => '96546842_p0_master1200.jpg',
+                'city_province' => 'Hà Nội',
+                'description' => 'Hàng hóa các loại tịch thu đã được phê duyệt chuyển bán đấu giá theo quyết định số 3214/QĐ-XPVPHC ngày 09/7/2021 của đội QLTT số 22.',
+                'more_description' => 'Hàng hóa các loại tịch thu đã được phê duyệt chuyển bán đấu giá theo quyết định số 3214/QĐ-XPVPHC ngày 09/7/2021 của đội QLTT số 22.',
+                'ownership' => 'Cục quản lý thị trường thành phố Hà Nội',
+                'registration_time' => Carbon::createFromFormat('H:i:s d/m/Y', '08:00:00 11/09/2022'),
+                'registration_deadline' => Carbon::createFromFormat('H:i:s d/m/Y', '16:00:00 15/09/2022'),
+                'starting_price' => '97370000',
+                'price_step' => '2000000',
+                'participation_costs' => '150000',
+                'auction_deposit' => '10000000',
+            ],
+        ];
+        DB::table('products')->insert($products);
+    }
+}
