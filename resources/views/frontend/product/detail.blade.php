@@ -1,41 +1,43 @@
 @extends('frontend/master/master')
-@section('title', "Chi tiết sản phẩm đấu giá")
+@section('title', 'Chi tiết sản phẩm đấu giá')
 @section('main')
 
     <div class="container pt-50 pb-50">
         <div class="row">
             <div class="col-lg-12">
                 <div class="detail-title">
-                    <h2>Công ty Đấu giá Hợp danh Vạn Thành An thông báo đấu giá 01 xe ô tô nhãn hiệu Ford Ranger đã qua
-                        sử dụng. Biển kiểm soát: 72C-188.45</h2>
+                    <h2>{{ $product->product_name }}</h2>
                 </div>
             </div>
             <div class="col-lg-12 col-md-12">
                 <div class="detail-tab">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
-                                aria-selected="true">Thông tin cuộc đấu giá</button>
+                            <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                                type="button" role="tab" aria-controls="nav-home" aria-selected="true">Thông tin cuộc
+                                đấu giá</button>
                             <button class="nav-link " id="nav-profile-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
                                 aria-selected="false">Những người tham gia đấu giá</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
-                                aria-selected="false">Hồ sơ tham gia đấu giá</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                                type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Hồ sơ tham
+                                gia đấu giá</button>
                             <!-- <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button> -->
                         </div>
                     </nav>
                     <div class="tab-content " id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-                            aria-labelledby="nav-home-tab" tabindex="0">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+                            tabindex="0">
                             <div class="row">
                                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
                                     <div class="detail-img">
-                                        <div id="carouselExampleInterval" class="carousel slide"
-                                            data-bs-ride="carousel">
+                                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active" data-bs-interval="10000">
+                                                    <img src="../upload/img/{{ $product->main_image }}"
+                                                        class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item" data-bs-interval="3000">
                                                     <img src="img/96546842_p0_master1200.jpg" class="d-block w-100"
                                                         alt="...">
                                                 </div>
@@ -68,20 +70,19 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Người có tài sản:</span>
-                                            <span class="detail-value">Ngân hàng TMCP Việt Nam Thịnh Vượng (VP
-                                                bank)</span>
+                                            <span class="detail-value">{{ $product->ownership }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Ngày công bố:</span>
-                                            <span class="detail-value">28/08/2023</span>
+                                            <span class="detail-value">{{ $product->registration_time }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký từ:</span>
-                                            <span class="detail-value">08:00:00 28/08/2023</span>
+                                            <span class="detail-value">{{ $product->registration_time }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký đến:</span>
-                                            <span class="detail-value">17:00:00 12/09/2023</span>
+                                            <span class="detail-value">{{ $product->registration_deadline }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Thời gian bắt đầu cuộc đấu giá:</span>
@@ -94,103 +95,139 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Giá khởi điểm:</span>
-                                            <span class="detail-value">674.000.000 VNĐ</span>
+                                            <span class="detail-value">{{ number_format($product->starting_price) }}
+                                                VNĐ</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Bước giá:</span>
-                                            <span class="detail-value">3.000.000VNĐ</span>
+                                            <span class="detail-value">{{ number_format($product->price_step) }} VNĐ</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Chi phí tham gia đấu giá:</span>
-                                            <span class="detail-value">500.000 VNĐ</span>
+                                            <span class="detail-value">{{ number_format($product->participation_costs) }}
+                                                VNĐ</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Tiền đặt trước:</span>
-                                            <span class="detail-value">134.800.000 VNĐ</span>
+                                            <span class="detail-value">{{ number_format($product->auction_deposit) }}
+                                                VNĐ</span>
                                         </div>
                                         <div class="detail-row">
                                             <!-- <button class="detail-btn">
-                                            Đăng ký tham gia đấu giá
-                                            </button>  -->
+                                                            Đăng ký tham gia đấu giá
+                                                            </button>  -->
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary detail-btn" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">
-                                                Đăng ký tham gia đấu giá
-                                            </button>
+                                            {{-- @dd(Auth::guest()) --}}
+                                            @if (Auth::guard('web')->check())
+                                                <button type="button" class="btn btn-primary detail-btn"
+                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Đăng ký tham gia đấu giá
+                                                </button>
+                                            @else
+                                                <a class="btn btn-primary detail-btn center-a-button"
+                                                    href="{{ route('user.login') }}">
+                                                    Đăng ký tham gia đấu giá
+                                                </a>
+                                            @endif
+
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Đăng ký tham
-                                                                gia đấu giá
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row">
-                                                                <p class="info-detail-modal">Số tiền cần phải nộp</p>
+                                                    <form action="{{route('paymentsite.post')}}" method="post">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Đăng ký
+                                                                    tham
+                                                                    gia đấu giá
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
                                                                 <div class="row">
-                                                                    <div class="col-7"><span>Chi phí tham gia đấu giá:</span></div>
-                                                                    <div class="col-5">
-                                                                        <!-- <span><strong>999/TP/ĐG-CCHN</strong></span> -->
-                                                                        <input class="input-modal form-control-sm form-control-plaintext" type="text" disabled value="150000">
-                                                                    </div>
-                                                                    <div class="col-7 pt-20"><span>Số tiền đặt trước:</span></div>
-                                                                    <div class="col-5 pt-20">
-                                                                        <input class="input-modal form-control-sm form-control-plaintext" type="text" disabled value="10000000">
+                                                                    <p class="info-detail-modal">Số tiền cần phải nộp</p>
+                                                                    <div class="row">
+                                                                        <div class="col-7"><span>Chi phí tham gia đấu
+                                                                                giá:</span></div>
+                                                                        <div class="col-5">
+                                                                            <!-- <span><strong>999/TP/ĐG-CCHN</strong></span> -->
+                                                                            <input
+                                                                                class="input-modal form-control-sm form-control-plaintext"
+                                                                                type="text" disabled value="{{number_format($product->participation_costs)}} VNĐ">
+                                                                        </div>
+                                                                        <div class="col-7 pt-20"><span>Số tiền đặt
+                                                                                trước:</span></div>
+                                                                        <div class="col-5 pt-20">
+                                                                            <input
+                                                                                class="input-modal form-control-sm form-control-plaintext"
+                                                                                type="text" disabled value="{{ number_format($product->auction_deposit) }} VNĐ">
 
-                                                                    </div>
-                                                                    <div class="col-7 pt-20"><span>Tổng tiền:</span></div>
-                                                                    <div class="col-5 pt-20">
-                                                                        <input class="input-modal form-control-sm form-control-plaintext" type="text" disabled value="10150000">
-                                                                    </div>
-                                                                    <div class="col-7 pt-20"><span>Bằng chữ:</span></div>
-                                                                    <div class="col-5 pt-20">
-                                                                        <span><strong> Mười Triệu Một Trăm Năm Mươi Nghìn</strong></span>
+                                                                        </div>
+                                                                        <div class="col-7 pt-20"><span>Tổng tiền:</span>
+                                                                        </div>
+                                                                        <div class="col-5 pt-20">
+                                                                            <input
+                                                                                class="input-modal form-control-sm form-control-plaintext"
+                                                                                type="text"  disabled value="{{ number_format($product->auction_deposit + $product->participation_costs) }} VNĐ">
+                                                                                <input type="hidden" name="total_amount" type="text" value="{{$product->auction_deposit + $product->participation_costs}}">
+                                                                        </div>
+                                                                        <div class="col-7 pt-20"><span>Bằng chữ:</span>
+                                                                        </div>
+                                                                        <div class="col-5 pt-20">
+                                                                            <span><strong id="convert-to-string"> Mười Triệu Một Trăm Năm Mươi Nghìn</strong></span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row pb-20">
-                                                                <p class="info-detail-modal">Thông tin nhận lại khoản tiền đặt trước</p>
+                                                                <div class="row pb-20">
+                                                                    <p class="info-detail-modal">Thông tin nhận lại khoản
+                                                                        tiền đặt trước</p>
+                                                                    <div class="row">
+                                                                        <div class="col-7"><span>Số tài khoản:</span>
+                                                                        </div>
+                                                                        <div class="col-5">
+                                                                            <input name="bank_account_number" type="text">
+                                                                        </div>
+                                                                        <div class="col-7 pt-20"><span>Ngân hàng:</span>
+                                                                        </div>
+                                                                        <div class="col-5 pt-20">
+                                                                            <input name="bank" type="text">
+                                                                        </div>
+                                                                        <div name='account_holder_name' class="col-7 pt-20"><span>Chủ tài
+                                                                                khoản:</span></div>
+                                                                        <div class="col-5 pt-20">
+                                                                            <input name="account_holder_name" type="text">
+                                                                        </div>
+                                                                        <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                                                        <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="row">
-                                                                    <div class="col-7"><span>Số tài khoản:</span></div>
-                                                                    <div class="col-5">
-                                                                        <input type="text">
+                                                                    <div class="col-7 pt-20">
+                                                                        <label class="dk-dv" for="terms"><a
+                                                                                target="_blank"
+                                                                                href="https://daugiaviet.vn/files/huong_dan_su_dung.pdf">Điều
+                                                                                khoản và dịch vụ</a></label>
                                                                     </div>
-                                                                    <div class="col-7 pt-20"><span>Ngân hàng:</span></div>
                                                                     <div class="col-5 pt-20">
-                                                                        <input type="text">
-                                                                    </div>
-                                                                    <div class="col-7 pt-20"><span>Chủ tài khoản:</span></div>
-                                                                    <div class="col-5 pt-20">
-                                                                        <input type="text">
+                                                                        <input type="checkbox" id="terms"
+                                                                            name="terms" required>
+                                                                        <span>Tôi đã đọc và nghiên cứu đầy đủ các thông tin
+                                                                            của hồ sơ tham dự đấu giá. Tôi cam kết thực hiện
+                                                                            đúng các quy định trong hồ sơ và quy định pháp
+                                                                            luật liên quan</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-7 pt-20">
-                                                                    <label class="dk-dv" for="terms"><a target="_blank" href="https://daugiaviet.vn/files/huong_dan_su_dung.pdf">Điều khoản và dịch vụ</a></label>
-                                                                </div>
-                                                                <div class="col-5 pt-20">
-                                                                    <input type="checkbox" id="terms" name="terms" required>
-                                                                    <span>Tôi đã đọc và nghiên cứu đầy đủ các thông tin của hồ sơ tham dự đấu giá. Tôi cam kết thực hiện đúng các quy định trong hồ sơ và quy định pháp luật liên quan</span>
-                                                                </div>
-                                                                    
-
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Thanh toán</button>
                                                             </div>
-
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save
-                                                                changes</button>
-                                                        </div>
-                                                    </div>
+                                                        @csrf
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +266,8 @@
                         <div class="tab-pane fade " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"
                             tabindex="0">
                             <a target="_blank" class="custom-a-tag"
-                                href="../upload/Vạn Thành An - chi nhánh Hà Nội_New folder (2)_72C-188.45    25-08_compressed.pdf">Thông tin đấu giá</a>
+                                href="../upload/Vạn Thành An - chi nhánh Hà Nội_New folder (2)_72C-188.45    25-08_compressed.pdf">Thông
+                                tin đấu giá</a>
                         </div>
                         <!-- <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div> -->
                     </div>
@@ -305,4 +343,8 @@
             </div>
         </div>
     </div>
-    @endsection
+    <script>
+        document.getElementById("convert-to-string").textContent = convertNumberToWords({{$product->auction_deposit + $product->participation_costs}});
+        console.log(convertNumberToWords({{$product->auction_deposit + $product->participation_costs}}));
+    </script>
+@endsection

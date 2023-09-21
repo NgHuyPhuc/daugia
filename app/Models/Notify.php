@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notify extends Model
 {
     use HasFactory;
-    protected $fllable = [
+    protected $fillable = [
         'id',
         'info',
         'link',

@@ -83,4 +83,19 @@ class ProductController extends Controller
         $request->session()->flash('alert', 'Đã xóa thành công');
         return redirect()->route('product.home');
     }
+    public function detail(Request $request)
+    {
+        $data['product'] = Product::findOrFail($request->id);
+        // $data['product'] = Product::find($request->id);
+        // dd($data['product']->category);
+        // dd($data['product']);
+        return view('backend.product.productdetail', $data);
+    }
+    public function search(Request $request)
+    {
+        $data['products'] = Product::where('id','like','%'.$request->keyword.'%')->orwhere('product_name','like','%'.$request->keyword.'%')->paginate(5);
+        // dd($data);
+        return view('backend.product.search', $data);
+    }
+
 }

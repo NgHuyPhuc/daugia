@@ -752,15 +752,18 @@ h1.cpn-name {
     border: none;
     border-radius: 15px;
 }
-.bd-btm{
+
+.bd-btm {
     border-bottom: 1px solid #333;
 }
-.info-detail-modal{
+
+.info-detail-modal {
     border-top: 1px solid rgba(0, 0, 0, 0.35);
     margin-top: 5px;
     padding-top: 5px;
     font-weight: bold;
 }
+
 .input-modal {
     border-radius: unset;
     text-transform: capitalize;
@@ -772,9 +775,20 @@ h1.cpn-name {
     box-sizing: border-box;
     outline: none;
 }
-.dk-dv{
+
+.dk-dv {
     text-decoration: underline;
 }
+
+
+.center-a-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* Đảm bảo chiều cao cố định cho thẻ a */
+}
+
 /* lg */
 @media (min-width: 992px) {
     .reponsive-menu {

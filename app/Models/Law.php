@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Law extends Model
 {
     use HasFactory;
-    protected $fllable = [
+    protected $fillable = [
         'id',
         'info',
         'link',

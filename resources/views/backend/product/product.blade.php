@@ -35,44 +35,55 @@
                             </div>
                             @endif
                             
-                            <a href="{{route('product.create')}}" class="btn btn-primary">Thêm sản phẩm</a>
+                            <a href="{{ route('product.create') }}" class="btn btn-primary">Thêm mới sản phẩm đấu giá</a>
+                                <form style="margin-top: 20px" action="{{ route('product.search') }}" method="get">
+                                    <label for="">Nhập thông tin tìm kiếm:</label>
+                                    <input type="text" name="keyword">
+                                    <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                                </form>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
                                     <tr class="bg-primary">
                                         <th>ID</th>
                                         <th>Thông tin sản phẩm</th>
-                                        <th>Giá khởi điểm</th>
+                                        <th width='13%'>Giá khởi điểm</th>
                                         <th>Bước giá</th>
                                         <th>Phí đăng ký</th>
                                         <th width='7%'>Tùy chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($products as $item)
-                                    <tr>
-                                        <td>{{$item->id}}</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-4"><img style="max-width: 100%" src="../upload/img/{{$item->main_image}}" alt="Áo đẹp" width="100px" class="thumbnail"></div>
-                                                <div class="col-md-8">
-                                                    {{-- <p><strong>Mã sản phẩm : SP01</strong></p> --}}
-                                                    <p><strong>{{$item->product_name}}</strong></p>
+                                    @foreach ($products as $item)
+                                        <tr>
+                                            <td><a href="{{route('product.detail',['id' => $item->id])}}" target="_blank">{{ $item->id }}</a> </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-md-3"><img style="max-width: 100%"
+                                                            src="../upload/img/{{ $item->main_image }}" alt="Áo đẹp"
+                                                            width="100px" class="thumbnail"></div>
+                                                    <div class="col-md-9">
+                                                        {{-- <p><strong>Mã sản phẩm : SP01</strong></p> --}}
+                                                        <p><a href="{{route('product.detail',['id' => $item->id])}}" target="_blank"><strong>{{ $item->product_name }}</strong></a></p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>{{number_format($item->starting_price)}} VND</td>
-                                        <td>{{number_format($item->participation_costs)}} VND</td>
-                                        <td>
-                                            <p>{{number_format($item->price_step)}} VND</p>
-                                        </td>
-                                        <td>
-                                            <a href="{{route('product.edit',['id' => $item->id])}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
-                                            <a href="{{route('product.delete',['id' => $item->id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                    
+                                            </td>
+                                            <td>{{ number_format($item->starting_price) }} VND</td>
+                                            <td>{{ number_format($item->participation_costs) }} VND</td>
+                                            <td>
+                                                <p>{{ number_format($item->price_step) }} VND</p>
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('product.edit', ['id' => $item->id]) }}"
+                                                    class="btn btn-warning"><i class="fa fa-pencil"
+                                                        aria-hidden="true"></i> Sửa</a>
+                                                <a href="{{ route('product.delete', ['id' => $item->id]) }}"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')"
+                                                    class="btn btn-danger"><i class="fa fa-trash"
+                                                        aria-hidden="true"></i> Xóa</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div align='right'>

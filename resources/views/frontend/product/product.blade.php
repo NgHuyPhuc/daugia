@@ -1,5 +1,5 @@
 @extends('frontend/master/master')
-@section('title', "Danh sách sản phẩm đấu giá")
+@section('title', 'Danh sách sản phẩm đấu giá')
 @section('main')
 
     <div class="trending-area">
@@ -48,22 +48,23 @@
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/img/10_day_nui_dep_nhat_chau_au.jpg" class="d-block w-100" alt="...">
+                                    <img src="../upload/img/10_day_nui_dep_nhat_chau_au.jpg" class="d-block w-100"
+                                        alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/img/22017.jpg" class="d-block w-100" alt="...">
+                                    <img src="../upload/img/22017.jpg" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="/img/236008.jpg" class="d-block w-100" alt="...">
+                                    <img src="../upload/img/236008.jpg" class="d-block w-100" alt="...">
                                 </div>
                             </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
@@ -106,232 +107,55 @@
                 <div class="col-lg-5 col-md-6 col-sm-12">
                     <div class="d-flex">
                         <p class="df-center text-search">Tìm kiếm:</p>
-                        <form action="" method="post">
+                        <form action="{{ route('productsite.search') }}" method="get">
                             <div class="input-group">
-                                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                                    aria-describedby="search-addon" />
-                                <button type="button" class="btn btn-outline-primary">search</button>
+                                <input type="search" class="form-control rounded" name="keyword" placeholder="Search"
+                                    aria-label="Search" aria-describedby="search-addon" />
+                                <button type="submit" class="btn btn-outline-primary">search</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row pt-30">
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
+                    @foreach ($products as $item)
+                        <div class="col-lg-4 col-md-4 pb-20">
+
+                            <div class="single-new">
+                                <a target="_blank" href="{{ route('productsite.detail', ['id' => $item->id]) }}">
+                                    <div class="new-img">
+                                        <img src="../upload/img/{{ $item->main_image }}" alt="">
+                                    </div>
+                                    <div class="new-cap">
+                                        <h4><a href="#" class="ellipsis">{{ $item->product_name }}</a></h4>
+                                    </div>
+                                </a>
+                                <div class="what-info">
+                                    <div class="icon"><img src="../frontend/img//daugia.svg" alt=""
+                                            class="icon-bua"></div>
+                                    <div class="text">
+                                        <span>Giá khởi điểm:
+                                            <strong>{{ number_format($item->starting_price) }} VNĐ</strong>
+                                        </span>
+                                        <span>Bước Giá:
+                                            <strong>{{ number_format($item->price_step) }} VNĐ</strong>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 pb-20">
-                        <div class="single-new">
-                            <div class="new-img">
-                                <img src="/img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg" alt="">
-                            </div>
-                            <div class="new-cap">
-                                <h4><a href="#" class="ellipsis">Công ty Đấu giá Hợp danh Tân Đại Phát Thông báo Đấu
-                                        giá: Tài sản 2: Quyền cho thuê Tầng 4 + Tầng 5 Nhà A7. Diện tích: 552
-                                        m2/tầng. Thời gian thuê: 03 năm</a></h4>
-                            </div>
-                            <div class="what-info">
-                                <div class="icon"><img src="/img//daugia.svg" alt="" class="icon-bua"></div>
-                                <div class="text">
-                                    <span>Giá khởi điểm:
-                                        <strong>1.663.200.000 VNĐ</strong>
-                                    </span>
-                                    <span>Bước Giá:
-                                        <strong>18.000.000 VNĐ</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
                 <div class="custom-pagination">
-                    <ul class="pagination">
+                    {{-- <ul class="pagination">
                         <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
                         <li class="page-item"><a class="page-link" href="#">2</a></li>
                         <li class="page-item"><a class="page-link" href="#">3</a></li>
                         <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-                    </ul> 
+                    </ul> --}}
+                    {{-- {{$products->links('')}} --}}
+                    {{$products->links('frontend.pagination.pagination')}}
                 </div>
             </div>
         </div>

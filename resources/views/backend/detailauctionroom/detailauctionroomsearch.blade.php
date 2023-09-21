@@ -79,7 +79,8 @@
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->product->product_name }}</td>
                                                 <td>{{ $item->id_auction_room }}</td>
-                                                <td><a href="{{route('useradminsite.detail',['id' =>  $item->user->id])}}" target="_blank">{{ $item->user->name }}</a></td>
+                                                <td><a href="{{ route('useradminsite.detail', ['id' => $item->user->id]) }}"
+                                                        target="_blank">{{ $item->user->name }}</a></td>
                                                 <td>{{ number_format($item->bidding_price) }} VND</td>
                                                 <td>
                                                     <a href="{{ route('detailauctionroom.edit', ['id' => $item->id]) }}"
@@ -133,26 +134,26 @@
         }
 
         $(document).ready(function() {
-        $('#id_product').on('input', function() {
-            var id = $(this).val();
-            if (id !== '') {
-                $.ajax({
-                    url: '/admin/get-product-name/' + id,
-                    type: 'GET',
-                    // data: { id: id },
-                    success: function(response) {
-                        $('#prd_name').text(response);
-                    },
-                    error: function(xhr) {
-                        $('#prd_name').text('Id hàng hóa không tồn tại');
-                        console.log(xhr.responseText);
-                    }
-                });
-            } else {
-                $('#prd_name').text('tên hàng hóa');
-            }
+            $('#id_product').on('input', function() {
+                var id = $(this).val();
+                if (id !== '') {
+                    $.ajax({
+                        url: '/admin/get-product-name/' + id,
+                        type: 'GET',
+                        // data: { id: id },
+                        success: function(response) {
+                            $('#prd_name').text(response);
+                        },
+                        error: function(xhr) {
+                            $('#prd_name').text('Id hàng hóa không tồn tại');
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#prd_name').text('tên hàng hóa');
+                }
+            });
         });
-    });
     </script>
 
 

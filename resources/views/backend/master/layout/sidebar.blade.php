@@ -14,7 +14,7 @@
 			<li><a href="{{route('detailauctionroom.home')}}"><svg class="glyph stroked bag"><use xlink:href="#stroked-bag"></use></svg> Phòng đấu giá Chi tiết</a></li>
 
 			<li role="presentation" class="divider"></li>
-			<li><a href="order.html"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad" /></svg> Đơn hàng</a></li>
+			<li><a href="{{route('payment.home')}}"><svg class="glyph stroked notepad "><use xlink:href="#stroked-notepad" /></svg> Đơn hàng</a></li>
 			@if (Auth::user()->level == 1)
 			<li role="presentation" class="divider"></li>
 			<li><a href="{{route('useradminsite.home')}}"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Quản lý thành viên</a></li>

@@ -9,10 +9,12 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Law\LawController;
 use App\Http\Controllers\Admin\Notify\NotifyController;
+use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\User\UserAdminController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Site\Auth\LoginController;
+use App\Http\Controllers\Site\Payment\PaymentController as PaymentPaymentController;
 use App\Http\Controllers\Site\SiteController\SiteController;
 use App\Models\DetailAuctionRoom;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +43,8 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
     Route::get('/',[AdminController::class,'index'])->name('admin.home');
     Route::prefix('/product')->middleware('auth:webadmin')->group(function () {
         Route::get('/',[ProductController::class,'index'])->name('product.home');
+        Route::get('/detail/{id}',[ProductController::class,'detail'])->name('product.detail');
+        Route::get('/search',[ProductController::class,'search'])->name('product.search');
         Route::get('/create',[ProductController::class,'create'])->name('product.create');
         Route::post('/postcreate',[ProductController::class,'postcreate'])->name('product.postcreate');
         Route::get('/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
@@ -120,6 +124,15 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
         Route::post('/postedit/{id}',[AboutController::class,'postedit'])->name('about.postedit');
         Route::get('/delete/{id}',[AboutController::class,'delete'])->name('about.delete');
     });
+    Route::prefix('/payment')->middleware('auth:webadmin')->group(function () {
+        Route::get('/',[PaymentController::class,'index'])->name('payment.home');
+        Route::get('/search',[PaymentController::class,'search'])->name('payment.search');
+        Route::get('/create',[PaymentController::class,'create'])->name('payment.create');
+        Route::post('/postcreate',[PaymentController::class,'postcreate'])->name('payment.postcreate');
+        Route::get('/edit/{id}',[PaymentController::class,'edit'])->name('payment.edit');
+        Route::post('/postedit/{id}',[PaymentController::class,'postedit'])->name('payment.postedit');
+        Route::get('/delete/{id}',[PaymentController::class,'delete'])->name('payment.delete');
+    });
     Route::get('/get-product-name/{id}', [AuctionRoomController::class, 'getProductName']);
     Route::get('/get-dgv-name/{id}', [AuctionRoomController::class, 'getDgvName']);
     // Route::prefix('/about')->middleware('auth:webadmin')->group(function () {
@@ -142,10 +155,11 @@ Route::get('/logout',[LoginController::class,'logout'])->name('user.logout');
 
 Route::get('/',[SiteController::class,'index'])->name('site.home');
 Route::prefix('product')->group(function () {
-    Route::get('/',[SiteController::class,'products']);
-    Route::get('/detail',[SiteController::class,'detail']);
+    Route::get('/',[SiteController::class,'products'])->name('productsite.home');
+    Route::get('/search',[SiteController::class,'search'])->name('productsite.search');
+    Route::get('/detail',[SiteController::class,'detail'])->name('productsite.detail');
 });
-
+Route::post('/payment',[PaymentPaymentController::class,'payment'])->name('paymentsite.post');
 Route::get('/register',[SiteController::class,'register'])->name('user.register')->middleware('checkuser');
 Route::get('/listroom',[SiteController::class,'listroom'])->name('user.listroom');
 Route::get('/about',[SiteController::class,'about'])->name('user.about');

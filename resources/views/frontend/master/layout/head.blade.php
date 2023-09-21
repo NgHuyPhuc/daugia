@@ -15,4 +15,6 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/detail.css">
+    <script src="js/converttostring.js"></script>
+
 </head>
