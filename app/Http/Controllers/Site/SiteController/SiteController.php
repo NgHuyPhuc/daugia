@@ -40,18 +40,6 @@ class SiteController extends Controller
         $data['product'] = Product::findOrFail($request->id);
         return view('frontend.product.detail',$data);
     }
-    public function listroom()
-    {
-        return view('frontend.room.listroom');
-    }
-    public function room()
-    {
-        return 'room';
-    }
-    public function profile()
-    {
-        return view('frontend.profile.profile');
-    }
     public function search(Request $request)
     {
         $keyword = $request->keyword;

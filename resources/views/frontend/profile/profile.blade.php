@@ -1,59 +1,80 @@
 @extends('frontend/master/master')
-@section('title', "Thông tin cá nhân")
+@section('title', 'Thông tin cá nhân')
 @section('main')
 
     <div class="container mb-50">
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="pro-detail-tab nav-tabs">
-                    <div class="tab-item nav-link active"><a class="active" href="">Thông tin</a></div>
-                    <div class="tab-item nav-link"><a href="">Đổi mật khẩu</a></div>
+                    <div class="tab-item nav-link active"><a class="active" href="{{route('user.profile')}}">Thông tin</a></div>
+                    <div class="tab-item nav-link"><a href="{{route('user.profilechangepass')}}">Đổi mật khẩu</a></div>
                 </div>
             </div>
+            @if (session('alert'))
+                    <div id="offdiv" class="text-success" role="alert">
+                        <h3>{{ session('alert') }}</h3>
+                    </div>
+                @endif
+                {{-- <div id="offdiv" class="text-success bg-success" role="alert">
+                    <h3>Cập nhật thông tin thành công</h3>
+                </div> --}}
+                
             <div class="col-lg-12 col-md-12">
-                <form action="">
+                <form action="{{ route('user.postprofile') }}" method="POST">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="form-email">Email</label><code>*</code>
-                                <input type="text" name="email" class="form-control" id="form-email" placeholder="Email" value="abc" required>
+                                <input type="text" name="email" class="form-control" id="form-email"
+                                    placeholder="Email" value="{{ $profile->email }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="form-name">Họ tên</label><code>*</code>
-                                <input type="text" name="name" class="form-control" id="form-name" placeholder="Họ tên" value="Họ tên" required>
+                                <input type="text" name="name" class="form-control" id="form-name"
+                                    placeholder="Họ tên" value="{{ $profile->name }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="form-dob">Ngày sinh</label><code>*</code>
-                                <input type="date" name="dob" class="form-control" id="form-dob" value="2001-06-22" required>
+                                <input type="date" name="dob" class="form-control" id="form-dob"
+                                    value="{{ $profile->dob }}" required>
                             </div>
                             <div class="form-group">
-                                <label for="form-phone">Số điện thoại (Nên sử dụng số di động để nhận tin nhắn thông báo khi cần thiết)</label><code>*</code>
-                                <input type="text" name="phonenumber" class="form-control" id="form-phone" placeholder="Số điện thoại" value="0326691468" required>
+                                <label for="form-phone">Số điện thoại (Nên sử dụng số di động để nhận tin nhắn thông báo khi
+                                    cần thiết)</label><code>*</code>
+                                <input type="text" name="phone" class="form-control" id="form-phone"
+                                    placeholder="Số điện thoại" value="{{ $profile->phone }}" required>
                             </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="form-cmnd">Số CMND/CCCD</label><code>*</code>
-                                <input type="text" name="cmndnumber" class="form-control" id="form-cmnd" placeholder="Số CMND" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="123255" required>
+                                <input type="text" name="cccd" class="form-control" id="form-cmnd"
+                                    placeholder="Số CMND" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    value="{{ $profile->cccd }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="form-date-cmnd">Ngày Cấp CMND/CCCD</label><code>*</code>
-                                <input type="date" name="datecmnd" class="form-control" id="form-noi-cap-cmnd" value="2001-06-22" required>
+                                <input type="date" name="ngay_cap_cccd" class="form-control" id="form-noi-cap-cmnd"
+                                    value="{{ $profile->ngay_cap_cccd }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="form-noi-cap-cmnd">Nơi cấp CMND/CCCD</label><code>*</code>
-                                <input type="text" name="noicapcmnd" class="form-control" id="form-date-cmnd" placeholder="Họ tên" value="Họ tên" required>
+                                <input type="text" name="noi_cap_cccd" class="form-control" id="form-date-cmnd"
+                                    placeholder="Nơi cấp căn cước công dân" value="{{ $profile->noi_cap_cccd }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="form-address">Địa chỉ</label><code>*</code>
-                                <input type="text" name="address" class="form-control" id="form-address" placeholder="Số điện thoại" value="0326691468" required>
+                                <input type="text" name="address" class="form-control" id="form-address"
+                                    placeholder="Địa chỉ" value="{{ $profile->address }}" required>
                             </div>
                         </div>
                         <div class="col-12">
-                            <button type="button" class="btn  btn-success button-effect button-pd">Cập nhật</button>
+                            <button type="submit" class="btn btn-success button-effect button-pd cus-btn-update">Cập
+                                nhật</button>
                         </div>
                     </div>
+                    @csrf
                 </form>
             </div>
         </div>

@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
 @extends('backend/master/master')
 @section('title', 'Danh sách Thông tin giới thiệu')
 @section('main')
@@ -56,9 +59,8 @@
                                         </td>
                                         <td>
                                             <div class=""><img style="max-width: 100%" src="../upload/img/{{$item->img}}" alt="Chứng chỉ đấu giá viên" width="100px" class="thumbnail"></div>
-                                            {{-- {{$item->img}} --}}
                                         </td>
-                                        <td>{{$item->content}}</td>
+                                        <td>{{ str::limit($item->content)}}</td>
                                         <td>
                                             <a href="{{route('about.edit',['id' => $item->id])}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
                                             <a href="{{route('about.delete',['id' => $item->id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa điều luật này?')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>

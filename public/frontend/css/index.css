@@ -779,7 +779,9 @@ h1.cpn-name {
 .dk-dv {
     text-decoration: underline;
 }
-
+.cus-btn-update{
+    background-color: #19875A!important;
+}
 
 .center-a-button {
     display: flex;
