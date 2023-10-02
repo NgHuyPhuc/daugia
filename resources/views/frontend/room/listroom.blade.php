@@ -4,6 +4,13 @@
 
     <div class="whats-news-area pt-50 pb-20">
         <div class="container">
+            @if (session('message'))
+            <div class="alert alert-danger" role="alert">
+                {{session('message')}}
+              </div>
+             
+            @endif
+
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="title-dau-gia">
@@ -13,7 +20,28 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
+                    @foreach ($list as $item)
                     <div class="list-room">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2 pdg-cus-sm">
+                                Phòng đấu giá: {{$item->id}}
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 imgpdg-cus-sm">
+                                <img src="../upload/img/{{$item->product->main_image}}" alt="">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-5 ttpdg-cus-sm">
+                                <a href="{{route('productsite.detail',['id'=>$item->id])}}">{{$item->product->product_name}}</a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-3 joinpdg-cus-sm">
+                                <div class="more-item">
+                                    <a class="" href="{{route('user.autionroom',['id'=> $item->id])}}">Vào phòng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    {{-- <div class="list-room">
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2 pdg-cus-sm">
                                 Phòng đấu giá: 100
@@ -69,26 +97,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="list-room">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-2 pdg-cus-sm">
-                                Phòng đấu giá: 100
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 imgpdg-cus-sm">
-                                <img src="/img/anh-phong-canh-thien-nhien-dep.jpg" alt="">
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-5 ttpdg-cus-sm">
-                                <a href="">Công ty Đấu giá Hợp danh 2E HHT Việt Nam, Thông báo Đấu giá 01 Máy đào bánh
-                                    xích nhãn hiệu DAWOO – 300LCV</a>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-3 joinpdg-cus-sm">
-                                <div class="more-item">
-                                    <a class="" href="">Vào phòng</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

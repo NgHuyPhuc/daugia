@@ -139,7 +139,7 @@
                                         <img src="../upload/img/{{ $item->main_image }}" alt="">
                                     </div>
                                     <div class="new-cap">
-                                        <h4><a href="#" class="ellipsis">{{ $item->product_name }}</a></h4>
+                                        <h4><a target="_blank" href="{{route('productsite.detail',['id'=>$item->id])}}" class="ellipsis">{{ $item->product_name }}</a></h4>
                                     </div>
                                 </a>
                                     <div class="what-info">

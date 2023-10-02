@@ -176,7 +176,7 @@
                                                                         <div class="col-7 pt-20"><span>Bằng chữ:</span>
                                                                         </div>
                                                                         <div class="col-5 pt-20">
-                                                                            <span><strong id="convert-to-string"> Mười Triệu Một Trăm Năm Mươi Nghìn</strong></span>
+                                                                            <span><strong id="convert-to-string"> </strong></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -200,7 +200,13 @@
                                                                             <input name="account_holder_name" type="text">
                                                                         </div>
                                                                         <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                                                        {{-- @dd(Auth::guard('web')->guest()) --}}
+                                                                        @if (Auth::guard('web')->guest())
+
+                                                                        @else
                                                                         <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
+                                                                            
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                                 <div class="row">

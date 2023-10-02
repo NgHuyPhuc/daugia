@@ -40,13 +40,13 @@ class AuctionRoomController extends Controller
     }
     public function postedit(Request $request)
     {
-        $room = new AuctionRoom();
+        // die;
+        $room = AuctionRoom::find($request->id);
         $room->id_product = $request->id_product;
         $room->thoi_gian_bat_dau = $request->thoi_gian_bat_dau;
         $room->thoi_gian_ket_thuc = $request->thoi_gian_ket_thuc;
         $room->id_dgv  = $request->id_dgv;
         $room->state = $request->state;
-
         $room->save();
         $request->session()->flash('alert', 'Đã sửa thành công');
         return redirect()->route('auctionroom.home');

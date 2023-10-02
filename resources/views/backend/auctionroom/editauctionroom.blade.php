@@ -10,7 +10,7 @@
     <!--/.row-->
     <div class="row">
         <div class="col-xs-6 col-md-12 col-lg-12">
-            <form method="post" enctype="multipart/form-data" action="{{ route('auctionroom.postcreate') }}">
+            <form method="post" enctype="multipart/form-data" action="{{ route('auctionroom.postedit',['id' => $room->id]) }}">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Sửa Phòng đấu giá</div>
                     <div class="panel-body">
@@ -37,8 +37,8 @@
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select class="form-control" name="state" >
-                                        <option value="0">Phòng đóng</option>
-                                        <option value="1">Phòng mở</option>
+                                        <option {{$room->state == 0 ? 'selected' : '' }} value="0">Phòng đóng</option>
+                                        <option {{$room->state == 1 ? 'selected' : '' }} value="1">Phòng mở</option>
                                     </select>
                                 </div>
                             </div>

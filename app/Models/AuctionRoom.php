@@ -16,7 +16,7 @@ class AuctionRoom extends Model
         'id_dgv',
         'state',
     ];
-    public function product (){
+    public function product(){
         return $this->belongsto(Product::class ,"id_product","id");
     }
     public function dgv(){

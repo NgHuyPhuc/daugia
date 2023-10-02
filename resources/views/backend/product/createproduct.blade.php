@@ -19,10 +19,6 @@
                                     <div class="form-group">
                                         <label>Danh mục</label>
                                         <select name="category" class="form-control">
-                                            {{-- <option value='1' selected>Nam</option>
-                                            <option value='3'>---|Áo khoác nam</option>
-                                            <option value='2'>Nữ</option>
-                                            <option value='4'>---|Áo khoác nữ</option> --}}
                                             @foreach ($categories as $item)
                                                 <option value='{{ $item->id }}'>{{ $item->name }}</option>
                                             @endforeach
@@ -87,10 +83,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    {{-- <div class="form-group">
-                                    <label>Miêu tả</label>
-                                    <textarea id="editor" name="describe" style="width: 100%;height: 100px;"></textarea>
-                                </div> --}}
                                     <button class="btn btn-success" type="submit">Thêm sản phẩm</button>
                                     <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                                 </div>

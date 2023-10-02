@@ -38,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //admin
-Route::get('/admin/login', [AuthController::class, 'getLogin'])->name('admin.login');
+Route::get('/admin/login', [AuthController::class, 'getLogin'])->name('admin.login')->middleware('checkadmin');
 Route::post('/admin/login', [AuthController::class, 'postlogin'])->name('admin.postlogin');
 Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
@@ -137,14 +137,6 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
     });
     Route::get('/get-product-name/{id}', [AuctionRoomController::class, 'getProductName']);
     Route::get('/get-dgv-name/{id}', [AuctionRoomController::class, 'getDgvName']);
-    // Route::prefix('/about')->middleware('auth:webadmin')->group(function () {
-    //     Route::get('/',[AboutController::class,'index'])->name('about.home');
-    //     Route::get('/create',[AboutController::class,'create'])->name('about.create');
-    //     Route::post('/postcreate',[AboutController::class,'postcreate'])->name('about.postcreate');
-    //     Route::get('/edit/{id}',[AboutController::class,'edit'])->name('about.edit');
-    //     Route::post('/postedit/{id}',[AboutController::class,'postedit'])->name('about.postedit');
-    //     Route::get('/delete/{id}',[AboutController::class,'delete'])->name('about.delete');
-    // });
 
 });
 //end admin
@@ -159,14 +151,19 @@ Route::get('/', [SiteController::class, 'index'])->name('site.home');
 Route::prefix('product')->group(function () {
     Route::get('/', [SiteController::class, 'products'])->name('productsite.home');
     Route::get('/search', [SiteController::class, 'search'])->name('productsite.search');
-    Route::get('/detail', [SiteController::class, 'detail'])->name('productsite.detail');
+    Route::get('/detail/{id}', [SiteController::class, 'detail'])->name('productsite.detail');
 });
 Route::post('/payment', [PaymentPaymentController::class, 'payment'])->name('paymentsite.post');
 Route::get('/register', [SiteController::class, 'register'])->name('user.register')->middleware('checkuser');
-Route::get('/listroom', [AuctionRoomAuctionRoomController::class, 'listroom'])->name('user.listroom');
 Route::get('/about', [SiteController::class, 'about'])->name('user.about');
 
-Route::get('/room', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
+// Route::get('/listroom', [AuctionRoomAuctionRoomController::class, 'room'])->name('user.listroom');
+Route::prefix('room')->group(function () {
+    Route::get('/', [AuctionRoomAuctionRoomController::class, 'listroom'])->name('user.listroom');
+    Route::get('auction/{id}', [AuctionRoomAuctionRoomController::class, 'autionroom'])->name('user.autionroom')->middleware('auth:web')->middleware('checkroom');
+});
+// Route::get('/listroom', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
+// Route::get('/listroom', [AuctionRoomController, 'room'])->name('user.room');
 
 Route::prefix('/profile')->middleware('auth:web')->group(function () {
     Route::get('/', [UserSiteController::class, 'profile'])->name('user.profile')->middleware('auth:web');

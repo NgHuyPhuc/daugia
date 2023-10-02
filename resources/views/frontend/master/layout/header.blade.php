@@ -107,7 +107,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link blinking" href="/listroom">
+                                            <a class="nav-link blinking" href="/room">
                                                 Phòng đấu giá
                                             </a>
                                         </li>
@@ -174,7 +174,7 @@
                             </ul>
                         </li>
                         <li class=""><a href="">Thông báo mời đấu giá</a></li>
-                        <li class=""><a class="blinking" href="/listroom">Phòng đấu giá</a></li>
+                        <li class=""><a class="blinking" href="/room">Phòng đấu giá</a></li>
                         <li class="">
                             <a href="javascript:void(0)">Thủ tục sau đấu giá</a>
                             <ul class="sub-menu">
