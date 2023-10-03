@@ -24,4 +24,5 @@ class Payment extends Model
     public function user(){
         return $this->belongsto(User::class ,"id_user","id");
     }
+    
 }

@@ -147,14 +147,6 @@
 
                 </div>
                 <div class="custom-pagination">
-                    {{-- <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-                    </ul> --}}
-                    {{-- {{$products->links('')}} --}}
                     {{$products->links('frontend.pagination.pagination')}}
                 </div>
             </div>

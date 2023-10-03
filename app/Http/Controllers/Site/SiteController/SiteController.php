@@ -7,9 +7,12 @@ use App\Models\About;
 use App\Models\Category;
 use App\Models\Law;
 use App\Models\Notify;
+use App\Models\Payment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
 {
@@ -38,6 +41,12 @@ class SiteController extends Controller
     public function detail(Request $request)
     {
         $data['product'] = Product::findOrFail($request->id);
+        $data['check'] = null;
+        // dd(Auth::guard('web')->check());
+        if(Auth::guard('web')->check()){
+            $data['check'] = Payment::where('id_product', $request->id)->where('id_user', Auth::user()->id)->first();
+        }
+        // dd($data['check']->isEmpty());
         return view('frontend.product.detail',$data);
     }
     public function search(Request $request)

@@ -172,6 +172,9 @@ Route::prefix('/profile')->middleware('auth:web')->group(function () {
     Route::post('/', [UserSiteController::class, 'postprofile'])->name('user.postprofile')->middleware('auth:web');
     Route::get('/changepass', [UserSiteController::class, 'profilechangepass'])->name('user.profilechangepass')->middleware('auth:web');
     Route::post('/changepass', [UserSiteController::class, 'postprofilechangepass'])->name('user.postprofilechangepass')->middleware('auth:web');
+    Route::get('/payment', [UserSiteController::class, 'profilepayment'])->name('user.profilepayment')->middleware('auth:web');
+    Route::get('/searchpayment', [UserSiteController::class, 'searchPayment'])->name('user.profilepaymentsearch')->middleware('auth:web');
+
 });
 
 

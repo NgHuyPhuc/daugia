@@ -118,11 +118,19 @@
                                                             </button>  -->
                                             <!-- Button trigger modal -->
                                             {{-- @dd(Auth::guest()) --}}
+                                            
                                             @if (Auth::guard('web')->check())
-                                                <button type="button" class="btn btn-primary detail-btn"
+                                                @if ($check == null)
+                                                    <button type="button" class="btn btn-primary detail-btn"
                                                     data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Đăng ký tham gia đấu giá
-                                                </button>
+                                                        Đăng ký tham gia đấu giá
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-primary detail-btn">
+                                                        <a href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
+                                                    </button>
+                                                @endif
+                                                
                                             @else
                                                 <a class="btn btn-primary detail-btn center-a-button"
                                                     href="{{ route('user.login') }}">
