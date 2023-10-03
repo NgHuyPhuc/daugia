@@ -22,6 +22,7 @@ class AuctionRoomController extends Controller
     }
     public function postcreate(Request $request)
     {
+        // dd($request);
         $room = new AuctionRoom();
         $room->id_product = $request->id_product;
         $room->thoi_gian_bat_dau = $request->thoi_gian_bat_dau;
@@ -41,6 +42,7 @@ class AuctionRoomController extends Controller
     public function postedit(Request $request)
     {
         // die;
+        
         $room = AuctionRoom::find($request->id);
         $room->id_product = $request->id_product;
         $room->thoi_gian_bat_dau = $request->thoi_gian_bat_dau;

@@ -160,7 +160,9 @@ Route::get('/about', [SiteController::class, 'about'])->name('user.about');
 // Route::get('/listroom', [AuctionRoomAuctionRoomController::class, 'room'])->name('user.listroom');
 Route::prefix('room')->group(function () {
     Route::get('/', [AuctionRoomAuctionRoomController::class, 'listroom'])->name('user.listroom');
-    Route::get('auction/{id}', [AuctionRoomAuctionRoomController::class, 'autionroom'])->name('user.autionroom')->middleware('auth:web')->middleware('checkroom');
+    Route::get('/auction/{id}', [AuctionRoomAuctionRoomController::class, 'autionroom'])->name('user.autionroom')->middleware('auth:web')->middleware('checkroom');
+    Route::get('/auctiondata/{id}', [AuctionRoomAuctionRoomController::class, 'getRealTimeData'])->name('user.autionroom.getRealTimeData')->middleware('auth:web')->middleware('checkroom');
+    Route::post('/postauction/{id}',[AuctionRoomAuctionRoomController::class, 'postautionroom'])->name('user.postautionroom')->middleware('auth:web')->middleware('checkroom');
 });
 // Route::get('/listroom', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
 // Route::get('/listroom', [AuctionRoomController, 'room'])->name('user.room');

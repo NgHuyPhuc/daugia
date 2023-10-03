@@ -30,7 +30,7 @@
                                 <img src="../upload/img/{{$item->product->main_image}}" alt="">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-5 ttpdg-cus-sm">
-                                <a href="{{route('productsite.detail',['id'=>$item->id])}}">{{$item->product->product_name}}</a>
+                                <a href="{{route('productsite.detail',['id'=>$item->id_product])}}">{{$item->product->product_name}}</a>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-3 joinpdg-cus-sm">
                                 <div class="more-item">
