@@ -31,6 +31,10 @@ class UserSiteController extends Controller
         $user->cccd = $request->cccd;
         $user->ngay_cap_cccd = $request->ngay_cap_cccd;
         $user->noi_cap_cccd = $request->noi_cap_cccd;
+        $user->bank_account_number = $request->bank_account_number;
+        $user->account_holder_name = $request->account_holder_name;
+        $user->bank = $request->bank;
+        $user->bank_branch = $request->bank_branch;
         $user->save();
         $request->session()->flash('alert', 'Cập nhật thông tin thành công');
         return redirect()->route('user.profile');
@@ -51,49 +55,88 @@ class UserSiteController extends Controller
                 $user->save();
                 $request->session()->flash('alert', 'Cập mật khẩu thành công');
                 return redirect()->route('user.profile');
-            }
-            else{
+            } else {
                 $request->session()->flash('repass', 'Mật khẩu mới và nhập lại không giống nhau');
                 return redirect()->route('user.profilechangepass');
             }
-        } 
-        else {
+        } else {
             $request->session()->flash('old_pass', 'Mật khẩu cũ không đúng');
             return redirect()->route('user.profilechangepass');
         }
     }
-    public function profilepayment(){
-        $data['payments'] = Payment::orderby('id','desc')->where('id_user', Auth::user()->id)->paginate(2);
+    public function profilepayment()
+    {
+        $data['payments'] = Payment::orderby('id', 'desc')->where('id_user', Auth::user()->id)->paginate(2);
         // dd($data);
-        return view('frontend.profile.listpayment',$data);
+        return view('frontend.profile.listpayment', $data);
     }
     public function searchPayment(Request $request)
     {
         $searchTerm = $request->keyword;
         // $data['room'] = AuctionRoom::where('id_product','')
         // $data['payment'] = Payment::where('id','like','%'.$request->keyword.'%')->orwhere('product_name','like','%'.$request->keyword.'%')->paginate(5);
-        $data['payments'] = Payment::
-        // where('id','like','%'.$request->keyword.'%')->
-        whereHas('product', function ($query) use ($searchTerm) {
-            $query->where('product_name', 'like', '%' . $searchTerm . '%');
-        })->orwhere('id','like','%'.$request->keyword.'%')
-        // ->first();
-        ->paginate(5);
-        // $data['test'] = Payment::join('room', 'payment.id_product', '=', 'room.id_product')
-        // ->where('payment.id', $paymentId)
-        // ->value('room.id');
-        // dd($data);
-        // dd($data['payments']->room);
+        $data['payments'] = Payment::where('id_user', Auth::user()->id)
+            ->whereHas('product', function ($query) use ($searchTerm) {
+                $query->where('product_name', 'like', '%' . $searchTerm . '%');
+            })->orwhere('id', 'like', '%' . $searchTerm . '%')
+            ->paginate(5);
+
+
         $data['test'] = [];
-        foreach($data['payments'] as $item)
-        {
+        foreach ($data['payments'] as $item) {
             $roomId =  Payment::join('auction_rooms', 'payments.id_product', '=', 'auction_rooms.id_product')
-                            ->where('payments.id', $item->id_product)
-                            ->value('auction_rooms.id');
-            $data['test'][] = $roomId;  
+                ->join('users', 'payments.id_user', '=', 'users.id')
+                ->where('payments.id', $item->id_product)
+                ->value('auction_rooms.id');
+            $data['test'][] = $roomId;
         }
+        // dd(Auth::user()->id);
         // dd($data);
-        return view('frontend.profile.searchpayment',$data);
+        return view('frontend.profile.searchpayment', $data);
         // return 'abc';
+    }
+    public function register()
+    {
+        return view('frontend.login_register.register');
+    }
+    public function postregister(Request $request)
+    {
+        $email = $request->email;
+        $check = User::where('email', $email)->count();
+        if ($check > 0) {
+            return redirect()->back()->with('message', 'Email đã được đăng ký');
+        } else {
+            if ($request->password == $request->repassword) {
+                $user = new User();
+                $user->email = $request->email;
+                $user->password = bcrypt($request->password);
+                $user->name = $request->name;
+                $user->phone = $request->phone;
+
+                $user->imgccdtrc = $request->imgccdtrc->getClientOriginalName();
+                $request->imgccdtrc->move("upload/img", $request->imgccdtrc->getClientOriginalName());
+
+                $user->imgccdsau = $request->imgccdsau->getClientOriginalName();
+                $request->imgccdsau->move("upload/img", $request->imgccdsau->getClientOriginalName());
+
+                $user->dob = $request->dob;
+                $user->gender = $request->gender;
+                $user->address = $request->address;
+                $user->cccd = $request->cccd;
+                $user->ngay_cap_cccd = $request->ngay_cap_cccd;
+                $user->noi_cap_cccd = $request->noi_cap_cccd;
+                $user->bank_account_number = $request->bank_account_number;
+                $user->account_holder_name = $request->account_holder_name;
+                $user->bank = $request->bank;
+                $user->bank_branch = $request->bank_branch;
+                $user->level = 0;
+
+                $user->save();
+                // $request->session()->flash('message', 'Đã thêm mới thành công!');
+                return redirect()->route('user.login')->with('message','Bạn đã đăng ký thành công hãy đăng nhập');
+            } else {
+                return redirect()->back()->with('message', 'Password không trùng khớp');
+            }
+        }
     }
 }

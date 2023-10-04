@@ -26,13 +26,10 @@ class UserController extends Controller
             $user->password = bcrypt($request->password);
             $user->name = $request->name;
             $user->phone = $request->phone;
-
             $user->imgccdtrc = $request->imgccdtrc->getClientOriginalName();
             $request->imgccdtrc->move("upload/img", $request->imgccdtrc->getClientOriginalName());
-
             $user->imgccdsau = $request->imgccdsau->getClientOriginalName();
             $request->imgccdsau->move("upload/img", $request->imgccdsau->getClientOriginalName());
-
             $user->dob = $request->dob;
             $user->gender = $request->gender;
             $user->address = $request->address;
@@ -43,8 +40,7 @@ class UserController extends Controller
             $user->account_holder_name = $request->account_holder_name;
             $user->bank = $request->bank;
             $user->bank_branch = $request->bank_branch;
-            $user->level = 1;
-
+            $user->level = $request->level;
             $user->save();
             $request->session()->flash('alert', 'Đã thêm mới thành công!');
             return redirect()->route('useradminsite.home');
@@ -57,7 +53,6 @@ class UserController extends Controller
     }
     public function postedit(Request $request)
     {
-
         $user =  User::find($request->id);
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -71,7 +66,6 @@ class UserController extends Controller
             $user->imgccdsau = $request->imgccdsau->getClientOriginalName();
             $request->imgccdsau->move("upload/img", $request->imgccdsau->getClientOriginalName());
         }
-
         $user->dob = $request->dob;
         $user->gender = $request->gender;
         $user->address = $request->address;
@@ -82,8 +76,7 @@ class UserController extends Controller
         $user->account_holder_name = $request->account_holder_name;
         $user->bank = $request->bank;
         $user->bank_branch = $request->bank_branch;
-        $user->level = 1;
-
+        $user->level = $request->level;
         $user->save();
         $request->session()->flash('alert', 'Đã sửa thành công!');
         return redirect()->route('useradminsite.home');
@@ -96,10 +89,11 @@ class UserController extends Controller
         return redirect()->route('useradminsite.home');
     }
     public function search(Request $request){
-        $data['users'] = User::where('id','like','%'.$request->keyword.'%')->orwhere('name','like','%'.$request->keyword.'%')->paginate(5);
+        $data['users'] = User::where('id','like','%'.$request->keyword.'%')
+        ->orwhere('name','like','%'.$request->keyword.'%')
+        ->paginate(5);
         // dd($data);
         return view('backend.users.user.searchuser',$data);
-
     }
     public function detail(Request $request){
         $data['user'] = User::find($request->id);

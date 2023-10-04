@@ -38,7 +38,7 @@
     border: none !important;
 }
 .button-effect {
-    background: linear-gradient(to right, rgb(255, 101, 106), rgb(255, 101, 106)) no-repeat;
+    background: linear-gradient(to right, rgb(69, 0, 243), rgb(69, 0, 243)) no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s;
 }

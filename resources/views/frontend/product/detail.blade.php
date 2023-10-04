@@ -22,7 +22,6 @@
                             <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
                                 type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Hồ sơ tham
                                 gia đấu giá</button>
-                            <!-- <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button> -->
                         </div>
                     </nav>
                     <div class="tab-content " id="nav-tabContent">
@@ -78,7 +77,7 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký từ:</span>
-                                            <span class="detail-value">{{ $product->registration_time }}</span>
+                                            <span class="detail-value">{{ date_format(date_create($product->registration_time),'d-m-Y') }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký đến:</span>
@@ -86,12 +85,19 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Thời gian bắt đầu cuộc đấu giá:</span>
-                                            <span class="detail-value">16:00:00 15/09/2023</span>
+                                            @if ($auctionroom == null)
+                                                <span class="detail-value">Chưa có thời gian bắt đầu</span>
+                                            @else
+                                                <span class="detail-value">{{ date_format(date_create($auctionroom->thoi_gian_bat_dau),'d/m/Y | h:i:s')}}</span>
+                                            @endif
                                         </div>
                                         <div class="detail-row">
-                                            <span class="detail-label txt-main">Thời gian kết thúc cuộc đấu giá:</span>
-                                            <!---->
-                                            <span class="detail-value">Theo quy chế cuộc đấu giá</span>
+                                            <span class="detail-label txt-main">Thời gian kết thúc cuộc đấu giá (Dự kiến):</span>
+                                            @if ($auctionroom == null)
+                                                <span class="detail-value">Theo quy đinh cuộc đấu giá</span>
+                                            @else
+                                                <span class="detail-value">{{date_format(date_create($auctionroom->thoi_gian_ket_thuc), 'd/m/Y | h:i:s')}}</span>
+                                            @endif
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Giá khởi điểm:</span>
@@ -113,12 +119,6 @@
                                                 VNĐ</span>
                                         </div>
                                         <div class="detail-row">
-                                            <!-- <button class="detail-btn">
-                                                            Đăng ký tham gia đấu giá
-                                                            </button>  -->
-                                            <!-- Button trigger modal -->
-                                            {{-- @dd(Auth::guest()) --}}
-                                            
                                             @if (Auth::guard('web')->check())
                                                 @if ($check == null)
                                                     <button type="button" class="btn btn-primary detail-btn"
@@ -126,9 +126,7 @@
                                                         Đăng ký tham gia đấu giá
                                                     </button>
                                                 @else
-                                                    <button class="btn btn-primary detail-btn">
-                                                        <a href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
-                                                    </button>
+                                                        <a class="btn btn-primary detail-btn" href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
                                                 @endif
                                                 
                                             @else
@@ -160,7 +158,6 @@
                                                                         <div class="col-7"><span>Chi phí tham gia đấu
                                                                                 giá:</span></div>
                                                                         <div class="col-5">
-                                                                            <!-- <span><strong>999/TP/ĐG-CCHN</strong></span> -->
                                                                             <input
                                                                                 class="input-modal form-control-sm form-control-plaintext"
                                                                                 type="text" disabled value="{{number_format($product->participation_costs)}} VNĐ">
@@ -208,7 +205,6 @@
                                                                             <input name="account_holder_name" type="text">
                                                                         </div>
                                                                         <input type="hidden" name="id_product" value="{{ $product->id }}">
-                                                                        {{-- @dd(Auth::guard('web')->guest()) --}}
                                                                         @if (Auth::guard('web')->guest())
 
                                                                         @else
@@ -258,20 +254,23 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Tên</th>
-                                                <th scope="col">Loại tài khoản</th>
+                                                <th scope="col">Thời gian mua hàng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($listpayment as $item)
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Cá nhân</td>
+                                                <th scope="row">{{$item->id}}</th>
+                                                <td>{{$item->user->name}}</td>
+                                                @if ($item->created_at == null)
+                                                    <td> </td>
+                                                @else
+                                                <td>{{date_format( $item->created_at,'d/m/y | h:i:s')}}</td>
+                                                    
+                                                @endif
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Doanh nghiệp</td>
-                                            </tr>
+                                                
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -283,7 +282,6 @@
                                 href="../upload/Vạn Thành An - chi nhánh Hà Nội_New folder (2)_72C-188.45    25-08_compressed.pdf">Thông
                                 tin đấu giá</a>
                         </div>
-                        <!-- <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div> -->
                     </div>
                 </div>
             </div>

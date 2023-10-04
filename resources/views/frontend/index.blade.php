@@ -66,7 +66,7 @@
                                 <h4>HỖ TRỢ:</h4>
                             </div>
                             <div class="support-list">
-                                <a href="">
+                                <a href="javascript:void(0)">
                                     <i class="fas fa-headphones"></i>
                                     Hotline: 0243.7622619
                                 </a>
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-lg-12 ">
                     <div id="nav-tab" role="tablist" class="nav nav-tabs">
-                        <a href="" class="nav-item nav-link active">TIN TỨC NỔI BẬT VỀ ĐẤU GIÁ TRỰC TUYẾN</a>
+                        <a href="javascript:void(0)" class="nav-item nav-link active">TIN TỨC NỔI BẬT VỀ ĐẤU GIÁ TRỰC TUYẾN</a>
                     </div>
                     <div class="row" id="what-news-info">
                         @foreach ($notifiesTop as $item)
@@ -116,7 +116,7 @@
             <div class="row">
                 <div class="col-lg-12 pt-30">
                     <div id="nav-tab" role="tablist" class="nav nav-tabs">
-                        <a href="" class="nav-item nav-link active">CUỘC ĐẤU GIÁ NỔI BẬT</a>
+                        <a href="javascript:void(0)" class="nav-item nav-link active">CUỘC ĐẤU GIÁ NỔI BẬT</a>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="d-flex">
@@ -171,7 +171,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div id="nav-tab" role="tablist" class="nav nav-tabs">
-                        <a href="" class="nav-item nav-link active">THÔNG TIN MỜI THAM GIA ĐẤU GIÁ - TÀI SẢN ĐẤU
+                        <a href="javascript:void(0)" class="nav-item nav-link active">THÔNG TIN MỜI THAM GIA ĐẤU GIÁ - TÀI SẢN ĐẤU
                             GIÁ</a>
                     </div>
                     <div class="row">
@@ -219,7 +219,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div id="nav-tab" role="tablist" class="nav nav-tabs">
-                        <a href="" class="nav-item nav-link active">KIẾN THỨC LUẬT PHÁP</a>
+                        <a href="javascript:void(0)" class="nav-item nav-link active">KIẾN THỨC LUẬT PHÁP</a>
                     </div>
                 </div>
             </div>

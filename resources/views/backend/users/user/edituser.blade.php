@@ -82,7 +82,14 @@
                                 <label>Tên chủ tài khoản(ngân hàng)</label>
                                 <input value="{{$user->account_holder_name}}" type="text" name="account_holder_name" class="form-control">
                             </div>
-                            
+                            <div class="form-group">
+                                <label>Level</label>
+                                <select name="level" class="form-control" value="">
+                                    <option selected value="0">Tài khoản chưa kích hoạt</option>
+                                    <option value="1">Tài khoản đã kích hoạt</option>
+                                    <option value="2">Tài khoản đấu giá viên</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

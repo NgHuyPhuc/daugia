@@ -790,7 +790,21 @@ h1.cpn-name {
     height: 100%;
     /* Đảm bảo chiều cao cố định cho thẻ a */
 }
-
+.end-auction{
+    text-align: center;
+    padding-left: 10px;
+    margin: 0;
+    padding-right: 10px;
+    background-color: rgb(229, 30, 30);
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px;
+}
+.float-r{
+    float: right;
+}
 /* lg */
 @media (min-width: 992px) {
     .reponsive-menu {

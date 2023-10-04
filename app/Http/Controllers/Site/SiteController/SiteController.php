@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site\SiteController;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\AuctionRoom;
 use App\Models\Category;
 use App\Models\Law;
 use App\Models\Notify;
@@ -41,7 +42,11 @@ class SiteController extends Controller
     public function detail(Request $request)
     {
         $data['product'] = Product::findOrFail($request->id);
+        $data['listpayment'] = Payment::where('id_product',$request->id)->where('state',1)->paginate(5);
         $data['check'] = null;
+        $data['auctionroom'] = AuctionRoom::where('id_product', $request->id)->first();
+        // dd($data);
+        // dd($data);
         // dd(Auth::guard('web')->check());
         if(Auth::guard('web')->check()){
             $data['check'] = Payment::where('id_product', $request->id)->where('id_user', Auth::user()->id)->first();

@@ -36,6 +36,7 @@
                                             class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                                 <a href="{{route('useradmin.create')}}" class="btn btn-primary">Thêm Thành viên</a>
+                                <a href="{{route('useradmin.tkdgv')}}" class="btn btn-primary">Tài khoản đấu giá viên</a>
                                 <table class="table table-bordered" style="margin-top:20px;">
 
                                     <thead>
@@ -81,13 +82,6 @@
                                     </tbody>
                                 </table>
                                 <div align='right'>
-                                    {{-- <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-                                    </ul> --}}
                                     {{$admins->links('backend.pagination.pagination')}}
                                 </div>
                             </div>

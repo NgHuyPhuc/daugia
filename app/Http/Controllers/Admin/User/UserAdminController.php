@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserAdminController extends Controller
@@ -55,5 +56,9 @@ class UserAdminController extends Controller
         $admin = Admin::find($request->id);
         $admin->delete();
         return redirect()->route('useradmin.home');
+    }
+    public function userdgv(Request $request){
+        $data['users'] = User::orderby('id','asc')->where('level', 2)->paginate(5);
+        return view('backend.users.admin.listdgv', $data);
     }
 }

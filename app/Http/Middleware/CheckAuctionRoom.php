@@ -24,7 +24,7 @@ class CheckAuctionRoom
         {
             return $next($request);
         }
-        else{
+        elseif (Auth::user()->level == 1){
             $id_prd = AuctionRoom::findOrFail($request->id)->id_product;
             $id_user = Auth::user()->id;
             // dd($idprd);

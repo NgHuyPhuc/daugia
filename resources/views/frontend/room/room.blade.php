@@ -1,3 +1,9 @@
+<?php
+if($check == false)
+{
+    $detail = json_decode($detail);
+}
+?>
 @extends('frontend/master/master')
 @section('title', 'Danh sách phòng đấu giá')
 @section('main')
@@ -143,60 +149,63 @@
                                 <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
                             </div>
                         </div>
+                        @if (Auth::guard('web')->user()->level == 1)
                         <div class="col-lg-6">
                             <!-- Trả giá -->
                             <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post">
                                 <div class="row">
-                                    <div class="col-xs-1 col-md-1 col-sm-1">
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
                                         <a class="button-price-decrease" href="javascript:void(0)"
                                             onclick="decreaseQuantity()">-</a>
                                     </div>
                                     {{-- @dd($detail); --}}
-                                    <div class="col-xs-3 col-md-3 col-sm-3">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
                                         <input type="text" id="quantity-text"
-                                            @if ($detail== null)
+                                            {{-- @if ($detail== null)
                                                 value="{{ number_format($info->product->starting_price, 0, '.', '.') }}"
-                                            @else
+                                            @else --}}
                                                 value="{{ number_format($detail->bidding_price, 0, '.', '.') }}"
-                                            @endif    
+                                            {{-- @endif     --}}
                                             disabled>
                                     </div>
-                                    <div style="display: none" class="col-xs-3 col-md-3 col-sm-3">
-                                    {{-- <div  class="col-xs-3 col-md-3 col-sm-3"> --}}
+                                    <div style="display: none">
                                         <input name="bidding_price" type="number" id="quantity"
-                                            @if ($detail== null)
-                                                min="{{ $info->product->starting_price }}"
-                                                value="{{ $info->product->starting_price }}"
-                                            @else
-                                                min="{{$detail->bidding_price}}"
-                                                value="{{ $detail->bidding_price }}"
-                                            @endif
-                                            
-                                            >
+                                            min="{{$detail->bidding_price}}"
+                                            value="{{ $detail->bidding_price }}">
                                     </div>
-                                    <div class="col-xs-1 col-md-1 col-sm-1">
+                                    <div class="col-lg-1 col-md-1 col-sm-1">
                                         <a class="button-price-increase" href="javascript:void(0)"
                                             onclick="increaseQuantity()">+</a>
                                     </div>
                                     <input type="hidden" name="id_product" value="{{ $info->id_product }}">
                                     <input type="hidden" name="id_room" value="{{ $info->id }}">
                                     <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
-                                    <div style="margin-left: 50px;" class="col-xs-3 col-md-3 col-sm-1">
-                                        <button class="submit-price" type="submit">Trả giá</button>
-                                    </div>
+                                    
+                                        <div style="margin-left: 50px;" class="col-lg-4 col-md-3 col-sm-1">
+                                            <button class="submit-price" type="submit">Trả giá</button>
+                                        </div>
+
+                                    
+                                    
 
                                 </div>
                                 @csrf
                             </form>
                         </div>
-                    </div>
-                    <div id="spinner-2s">
-                        <div id="spinner-container" class="d-flex justify-content-center">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                        @else
+                        <div class="col-lg-6 ">
+                            <div class="col-lg-4 col-md-3 col-sm-1 float-r">
+                                <form action="{{route('user.postendauction',['id' => $info->id])}}" method="post">
+                                    <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn kết thúc cuộc đấu giá này?')" 
+                                    class="end-auction" type="submit">Kết thúc cuộc đấu giá</button>
+                                    @csrf
+                                </form>
                             </div>
                         </div>
+                        @endif
+
                     </div>
+                    
                 </div>
 
             </div>
@@ -211,6 +220,7 @@
                             <th scope="col">Thời điểm trả giá</th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         {{-- <tr>
                             <th scope="row">1</th>
@@ -220,6 +230,13 @@
                         </tr> --}}
                     </tbody>
                 </table>
+                <div id="spinner-2s">
+                    <div id="spinner-container" class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -292,7 +309,6 @@
         </div>
     </div>
     <script>
-        // console.log(<?php echo json_encode($detail)?>);
 
         function decreaseQuantity() {
             var quantityInput = document.getElementById('quantity');
@@ -303,19 +319,12 @@
             //     quantityInput.value = currentQuantity - {{ $info->product->price_step }};
             //     quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
             // }
-            if(<?php echo json_encode($detail)?> == null)
-            {
-                if (currentQuantity > {{ $info->product->starting_price }}) {
-                    quantityInput.value = currentQuantity - {{ $info->product->price_step }};
-                    quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
-                }
-            }
-            else{
+
                 if (currentQuantity > {{ $detail->bidding_price }}) {
                     quantityInput.value = currentQuantity - {{ $info->product->price_step }};
                     quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
                 }
-            }
+            
 
 
         }

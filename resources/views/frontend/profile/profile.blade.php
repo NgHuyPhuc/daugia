@@ -45,6 +45,14 @@
                                 <input type="text" name="phone" class="form-control" id="form-phone"
                                     placeholder="Số điện thoại" value="{{ $profile->phone }}" required>
                             </div>
+                            <div class="form-group">
+                                <label>Số tài khoản ngân hàng</label>
+                                <input type="text" name="bank_account_number" class="form-control" value="{{ $profile->bank_account_number }}">
+                            </div>
+                            <div class="form-group">
+                                <label>Tên ngân hàng</label>
+                                <input type="text" name="bank" class="form-control" value="{{ $profile->bank }}">
+                            </div>
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-12">
@@ -68,6 +76,16 @@
                                 <label for="form-address">Địa chỉ</label><code>*</code>
                                 <input type="text" name="address" class="form-control" id="form-address"
                                     placeholder="Địa chỉ" value="{{ $profile->address }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Tên chủ tài khoản(ngân hàng)</label>
+                                <input type="text" name="account_holder_name" class="form-control" value="{{ $profile->account_holder_name }}">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Chi nhánh ngân hàng</label>
+                                <input type="text" name="bank_branch" class="form-control" value="{{ $profile->bank_branch }}">
                             </div>
                         </div>
                         <div class="col-12">
