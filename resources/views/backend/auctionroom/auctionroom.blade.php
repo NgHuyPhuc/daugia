@@ -61,6 +61,8 @@
                                         <td>{{$item->dgv->name }}</td>
                                         <td>{{$item->state ==0? 'Phòng đang đóng' : 'Phòng đang mở'}}</td>
                                         <td>
+                                            <a target="_blank" href="{{route('user.autionroom',['id' => $item->id])}}" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Vào phòng đấu giá</a>
+                                            <hr>
                                             <a href="{{route('auctionroom.edit',['id' => $item->id])}}" class="btn btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Sửa</a>
                                             <a href="{{route('auctionroom.delete',['id' => $item->id])}}" onclick="return confirm('Bạn có chắc chắn muốn xóa điều luật này?')" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Xóa</a>
                                         </td>

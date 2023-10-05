@@ -117,20 +117,20 @@
                                                 Thủ tục sau đấu giá
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/about">Kết quả đấu giá</a></li>
+                                                <li><a class="dropdown-item" href="{{route('user.result')}}">Kết quả đấu giá</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="/about">Hợp đồng mua bán tài sản</a>
+                                                <li><a class="dropdown-item" href="{{route('user.result')}}">Hợp đồng mua bán tài sản</a>
                                                 </li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="/about">Bàn giao tài sản</a></li>
+                                                <li><a class="dropdown-item" href="{{route('user.result')}}">Bàn giao tài sản</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="/about">Hỗ trợ giao hàng</a></li>
+                                                <li><a class="dropdown-item" href="{{route('user.result')}}">Hỗ trợ giao hàng</a></li>
                                             </ul>
                                         </li>
 
@@ -178,10 +178,10 @@
                         <li class="">
                             <a href="javascript:void(0)">Thủ tục sau đấu giá</a>
                             <ul class="sub-menu">
-                                <li><a href="/about" class="">Kết quả đấu giá</a></li>
-                                <li><a href="/about" class="">Hợp đồng mua bán tài sản</a></li>
-                                <li><a href="/about" class="">Bàn giao tài sản</a></li>
-                                <li><a href="/about" class="">Hỗ trợ hợp đồng</a></li>
+                                <li><a href="{{route('user.result')}}" class="">Kết quả đấu giá</a></li>
+                                <li><a href="{{route('user.result')}}" class="">Hợp đồng mua bán tài sản</a></li>
+                                <li><a href="{{route('user.result')}}" class="">Bàn giao tài sản</a></li>
+                                <li><a href="{{route('user.result')}}" class="">Hỗ trợ hợp đồng</a></li>
                             </ul>
                         </li>
                         <li class=""><a href="">Tin tức sự kiện</a></li>

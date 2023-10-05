@@ -181,6 +181,10 @@ Route::prefix('/profile')->middleware('auth:web')->group(function () {
     Route::get('/searchpayment', [UserSiteController::class, 'searchPayment'])->name('user.profilepaymentsearch')->middleware('auth:web');
 });
 
-Route::get('result',[ResultAuctionController::class, 'index'])->name('user.result');
+Route::prefix('result')->group(function () {
+    Route::get('/', [ResultAuctionController::class, 'index'])->name('user.result');
+    Route::get('/search', [ResultAuctionController::class, 'search'])->name('user.result.search');
+    Route::get('/detail/{id}', [ResultAuctionController::class, 'detail'])->name('user.result.detail');
+});
 
 //end site

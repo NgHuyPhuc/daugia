@@ -25,4 +25,7 @@ class AuctionRoomFinal extends Model
     public function user(){
         return $this->belongsto(User::class ,"id_user","id");
     }
+    public function room(){
+        return $this->belongsto(AuctionRoom::class ,"id_auction_room","id");
+    }
 }
