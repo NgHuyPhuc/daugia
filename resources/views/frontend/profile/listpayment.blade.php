@@ -1,5 +1,6 @@
 <?php
 use App\Models\Payment;
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 @extends('frontend/master/master')
 @section('title', 'Thông tin cá nhân')
@@ -33,8 +34,10 @@ use App\Models\Payment;
                             <th>Người tham gia</th>
                             <th>Thông tin sản phẩm</th>
                             <th>Phòng đấu giá</th> 
-                            <th>Số tiền đặt cọc sản phẩm</th>
+                            <th width='10%'>Thời gian bắt đầu</th> 
+                            <th width='10%'>Thời gian kết thúc </th> 
                             <th>Phí tham gia</th>
+                            <th>Số tiền đặt cọc sản phẩm</th>
                             <th>Số tiền cần thanh toán</th>
                             <th>Trạng thái</th>
                         </tr>
@@ -47,9 +50,10 @@ use App\Models\Payment;
                             <td><p><a href="{{route('productsite.detail',['id' => $item->product->id])}}" target="_blank">
                                 <strong>{{ $item->product->product_name }}</strong></a></p>
                             </td>
-                            <td>{{Payment::join('auction_rooms', 'payments.id_product', '=', 'auction_rooms.id_product')
-                                ->where('payments.id', $item->id_product)
-                                ->value('auction_rooms.id');}}</td> 
+                            <td>{{isset($item->room) ? $item->room->id : 'Chưa có thông tin'}}</td> 
+                            </td>
+                            <td>{{isset($item->room) ? $item->room->thoi_gian_bat_dau : 'Chưa có thông tin'}}</td>
+                            <td>{{isset($item->room) ? $item->room->thoi_gian_ket_thuc : 'Chưa có thông tin'}}</td>
                             <td>{{number_format($item->product->participation_costs)}} VND</td>
                             <td>{{number_format($item->product->auction_deposit)}} VND</td>
                             <td>{{number_format($item->total_amount)}} VND</td>

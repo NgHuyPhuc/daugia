@@ -27,11 +27,11 @@ class AuctionRoomController extends Controller
     public function autionroom(Request $request)
     {
         $data['info'] = AuctionRoom::findOrFail($request->id);
-        $data['detail'] = DetailAuctionRoom::orderby('bidding_price', 'desc')->where('id_auction_room', $request->id)->first();
+        $data['detail'] = DetailAuctionRoom::where('id_auction_room', $request->id)->orderby('bidding_price', 'desc')->first();
         $data['check'] = true;
         if($data['detail'] == null){
             $data['check'] = false;
-            $detail = ["bidding_price" => $data['info']->product->starting_price];
+            $detail = ["bidding_price" => $data['info']->product->starting_price+$data['info']->product->price_step];
             $data['detail'] = json_encode($detail);
         }
         $data['dgv'] = User::findOrFail($data['info']->id_dgv);
@@ -44,7 +44,11 @@ class AuctionRoomController extends Controller
         if(Auth::guard('web')->user()->level == 1)
         {
             $idroom = $request->id;
-            $max = DetailAuctionRoom::where('id_auction_room', $idroom)->orderby('bidding_price', 'desc')->first()->bidding_price;
+            $inforoom =AuctionRoom::find($idroom);
+            $max = $inforoom->product->starting_price;
+            if(DetailAuctionRoom::where('id_auction_room', $idroom)->orderby('bidding_price', 'desc')->count() > 0){
+                $max = DetailAuctionRoom::where('id_auction_room', $idroom)->orderby('bidding_price', 'desc')->first()->bidding_price;
+            }
             $setTimeAuctionRoom = AuctionRoom::findOrFail($idroom);
             $timeKetThuc = $setTimeAuctionRoom->thoi_gian_ket_thuc;
             if ($request->bidding_price <= $max) {

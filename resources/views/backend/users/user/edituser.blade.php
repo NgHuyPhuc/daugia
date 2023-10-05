@@ -85,16 +85,16 @@
                             <div class="form-group">
                                 <label>Level</label>
                                 <select name="level" class="form-control" value="">
-                                    <option selected value="0">Tài khoản chưa kích hoạt</option>
-                                    <option value="1">Tài khoản đã kích hoạt</option>
-                                    <option value="2">Tài khoản đấu giá viên</option>
+                                    <option {{$user->level == 0 ? 'selected' : ''}} value="0">Tài khoản chưa kích hoạt</option>
+                                    <option {{$user->level == 1 ? 'selected' : ''}} value="1">Tài khoản đã kích hoạt</option>
+                                    <option {{$user->level == 2 ? 'selected' : ''}} value="2">Tài khoản đấu giá viên</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success" type="submit">Thêm thông báo</button>
+                            <button class="btn btn-success" type="submit">Sửa tài khoản</button>
                             <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                         </div>
                     </div>

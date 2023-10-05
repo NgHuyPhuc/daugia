@@ -16,10 +16,16 @@ class AuctionRoom extends Model
         'id_dgv',
         'state',
     ];
-    public function product(){
-        return $this->belongsto(Product::class ,"id_product","id");
+    public function product()
+    {
+        return $this->belongsto(Product::class, "id_product", "id");
     }
-    public function dgv(){
-        return $this->belongsto(User::class ,"id_dgv","id");
+    public function dgv()
+    {
+        return $this->belongsto(User::class, "id_dgv", "id");
+    }
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'id_product', 'id_product');
     }
 }

@@ -80,6 +80,7 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
     });
     Route::prefix('/user')->middleware('auth:webadmin')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('useradminsite.home');
+        Route::get('/verification', [UserController::class, 'verifiUser'])->name('useradminsite.verification');
         Route::get('/detail/{id}', [UserController::class, 'detail'])->name('useradminsite.detail');
         Route::get('/search', [UserController::class, 'search'])->name('useradminsite.search');
         Route::get('/create', [UserController::class, 'create'])->name('useradminsite.create');

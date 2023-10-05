@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,7 +56,23 @@ class UserController extends Controller
     {
         $user =  User::find($request->id);
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        // dd($request->password);
+        // dd(!Hash::check('smspro123' , $user->password));
+        // if(Hash::check($request->password , $user->password))
+        // {
+
+        // }
+        // else{
+        //     $user->password = Hash::make($request->password);
+        // }
+        if($request->password === $user->password)
+        {
+
+        }
+        else{
+            $user->password = Hash::make($request->password);
+        }
+
         $user->name = $request->name;
         $user->phone = $request->phone;
         if($request->hasFile('imgccdtrc')){
@@ -94,6 +111,11 @@ class UserController extends Controller
         ->paginate(5);
         // dd($data);
         return view('backend.users.user.searchuser',$data);
+    }
+    public function verifiUser()
+    {
+        $data['users'] = User::where('level', 0)->paginate(5);
+        return view('backend.users.user.verification',$data);
     }
     public function detail(Request $request){
         $data['user'] = User::find($request->id);

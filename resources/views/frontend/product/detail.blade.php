@@ -120,15 +120,18 @@
                                         </div>
                                         <div class="detail-row">
                                             @if (Auth::guard('web')->check())
-                                                @if ($check == null)
-                                                    <button type="button" class="btn btn-primary detail-btn"
-                                                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                        Đăng ký tham gia đấu giá
-                                                    </button>
+                                                @if (Auth::user()->level == 0)
+                                                <a class="btn btn-primary detail-btn" href="javascript:void(0)">Tài khoản của bạn chưa được xác thực</a>  
                                                 @else
-                                                        <a class="btn btn-primary detail-btn" href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
+                                                    @if ($check == null)
+                                                        <button type="button" class="btn btn-primary detail-btn"
+                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Đăng ký tham gia đấu giá
+                                                        </button>
+                                                    @else
+                                                            <a class="btn btn-primary detail-btn" href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
+                                                    @endif
                                                 @endif
-                                                
                                             @else
                                                 <a class="btn btn-primary detail-btn center-a-button"
                                                     href="{{ route('user.login') }}">

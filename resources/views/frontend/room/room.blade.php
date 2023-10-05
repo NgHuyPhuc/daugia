@@ -161,11 +161,7 @@ if($check == false)
                                     {{-- @dd($detail); --}}
                                     <div class="col-lg-4 col-md-4 col-sm-4">
                                         <input type="text" id="quantity-text"
-                                            {{-- @if ($detail== null)
-                                                value="{{ number_format($info->product->starting_price, 0, '.', '.') }}"
-                                            @else --}}
-                                                value="{{ number_format($detail->bidding_price, 0, '.', '.') }}"
-                                            {{-- @endif     --}}
+                                            value="{{ number_format($detail->bidding_price, 0, '.', '.') }}"
                                             disabled>
                                     </div>
                                     <div style="display: none">
@@ -186,8 +182,6 @@ if($check == false)
                                         </div>
 
                                     
-                                    
-
                                 </div>
                                 @csrf
                             </form>

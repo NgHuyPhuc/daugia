@@ -37,8 +37,8 @@ use App\Models\Payment;
                             <th>Thông tin sản phẩm</th>
                             {{-- <th>Số tài khoản ngân hàng</th>
                             <th>Ngân hàng</th>--}}
-                            <th>Phòng đấu giá</th> 
                             <th>Số tiền đặt cọc sản phẩm</th>
+                            <th>Phòng đấu giá</th> 
                             <th>Phí tham gia</th>
                             <th>Số tiền cần thanh toán</th>
                             <th>Trạng thái</th>

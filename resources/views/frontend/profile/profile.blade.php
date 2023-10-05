@@ -3,6 +3,12 @@
 @section('main')
 
     <div class="container mb-50">
+        @if (Auth::user()->level == 0)
+            <div class="alert alert-danger mt-30">
+                Tài khoản chưa được xác thực có thể liên hệ admin để được xác thực sớm hơn
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 <div class="pro-detail-tab nav-tabs">

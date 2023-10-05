@@ -37,10 +37,7 @@
                                             class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 @endif
-                                <div class="">
-                                    <a href="{{ route('useradminsite.create') }}" class="btn btn-primary">Thêm Thành viên</a>
-                                    <a style="margin-left: 15px" href="{{ route('useradminsite.verification') }}" class="btn btn-primary">Xác thực thành viên</a>
-                                </div>
+                                <a href="{{ route('useradminsite.create') }}" class="btn btn-primary">Thêm Thành viên</a>
                                 <form style="margin-top: 20px" action="{{ route('useradminsite.search') }}" method="get">
                                     <label for="">Nhập thông tin tìm kiếm:</label>
                                     <input type="text" name="keyword">

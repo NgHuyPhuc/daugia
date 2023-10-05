@@ -24,5 +24,9 @@ class Payment extends Model
     public function user(){
         return $this->belongsto(User::class ,"id_user","id");
     }
+    public function room()
+    {
+        return $this->hasOne(AuctionRoom::class, 'id_product','id_product')->latest();
+    }
     
 }
