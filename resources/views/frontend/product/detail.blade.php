@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 @extends('frontend/master/master')
 @section('title', 'Chi tiết sản phẩm đấu giá')
 @section('main')
@@ -66,6 +69,17 @@
                                     <div class="detail-info">
                                         <div class="detail-row">
                                             <span>XEM CHI TIẾT TẠI THÔNG BÁO ĐẤU GIÁ TÀI SẢN</span>
+                                            @if ($check_wishlist)
+                                            <a id='wish-list' style="margin-left: 30px"
+                                            data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
+                                                class="fa-solid fa-heart" style="color: #ff0000;"></i></a>
+                                            @else
+                                                
+                                            <a id="wish-list" style="margin-left: 30px"
+                                                data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
+                                                    class="fa-regular fa-heart"></i></a>
+                                            @endif
+                                            
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Người có tài sản:</span>
@@ -73,30 +87,36 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Ngày công bố:</span>
-                                            <span class="detail-value">{{ $product->registration_time }}</span>
+                                            <span
+                                                class="detail-value">{{ date_format(date_create($product->registration_time), 'd-m-Y | h:i:s') }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký từ:</span>
-                                            <span class="detail-value">{{ date_format(date_create($product->registration_time),'d-m-Y') }}</span>
+                                            <span
+                                                class="detail-value">{{ date_format(date_create($product->registration_time), 'd-m-Y | h:i:s') }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Hạn đăng ký đến:</span>
-                                            <span class="detail-value">{{ $product->registration_deadline }}</span>
+                                            <span
+                                                class="detail-value">{{ date_format(date_create($product->registration_deadline), 'd/m/Y | h:i:s') }}</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Thời gian bắt đầu cuộc đấu giá:</span>
                                             @if ($auctionroom == null)
                                                 <span class="detail-value">Chưa có thời gian bắt đầu</span>
                                             @else
-                                                <span class="detail-value">{{ date_format(date_create($auctionroom->thoi_gian_bat_dau),'d/m/Y | h:i:s')}}</span>
+                                                <span
+                                                    class="detail-value">{{ date_format(date_create($auctionroom->thoi_gian_bat_dau), 'd/m/Y | h:i:s') }}</span>
                                             @endif
                                         </div>
                                         <div class="detail-row">
-                                            <span class="detail-label txt-main">Thời gian kết thúc cuộc đấu giá (Dự kiến):</span>
+                                            <span class="detail-label txt-main">Thời gian kết thúc cuộc đấu giá (Dự
+                                                kiến):</span>
                                             @if ($auctionroom == null)
-                                                <span class="detail-value">Theo quy đinh cuộc đấu giá</span>
+                                                <span class="detail-value">Theo quy định cuộc đấu giá</span>
                                             @else
-                                                <span class="detail-value">{{date_format(date_create($auctionroom->thoi_gian_ket_thuc), 'd/m/Y | h:i:s')}}</span>
+                                                <span
+                                                    class="detail-value">{{ date_format(date_create($auctionroom->thoi_gian_ket_thuc), 'd/m/Y | h:i:s') }}</span>
                                             @endif
                                         </div>
                                         <div class="detail-row">
@@ -106,7 +126,8 @@
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Bước giá:</span>
-                                            <span class="detail-value">{{ number_format($product->price_step) }} VNĐ</span>
+                                            <span class="detail-value">{{ number_format($product->price_step) }}
+                                                VNĐ</span>
                                         </div>
                                         <div class="detail-row">
                                             <span class="detail-label txt-main">Chi phí tham gia đấu giá:</span>
@@ -119,32 +140,46 @@
                                                 VNĐ</span>
                                         </div>
                                         <div class="detail-row">
-                                            @if (Auth::guard('web')->check())
-                                                @if (Auth::user()->level == 0)
-                                                <a class="btn btn-primary detail-btn" href="javascript:void(0)">Tài khoản của bạn chưa được xác thực</a>  
-                                                @else
-                                                    @if ($check == null)
-                                                        <button type="button" class="btn btn-primary detail-btn"
-                                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Đăng ký tham gia đấu giá
-                                                        </button>
+                                            {{-- @if (isset($product->registration_deadline))
+                                                
+                                            @else
+                                                
+                                            @endif --}}
+                                            @if (Carbon::now() < $product->registration_deadline)
+                                                @if (Auth::guard('web')->check())
+                                                    @if (Auth::user()->level == 0)
+                                                        <a class="btn btn-primary detail-btn"
+                                                            href="javascript:void(0)">Tài khoản của bạn chưa được xác
+                                                            thực</a>
                                                     @else
-                                                            <a class="btn btn-primary detail-btn" href="{{route('user.profilepayment')}}">Bạn đã đặt hàng sản phẩm này hãy kiểm tra</a>    
+                                                        @if ($check == null)
+                                                            <button type="button" class="btn btn-primary detail-btn"
+                                                                data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                Đăng ký tham gia đấu giá
+                                                            </button>
+                                                        @else
+                                                            <a class="btn btn-primary detail-btn"
+                                                                href="{{ route('user.profilepayment') }}">Bạn đã đặt hàng
+                                                                sản phẩm này hãy kiểm tra</a>
+                                                        @endif
                                                     @endif
+                                                @else
+                                                    <a class="btn btn-primary detail-btn center-a-button"
+                                                        href="{{ route('user.login') }}">
+                                                        Đăng ký tham gia đấu giá
+                                                    </a>
                                                 @endif
                                             @else
-                                                <a class="btn btn-primary detail-btn center-a-button"
-                                                    href="{{ route('user.login') }}">
-                                                    Đăng ký tham gia đấu giá
-                                                </a>
-                                            @endif
+                                                <a class="btn btn-warning" href="javascript:void(0)">Thời gian đăng ký đã
+                                                    kết thúc</a>
 
+                                            @endif
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <form action="{{route('paymentsite.post')}}" method="post">
+                                                    <form action="{{ route('paymentsite.post') }}" method="post">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Đăng ký
@@ -163,14 +198,16 @@
                                                                         <div class="col-5">
                                                                             <input
                                                                                 class="input-modal form-control-sm form-control-plaintext"
-                                                                                type="text" disabled value="{{number_format($product->participation_costs)}} VNĐ">
+                                                                                type="text" disabled
+                                                                                value="{{ number_format($product->participation_costs) }} VNĐ">
                                                                         </div>
                                                                         <div class="col-7 pt-20"><span>Số tiền đặt
                                                                                 trước:</span></div>
                                                                         <div class="col-5 pt-20">
                                                                             <input
                                                                                 class="input-modal form-control-sm form-control-plaintext"
-                                                                                type="text" disabled value="{{ number_format($product->auction_deposit) }} VNĐ">
+                                                                                type="text" disabled
+                                                                                value="{{ number_format($product->auction_deposit) }} VNĐ">
 
                                                                         </div>
                                                                         <div class="col-7 pt-20"><span>Tổng tiền:</span>
@@ -178,13 +215,17 @@
                                                                         <div class="col-5 pt-20">
                                                                             <input
                                                                                 class="input-modal form-control-sm form-control-plaintext"
-                                                                                type="text"  disabled value="{{ number_format($product->auction_deposit + $product->participation_costs) }} VNĐ">
-                                                                                <input type="hidden" name="total_amount" type="text" value="{{$product->auction_deposit + $product->participation_costs}}">
+                                                                                type="text" disabled
+                                                                                value="{{ number_format($product->auction_deposit + $product->participation_costs) }} VNĐ">
+                                                                            <input type="hidden" name="total_amount"
+                                                                                type="text"
+                                                                                value="{{ $product->auction_deposit + $product->participation_costs }}">
                                                                         </div>
                                                                         <div class="col-7 pt-20"><span>Bằng chữ:</span>
                                                                         </div>
                                                                         <div class="col-5 pt-20">
-                                                                            <span><strong id="convert-to-string"> </strong></span>
+                                                                            <span><strong id="convert-to-string">
+                                                                                </strong></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -195,24 +236,27 @@
                                                                         <div class="col-7"><span>Số tài khoản:</span>
                                                                         </div>
                                                                         <div class="col-5">
-                                                                            <input name="bank_account_number" type="text">
+                                                                            <input name="bank_account_number"
+                                                                                type="text">
                                                                         </div>
                                                                         <div class="col-7 pt-20"><span>Ngân hàng:</span>
                                                                         </div>
                                                                         <div class="col-5 pt-20">
                                                                             <input name="bank" type="text">
                                                                         </div>
-                                                                        <div name='account_holder_name' class="col-7 pt-20"><span>Chủ tài
+                                                                        <div name='account_holder_name'
+                                                                            class="col-7 pt-20"><span>Chủ tài
                                                                                 khoản:</span></div>
                                                                         <div class="col-5 pt-20">
-                                                                            <input name="account_holder_name" type="text">
+                                                                            <input name="account_holder_name"
+                                                                                type="text">
                                                                         </div>
-                                                                        <input type="hidden" name="id_product" value="{{ $product->id }}">
+                                                                        <input type="hidden" name="id_product"
+                                                                            value="{{ $product->id }}">
                                                                         @if (Auth::guard('web')->guest())
-
                                                                         @else
-                                                                        <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
-                                                                            
+                                                                            <input type="hidden" name="id_user"
+                                                                                value="{{ Auth::guard('web')->user()->id }}">
                                                                         @endif
                                                                     </div>
                                                                 </div>
@@ -236,7 +280,8 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Thanh toán</button>
+                                                                <button type="submit" class="btn btn-primary">Thanh
+                                                                    toán</button>
                                                             </div>
                                                         </div>
                                                         @csrf
@@ -262,17 +307,15 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($listpayment as $item)
-                                            <tr>
-                                                <th scope="row">{{$item->id}}</th>
-                                                <td>{{$item->user->name}}</td>
-                                                @if ($item->created_at == null)
-                                                    <td> </td>
-                                                @else
-                                                <td>{{date_format( $item->created_at,'d/m/y | h:i:s')}}</td>
-                                                    
-                                                @endif
-                                            </tr>
-                                                
+                                                <tr>
+                                                    <th scope="row">{{ $item->id }}</th>
+                                                    <td>{{ $item->user->name }}</td>
+                                                    @if ($item->created_at == null)
+                                                        <td> </td>
+                                                    @else
+                                                        <td>{{ date_format($item->created_at, 'd/m/y | h:i:s') }}</td>
+                                                    @endif
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -359,7 +402,42 @@
         </div>
     </div>
     <script>
-        document.getElementById("convert-to-string").textContent = convertNumberToWords({{$product->auction_deposit + $product->participation_costs}});
-        console.log(convertNumberToWords({{$product->auction_deposit + $product->participation_costs}}));
+        document.getElementById("convert-to-string").textContent = convertNumberToWords(
+            {{ $product->auction_deposit + $product->participation_costs }});
+        console.log(convertNumberToWords({{ $product->auction_deposit + $product->participation_costs }}));
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#wish-list').click(function(e) {
+                e.preventDefault();
+                var productId = $(this).data('product-id');
+                $.ajax({
+                    url: '{{ route('wishlist.add') }}',
+                    method: 'POST',
+                    data: {
+                        product_id: productId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#icon-heart').removeClass(),
+                            $('#icon-heart').addClass('fa-solid fa-heart'),
+                            $('#icon-heart').removeAttr('style'),
+                            $('#icon-heart').css('color', '#ff0000');
+                            // alert(response.message+'true');
+                        } else {
+                            $('#icon-heart').removeClass(),
+                            $('#icon-heart').addClass('fa-regular fa-heart'),
+                            $('#icon-heart').removeAttr('style');
+                            // alert(response.message+'false');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection

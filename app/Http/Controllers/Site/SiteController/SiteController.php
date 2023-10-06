@@ -10,6 +10,7 @@ use App\Models\Law;
 use App\Models\Notify;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\WishList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,11 @@ class SiteController extends Controller
         $data['listpayment'] = Payment::where('id_product',$request->id)->where('state',1)->paginate(5);
         $data['check'] = null;
         $data['auctionroom'] = AuctionRoom::where('id_product', $request->id)->first();
+        $checkwishlist = WishList::where('id_user',Auth::user()->id)->where('id_product', $request->id)->count();
+        $data['check_wishlist'] = false;
+        if($checkwishlist > 0){
+            $data['check_wishlist'] = true;
+        }
         // dd($data);
         // dd($data);
         // dd(Auth::guard('web')->check());

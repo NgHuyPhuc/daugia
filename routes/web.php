@@ -19,6 +19,7 @@ use App\Http\Controllers\Site\Payment\PaymentController as PaymentPaymentControl
 use App\Http\Controllers\Site\ResultAuction\ResultAuctionController;
 use App\Http\Controllers\Site\SiteController\SiteController;
 use App\Http\Controllers\Site\UserSite\UserSiteController;
+use App\Http\Controllers\Site\Wishlist\WishlistController;
 use App\Models\DetailAuctionRoom;
 use Illuminate\Support\Facades\Route;
 
@@ -185,6 +186,10 @@ Route::prefix('result')->group(function () {
     Route::get('/', [ResultAuctionController::class, 'index'])->name('user.result');
     Route::get('/search', [ResultAuctionController::class, 'search'])->name('user.result.search');
     Route::get('/detail/{id}', [ResultAuctionController::class, 'detail'])->name('user.result.detail');
+});
+Route::prefix('wishlist')->group(function () {
+    Route::post('/add', [WishlistController::class, 'add'])->name('wishlist.add');
+    Route::post('/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
 });
 
 //end site
