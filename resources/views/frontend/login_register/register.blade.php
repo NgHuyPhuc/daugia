@@ -33,11 +33,11 @@
                         </div>
                         <div class="form-group">
                             <label>Số tài khoản ngân hàng</label>
-                            <input type="text" name="bank_account_number" class="form-control">
+                            <input type="text" name="bank_account_number" placeholder="Số tài khoản ngân hàng" class="form-control">
                         </div>
                         <div class="form-group">
                             <label>Tên ngân hàng</label>
-                            <input type="text" name="bank" class="form-control">
+                            <input type="text" name="bank" placeholder="Tên ngân hàng" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="form-dob">Ngày sinh</label><code>*</code>
@@ -75,12 +75,12 @@
                         
                         <div class="form-group">
                             <label>Tên chủ tài khoản(ngân hàng)</label>
-                            <input type="text" name="account_holder_name" class="form-control">
+                            <input type="text" name="account_holder_name" placeholder="Tên chủ tài khoản" class="form-control">
                         </div>
                         
                         <div class="form-group">
                             <label>Chi nhánh ngân hàng</label>
-                            <input type="text" name="bank_branch" class="form-control">
+                            <input type="text" name="bank_branch" placeholder="Chi nhánh ngân hàng" class="form-control">
                         </div>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">

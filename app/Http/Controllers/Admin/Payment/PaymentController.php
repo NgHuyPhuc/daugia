@@ -50,7 +50,9 @@ class PaymentController extends Controller
 
         $payment->save();
         $request->session()->flash('alert', 'Đã sửa thành công');
-        return redirect()->route('payment.home');
+        return redirect()
+        // ->back();
+        ->route('payment.home');
     }
     public function delete(Request $request)
     {
@@ -61,16 +63,23 @@ class PaymentController extends Controller
     }
     public function search(Request $request)
     {
-        $searchTerm = $request->keyword;
-        // $data['payments'] = Payment::where('id','like','%'.$request->keyword.'%')->orwhere('product_name','like','%'.$request->keyword.'%')->paginate(5);
-        $data['payments'] = Payment::whereHas('product', function ($query) use ($searchTerm) {
-            $query->where('product_name', 'like', '%' . $searchTerm . '%');
-        })
-        ->orWhereHas('user', function ($query) use ($searchTerm) {
-            $query->where('name', 'like', '%' . $searchTerm . '%');
-        })
-        ->paginate(5);
-        // dd($data);
-        return view('backend.payment.paymentsearch', $data);
+        if(isset($request->id))
+        {
+            $searchTerm = $request->id;
+            $data['payments'] = Payment::where('id_product', $searchTerm)->paginate(5);
+            return view('backend.payment.paymentsearch', $data);
+        }
+        else{
+            $searchTerm = $request->keyword;
+            $data['payments'] = Payment::whereHas('product', function ($query) use ($searchTerm) {
+                $query->where('product_name', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhereHas('user', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            })
+            ->paginate(5);
+            // dd($data);
+            return view('backend.payment.paymentsearch', $data);
+        }
     }
 }

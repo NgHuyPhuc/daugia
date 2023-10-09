@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Danh sách sản phẩm')
+@section('title', 'Danh sách đơn hàng')
 @section('main')
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -7,14 +7,14 @@
             <li><a href="#"><svg class="glyph stroked home">
                         <use xlink:href="#stroked-home"></use>
                     </svg></a></li>
-            <li class="active">Danh sách sản phẩm</li>
+            <li class="active">Danh sách đơn hàng</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Danh sách sản phẩm</h1>
+            <h1 class="page-header">Danh sách đơn hàng</h1>
         </div>
     </div>
     <!--/.row-->
@@ -35,11 +35,19 @@
                             </div>
                             @endif
                             
-                            <a href="{{route('payment.create')}}" class="btn btn-primary">Thêm sản phẩm</a>
+                            <a href="{{route('payment.create')}}" class="btn btn-primary">Thêm đơn hàng</a>
                             <form style="margin-top: 20px" action="{{ route('payment.search') }}" method="get">
                                 <label for="">Nhập thông tin tìm kiếm:</label>
                                 <input type="text" name="keyword">
                                 <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                            </form>
+
+                            <form style="margin-top: 20px" action="{{ route('payment.search') }}" method="get">
+                                <label for="">Nhập ID sản phẩm:</label>
+                                <input id="id_product" type="text" name="id">
+                                <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                                <br>
+                                <label id="prd_name" for=""></label>
                             </form>
                             <table class="table table-bordered" style="margin-top:20px;">
 
@@ -122,6 +130,27 @@
         var x = document.getElementById("offdiv");
         x.style.display = "none";
     }
+    $(document).ready(function() {
+            $('#id_product').on('input', function() {
+                var id = $(this).val();
+                if (id !== '') {
+                    $.ajax({
+                        url: '/admin/get-product-name/' + id,
+                        type: 'GET',
+                        // data: { id: id },
+                        success: function(response) {
+                            $('#prd_name').text(response);
+                        },
+                        error: function(xhr) {
+                            $('#prd_name').text('Id hàng hóa không tồn tại');
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#prd_name').text('tên hàng hóa');
+                }
+            });
+        });
 </script>
         
         

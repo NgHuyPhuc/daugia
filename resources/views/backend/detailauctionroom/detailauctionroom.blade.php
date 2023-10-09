@@ -33,7 +33,10 @@
                             </div>
                             <div class="table-responsive">
                                 <label for="">Nhập id sản phẩm</label>
-                                <input name="id_prd" type="text">
+                                <input name="id_prd" id="id_product" type="text">
+                                <br>
+                                <label id="prd_name" for="">Tên sản phẩm</label>
+
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -64,6 +67,28 @@
             var x = document.getElementById("offdiv");
             x.style.display = "none";
         }
+
+        $(document).ready(function() {
+            $('#id_product').on('input', function() {
+                var id = $(this).val();
+                if (id !== '') {
+                    $.ajax({
+                        url: '/admin/get-product-name/' + id,
+                        type: 'GET',
+                        // data: { id: id },
+                        success: function(response) {
+                            $('#prd_name').text(response);
+                        },
+                        error: function(xhr) {
+                            $('#prd_name').text('Id hàng hóa không tồn tại');
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#prd_name').text('tên hàng hóa');
+                }
+            });
+        });
     </script>
 
 

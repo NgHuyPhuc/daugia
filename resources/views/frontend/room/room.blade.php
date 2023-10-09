@@ -153,8 +153,9 @@ if($check == false)
                         <div class="col-lg-6">
                             <!-- Trả giá -->
                             <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post">
+                                {{-- <div class="row md-sm-mgt-10px"> --}}
                                 <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                    <div class="col-lg-1 col-md-2 col-sm-2 sm-pdt-5px">
                                         <a class="button-price-decrease" href="javascript:void(0)"
                                             onclick="decreaseQuantity()">-</a>
                                     </div>
@@ -169,7 +170,7 @@ if($check == false)
                                             min="{{$detail->bidding_price}}"
                                             value="{{ $detail->bidding_price }}">
                                     </div>
-                                    <div class="col-lg-1 col-md-1 col-sm-1">
+                                    <div class="col-lg-1 col-md-2 col-sm-2">
                                         <a class="button-price-increase" href="javascript:void(0)"
                                             onclick="increaseQuantity()">+</a>
                                     </div>
@@ -177,7 +178,7 @@ if($check == false)
                                     <input type="hidden" name="id_room" value="{{ $info->id }}">
                                     <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
                                     
-                                        <div style="margin-left: 50px;" class="col-lg-4 col-md-3 col-sm-1">
+                                        <div class="col-lg-4 col-md-3 col-sm-4">
                                             <button class="submit-price" type="submit">Trả giá</button>
                                         </div>
 

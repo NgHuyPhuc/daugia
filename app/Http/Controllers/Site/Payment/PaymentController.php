@@ -30,7 +30,7 @@ class PaymentController extends Controller
                 $payment->bank = $request->bank;
                 $payment->state = 2;
                 $payment->save();
-                return redirect()->route('site.home');
+                return redirect()->route('user.profilepayment');
             }
         }
     }

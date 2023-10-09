@@ -41,6 +41,11 @@
                                 <input type="text" name="keyword">
                                 <button class="btn btn-success" type="submit">Tìm kiếm</button>
                             </form>
+                            <form style="margin-top: 20px" action="{{ route('payment.search') }}" method="get">
+                                <label for="">Nhập ID sản phẩm:</label>
+                                <input type="text" name="id">
+                                <button class="btn btn-success" type="submit">Tìm kiếm</button>
+                            </form>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
@@ -122,6 +127,28 @@
         var x = document.getElementById("offdiv");
         x.style.display = "none";
     }
+
+    $(document).ready(function() {
+            $('#id_product').on('input', function() {
+                var id = $(this).val();
+                if (id !== '') {
+                    $.ajax({
+                        url: '/admin/get-product-name/' + id,
+                        type: 'GET',
+                        // data: { id: id },
+                        success: function(response) {
+                            $('#prd_name').text(response);
+                        },
+                        error: function(xhr) {
+                            $('#prd_name').text('Id hàng hóa không tồn tại');
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#prd_name').text('tên hàng hóa');
+                }
+            });
+        });
 </script>
         
         
