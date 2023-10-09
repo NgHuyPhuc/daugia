@@ -180,6 +180,7 @@ Route::prefix('/profile')->middleware('auth:web')->group(function () {
     Route::post('/changepass', [UserSiteController::class, 'postprofilechangepass'])->name('user.postprofilechangepass')->middleware('auth:web');
     Route::get('/payment', [UserSiteController::class, 'profilepayment'])->name('user.profilepayment')->middleware('auth:web');
     Route::get('/searchpayment', [UserSiteController::class, 'searchPayment'])->name('user.profilepaymentsearch')->middleware('auth:web');
+    Route::get('/wishlist', [WishlistController::class, 'wishlist'])->name('user.profilewishlist')->middleware('auth:web');
 });
 
 Route::prefix('result')->group(function () {

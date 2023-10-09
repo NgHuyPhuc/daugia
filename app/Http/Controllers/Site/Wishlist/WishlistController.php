@@ -31,8 +31,11 @@ class WishlistController extends Controller
         }
 
     }
-    public function remove(Request $request)
+    public function wishlist(Request $request)
     {
-
+        $id_user = Auth::user()->id;
+        
+        $data['list'] = WishList::orderby('id','desc')->where('id_user',$id_user)->paginate(5);
+        return view('frontend.profile.wishlist', $data);
     }
 }

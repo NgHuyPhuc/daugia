@@ -12,6 +12,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
                 <div class="pro-detail-tab nav-tabs">
                     <div class="tab-item nav-link"><a href="{{route('user.profile')}}">Thông tin</a></div>
                     <div class="tab-item nav-link"><a href="{{route('user.profilechangepass')}}">Đổi mật khẩu</a></div>
+                    <div class="tab-item nav-link"><a href="{{route('user.profilewishlist')}}">Sản phẩm yêu thích</a></div>
                     <div class="tab-item nav-link active"><a class="active" href="{{route('user.profilepayment')}}">Thông tin thanh toán</a></div>
                 </div>
             </div>

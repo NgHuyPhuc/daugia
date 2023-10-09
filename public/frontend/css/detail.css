@@ -23,12 +23,11 @@
     --bs-nav-tabs-link-active-color: rgb(255, 59, 24) !important;
 }
 .nav-tabs .active{
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 .detail-info{
     width: 100%;
     float: left;
-    /* padding: 20px 0px; */
 }
 .detail-row {
     width: 100%;
