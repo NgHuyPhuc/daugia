@@ -64,6 +64,14 @@ use Illuminate\Support\Facades\Route;
                     class="glyph stroked bag">
                     <use xlink:href="#stroked-bag"></use>
                 </svg> Đơn hàng</a></li>
+
+        <li class="
+		@if (Route::is('paymentstate.*')) active @endif
+		"><a href="{{ route('paymentstate.home') }}"><svg
+                    class="glyph stroked bag">
+                    <use xlink:href="#stroked-bag"></use>
+                </svg> Hoàn tiền đặt cọc</a></li>
+
         @if (Auth::user()->level == 1)
             <li role="presentation" class="divider"></li>
             <li class="
@@ -79,6 +87,7 @@ use Illuminate\Support\Facades\Route;
                         <use xlink:href="#stroked-male-user"></use>
                     </svg> Quản lý Admin</a></li>
         @endif
+        <li role="presentation" class="divider"></li>
 
     </ul>
 

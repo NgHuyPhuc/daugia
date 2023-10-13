@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auction\AuctionRoomController;
 use App\Http\Controllers\Admin\Auction\AuctionRoomFinal;
 use App\Http\Controllers\Admin\Auction\DetailAutionRoomController;
+use App\Http\Controllers\Admin\AuctionRefund\AuctionRefundController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Law\LawController;
@@ -137,6 +138,15 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
         Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payment.edit');
         Route::post('/postedit/{id}', [PaymentController::class, 'postedit'])->name('payment.postedit');
         Route::get('/delete/{id}', [PaymentController::class, 'delete'])->name('payment.delete');
+    });
+    Route::prefix('/payment-refund')->middleware('auth:webadmin')->group(function () {
+        Route::get('/', [AuctionRefundController::class, 'index'])->name('paymentstate.home');
+        Route::get('/search', [AuctionRefundController::class, 'search'])->name('paymentstate.search');
+        // Route::get('/create', [AuctionRefundController::class, 'create'])->name('payment.create');
+        Route::post('/postcreate', [AuctionRefundController::class, 'postcreate'])->name('paymentstate.postcreate');
+        Route::get('/edit/{id}', [AuctionRefundController::class, 'edit'])->name('paymentstate.edit');
+        Route::post('/postedit/{id}', [AuctionRefundController::class, 'postedit'])->name('paymentstate.postedit');
+        Route::get('/delete/{id}', [AuctionRefundController::class, 'delete'])->name('paymentstate.delete');
     });
     Route::get('/get-product-name/{id}', [AuctionRoomController::class, 'getProductName']);
     Route::get('/get-dgv-name/{id}', [AuctionRoomController::class, 'getDgvName']);

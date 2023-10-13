@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuctionRoom;
 use App\Models\AuctionRoomFinal;
 use App\Models\DetailAuctionRoom;
+use App\Models\Payment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -89,6 +90,14 @@ class AuctionRoomController extends Controller
         $final_room->id_user = $auction_room_detail->id_user;
         $final_room->bidding_price = $auction_room_detail->bidding_price;
         $auction_room->state = 0;
+
+        $payment_status = Payment::where('id_product', $auction_room->id_product)->get();
+        foreach ($payment_status as $item)
+        {
+            $item->state = 3;
+            $item->save();
+        }
+        // dd($payment_status);
         $auction_room->save();
         $final_room->save();
         return redirect()->route('user.listroom');
