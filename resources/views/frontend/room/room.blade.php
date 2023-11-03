@@ -1,6 +1,5 @@
 <?php
-if($check == false)
-{
+if ($check == false) {
     $detail = json_decode($detail);
 }
 ?>
@@ -43,7 +42,7 @@ if($check == false)
                                 <span class="detail-value">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">
-                                        {{$dgv->name}}
+                                        {{ $dgv->name }}
                                     </button>
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,41 +50,42 @@ if($check == false)
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Thông tin đấu giá
-                                                        viên: {{$dgv->name}}</h5>
+                                                        viên: {{ $dgv->name }}</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="row">
                                                         <div class="col-lg-5 detail-dgv">
-                                                            <img src="../upload/img/{{$dgv->imgccdtrc}}"
-                                                                alt="">
+                                                            <img src="../upload/img/{{ $dgv->imgccdtrc }}" alt="">
                                                         </div>
                                                         <div class="col-lg-7">
                                                             <div class="row">
                                                                 <div class="col-7"><span>Chứng chỉ hành nghề đấu giá
                                                                         số:</span></div>
                                                                 <div class="col-5">
-                                                                    <span><strong>{{$dgv->dgv_chung_chi}}</strong></span>
+                                                                    <span><strong>{{ $dgv->dgv_chung_chi }}</strong></span>
                                                                 </div>
                                                                 <div class="col-7 pt-20"><span>Ngày cấp chứng chỉ hành
                                                                         nghề:</span></div>
                                                                 <div class="col-5 pt-20">
-                                                                    <span><strong>{{$dgv->dgv_ngay_cap_chung_chi}}</strong></span>
+                                                                    <span><strong>{{ $dgv->dgv_ngay_cap_chung_chi }}</strong></span>
                                                                 </div>
                                                                 <div class="col-7 pt-20"><span>Số thẻ đấu giá
                                                                         viên:</span></div>
                                                                 <div class="col-5 pt-20">
-                                                                    <span><strong>{{$dgv->dgv_so_the_dgv}}</strong></span>
+                                                                    <span><strong>{{ $dgv->dgv_so_the_dgv }}</strong></span>
                                                                 </div>
                                                                 <div class="col-7 pt-20"><span>Ngày cấp thẻ đấu giá
                                                                         viên:</span></div>
                                                                 <div class="col-5 pt-20">
-                                                                    <span><strong>{{$dgv->dgv_ngay_cap_the_dgv}}</strong></span>
+                                                                    <span><strong>{{ $dgv->dgv_ngay_cap_the_dgv }}</strong></span>
                                                                 </div>
                                                                 <div class="col-7 pt-20"><span>Nơi cấp thẻ đấu
                                                                         giá:</span></div>
-                                                                <div class="col-5 pt-20"><span><strong>{{$dgv->dgv_noi_cap_the_dgv}}</strong></span></div>
+                                                                <div class="col-5 pt-20">
+                                                                    <span><strong>{{ $dgv->dgv_noi_cap_the_dgv }}</strong></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -150,57 +150,58 @@ if($check == false)
                             </div>
                         </div>
                         @if (Auth::guard('web')->user()->level == 1)
-                        <div class="col-lg-6">
-                            <!-- Trả giá -->
-                            <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post">
-                                {{-- <div class="row md-sm-mgt-10px"> --}}
-                                <div class="row">
-                                    <div class="col-lg-1 col-md-2 col-sm-2 sm-pdt-5px">
-                                        <a class="button-price-decrease" href="javascript:void(0)"
-                                            onclick="decreaseQuantity()">-</a>
-                                    </div>
-                                    {{-- @dd($detail); --}}
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <input type="text" id="quantity-text"
-                                            value="{{ number_format($detail->bidding_price, 0, '.', '.') }}"
-                                            disabled>
-                                    </div>
-                                    <div style="display: none">
-                                        <input name="bidding_price" type="number" id="quantity"
-                                            min="{{$detail->bidding_price}}"
-                                            value="{{ $detail->bidding_price }}">
-                                    </div>
-                                    <div class="col-lg-1 col-md-2 col-sm-2">
-                                        <a class="button-price-increase" href="javascript:void(0)"
-                                            onclick="increaseQuantity()">+</a>
-                                    </div>
-                                    <input type="hidden" name="id_product" value="{{ $info->id_product }}">
-                                    <input type="hidden" name="id_room" value="{{ $info->id }}">
-                                    <input type="hidden" name="id_user" value="{{ Auth::guard('web')->user()->id }}">
-                                    
+                            <div class="col-lg-6">
+                                <!-- Trả giá -->
+                                <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post">
+                                    {{-- <div class="row md-sm-mgt-10px"> --}}
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-2 col-sm-2 sm-pdt-5px">
+                                            <a class="button-price-decrease" href="javascript:void(0)"
+                                                onclick="decreaseQuantity()">-</a>
+                                        </div>
+                                        {{-- @dd($detail); --}}
+                                        <div class="col-lg-4 col-md-4 col-sm-4">
+                                            <input type="text" id="quantity-text"
+                                                value="{{ number_format($detail->bidding_price, 0, '.', '.') }}" disabled>
+                                        </div>
+                                        <div style="display: none">
+                                            <input name="bidding_price" type="number" id="quantity"
+                                                min="{{ $detail->bidding_price }}" value="{{ $detail->bidding_price }}">
+                                        </div>
+                                        <div class="col-lg-1 col-md-2 col-sm-2">
+                                            <a class="button-price-increase" href="javascript:void(0)"
+                                                onclick="increaseQuantity()">+</a>
+                                        </div>
+                                        <input type="hidden" name="id_product" value="{{ $info->id_product }}">
+                                        <input type="hidden" name="id_room" value="{{ $info->id }}">
+                                        <input type="hidden" name="id_user"
+                                            value="{{ Auth::guard('web')->user()->id }}">
+
                                         <div class="col-lg-4 col-md-3 col-sm-4">
                                             <button class="submit-price" type="submit">Trả giá</button>
                                         </div>
 
-                                    
-                                </div>
-                                @csrf
-                            </form>
-                        </div>
-                        @else
-                        <div class="col-lg-6 ">
-                            <div class="col-lg-4 col-md-3 col-sm-1 float-r">
-                                <form action="{{route('user.postendauction',['id' => $info->id])}}" method="post">
-                                    <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn kết thúc cuộc đấu giá này?')" 
-                                    class="end-auction" type="submit">Kết thúc cuộc đấu giá</button>
+
+                                    </div>
                                     @csrf
                                 </form>
                             </div>
-                        </div>
+                        @else
+                            <div class="col-lg-6 ">
+                                <div class="col-lg-4 col-md-3 col-sm-1 float-r">
+                                    <form action="{{ route('user.postendauction', ['id' => $info->id]) }}"
+                                        method="post">
+                                        <button type="submit"
+                                            onclick="return confirm('Bạn có chắc chắn muốn kết thúc cuộc đấu giá này?')"
+                                            class="end-auction" type="submit">Kết thúc cuộc đấu giá</button>
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
                         @endif
 
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -215,7 +216,7 @@ if($check == false)
                             <th scope="col">Thời điểm trả giá</th>
                         </tr>
                     </thead>
-                    
+
                     <tbody>
                         {{-- <tr>
                             <th scope="row">1</th>
@@ -232,6 +233,31 @@ if($check == false)
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="chat-icon-container">
+                <i class="fas fa-comment-dots chat-icon"></i>
+            </div>
+
+            <div style="display: none;" id="chat-box" class="chat-box">
+
+                <div class="chat-header">
+                    <h3>Chat</h3>
+                    <div class="close-btn">
+                        <a href="javascript:void(0)" onclick="closechat()" class="">X</a>
+                    </div>
+                </div>
+
+                <div class="messages">
+                    <!-- Tin nhắn của người dùng khác -->
+                    @include('/frontend/chat/receive', ['message' => "Chào mừng vào phòng chat  👋"])
+
+                </div>
+                <form class="chat-input">
+                    <input style="word-wrap: break-word;max-width: 100%;overflow-wrap: break-word;" type="text" id="message" name="message" placeholder="Nhập tin nhắn..."
+                        autocomplete="off">
+                    <input id="name" type="hidden" name="name" value="{{Auth::user()->name}}">
+                    <button type="submit">Gửi</button>
+                </form>
             </div>
         </div>
     </div>
@@ -303,8 +329,70 @@ if($check == false)
             </div>
         </div>
     </div>
-    <script>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 
+    <script>
+        function scrollToBottom() {
+            let boxHeight = $('.messages').prop('scrollHeight');
+            $('.messages').scrollTop(boxHeight);
+        }
+        const pusher = new Pusher('{{ config('broadcasting.connections.pusher.key') }}', {
+            cluster: 'ap1'
+        });
+        const channel = pusher.subscribe('public');
+
+        //Receive messages
+        channel.bind('chat', function(data) {
+            console.log(data)
+
+            $.post("/room/receive", {
+                    _token: '{{ csrf_token() }}',
+                    message: data.message,
+                    name: data.name,
+                })
+                .done(function(res) {
+                    $(".messages > .message").last().after(res)
+                    scrollToBottom();
+                });
+        });
+
+        // Broadcast messages
+        $(".chat-input").submit(function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: "/room/broadcast",
+                method: 'POST',
+                headers: {
+                    'X-Socket-Id': pusher.connection.socket_id
+                },
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    message: $(".chat-input #message").val(),
+                    name: $(".chat-input #name").val(),
+                }
+            }).done(function(res) {
+                console.log(res);
+                $(".messages > .message").last().after(res);
+                $(".chat-input #message").val('');
+                scrollToBottom();
+
+            });
+        });
+    </script>
+    <script>
+        const icon = document.querySelector('.chat-icon');
+        const chatBox = document.querySelector('.chat-box');
+
+        icon.addEventListener('click', () => {
+            chatBox.style.display = chatBox.style.display == 'none' ? 'block' : 'none';
+        })
+
+        function closechat() {
+            chatBox.style.display = 'none'
+        }
+    </script>
+    <script>
         function decreaseQuantity() {
             var quantityInput = document.getElementById('quantity');
             var currentQuantity = parseInt(quantityInput.value);
@@ -314,14 +402,10 @@ if($check == false)
             //     quantityInput.value = currentQuantity - {{ $info->product->price_step }};
             //     quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
             // }
-
-                if (currentQuantity > {{ $detail->bidding_price }}) {
-                    quantityInput.value = currentQuantity - {{ $info->product->price_step }};
-                    quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
-                }
-            
-
-
+            if (currentQuantity > {{ $detail->bidding_price }}) {
+                quantityInput.value = currentQuantity - {{ $info->product->price_step }};
+                quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
+            }
         }
 
         function increaseQuantity() {
@@ -397,10 +481,12 @@ if($check == false)
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         if (response.info.length > 0) {
                             // pricenow = response.info[0]['bidding_price'];
-                            document.getElementById('max-price').textContent = 'Giá cao nhất hiện tại: '+ new Intl.NumberFormat().format(response.info[0]['bidding_price'])  +'VND';
+                            document.getElementById('max-price').textContent =
+                                'Giá cao nhất hiện tại: ' + new Intl.NumberFormat().format(
+                                    response.info[0]['bidding_price']) + 'VND';
                             var info = '<thead>' + '<tr>' +
                                 '<th scope="col">ID</th>' +
                                 '<th scope="col">Người đấu giá</th>' +
@@ -422,9 +508,11 @@ if($check == false)
                                     '<tr>' +
                                     '<td scope="row">' + response.info[i]['id'] + '</td>' +
                                     '<td>' + response.info[i].user['name'] + '</td>' +
-                                    '<td>' + new Intl.NumberFormat().format(response.info[i]['bidding_price']) + ' VND' + '</td>' +
+                                    '<td>' + new Intl.NumberFormat().format(response.info[i][
+                                        'bidding_price'
+                                    ]) + ' VND' + '</td>' +
                                     // '<td>' + response.info[i]['created_at'] + '</td>' +
-                                    '<td>'+ formattedDate+'</td>'+
+                                    '<td>' + formattedDate + '</td>' +
                                     '</tr>' + '</tbody>';
                             }
                             $('#data').empty();
@@ -440,4 +528,5 @@ if($check == false)
             // console.log(pricenow);
         });
     </script>
+
 @endsection

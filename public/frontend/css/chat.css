@@ -1,0 +1,196 @@
+.chat-icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.chat-icon {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+}
+
+.chat-box {
+    transition: all 0.3s;
+}
+
+.icon {
+    position: fixed;
+    right: 20px;
+}
+.chat-box {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 500px;
+    background: #fff;
+    border: 1px solid #ddd;
+    z-index: 999999;
+}
+
+.messages {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+/* message styles */
+.message {
+    padding: 10px;
+    width: 100%;
+    /* margin: 10px 0; */
+
+}
+
+.message.left {
+    float: left;
+    text-align: left;
+    display: flex;
+}
+
+.message.right {
+    float: right;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end; 
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    width: 80%;
+}
+
+.close-btn {
+    width: 20%;
+}
+
+.messages {
+    height: 400px;
+    overflow-y: scroll;
+    
+}
+
+/* Left message */
+.message.left {
+    text-align: left;
+}
+
+/* Right message */
+.message.right {
+    text-align: right;
+}
+
+/* User name */
+.message p {
+    margin: 0;
+}
+
+/* Chat input */
+.chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Input field */
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+/* Send button */
+.chat-input button {
+    padding: 10px 15px;
+    background: #eee;
+    border: none;
+    cursor: pointer;
+}
+
+/* Overall chat box styling*/
+.chat-box {
+    width: 350px;
+    background: #fff;
+    border-left: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+    border-radius: 5px solid #ddd;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000000;
+}
+
+.close-btn {
+    width: 30px;
+    height: 30px;
+    background: #d80c0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.close-btn a {
+    color: #000000;
+    text-emphasis: none;
+}
+
+/* Style thanh scroll */
+.messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Style thanh cuộn */
+.messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Style thanh trượt */
+.messages::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Style thanh trượt trên */
+.messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.img-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.message.left p {
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    margin-left: 10px;
+}
+
+.message.right p {
+    border-radius: 5px;
+    background-color: aqua;
+    margin-right: 10px;
+}
+
+.p-message {
+    line-height: 40px;
+    display: inline-block;
+    word-wrap: break-word;
+}

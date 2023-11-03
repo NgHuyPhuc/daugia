@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\User\UserAdminController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Site\AuctionRoom\AuctionRoomController as AuctionRoomAuctionRoomController;
 use App\Http\Controllers\Site\Auth\LoginController;
+use App\Http\Controllers\Site\Chat\PusherController;
 use App\Http\Controllers\Site\Payment\PaymentController as PaymentPaymentController;
 use App\Http\Controllers\Site\ResultAuction\ResultAuctionController;
 use App\Http\Controllers\Site\SiteController\SiteController;
@@ -179,6 +180,10 @@ Route::prefix('room')->group(function () {
     Route::post('/postauction/{id}',[AuctionRoomAuctionRoomController::class, 'postautionroom'])->name('user.postautionroom')->middleware('auth:web')->middleware('checkroom');
     Route::post('/postendauction/{id}',[AuctionRoomAuctionRoomController::class, 'postendauction'])->name('user.postendauction')->middleware('auth:web');
     // ->middleware('postcheckauctionroomadmin');
+    Route::post('/broadcast', [PusherController::class, 'broadcast']);
+    // ->middleware('auth:web');
+    Route::post('/receive', [PusherController::class, 'receive']);
+    // ->middleware('auth:web');
 });
 // Route::get('/listroom', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
 // Route::get('/listroom', [AuctionRoomController, 'room'])->name('user.room');
