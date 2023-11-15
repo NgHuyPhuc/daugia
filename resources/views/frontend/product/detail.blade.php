@@ -69,16 +69,25 @@ use Carbon\Carbon;
                                     <div class="detail-info">
                                         <div class="detail-row">
                                             <span>XEM CHI TIẾT TẠI THÔNG BÁO ĐẤU GIÁ TÀI SẢN</span>
-                                            @if ($check_wishlist)
-                                            <a id='wish-list' style="margin-left: 30px"
-                                            data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
-                                                class="fa-solid fa-heart" style="color: #ff0000;"></i></a>
-                                            @else
-                                                
-                                            <a id="wish-list" style="margin-left: 30px"
-                                                data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
+                                            {{-- @dd() --}}
+                                            @if (Auth::guard('web')->guest())
+                                                <a id="login" style="margin-left: 30px"
+                                                data-product-id="{{ $product->id }}" href="{{ route('user.login') }}"><i id="icon-heart"
                                                     class="fa-regular fa-heart"></i></a>
+                                            @else
+                                                @if ($check_wishlist)
+                                                <a id='wish-list' style="margin-left: 30px"
+                                                data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
+                                                    class="fa-solid fa-heart" style="color: #ff0000;"></i></a>
+                                                @else
+                                                    
+                                                <a id="wish-list" style="margin-left: 30px"
+                                                    data-product-id="{{ $product->id }}" href="javascript:void(0)"><i id="icon-heart"
+                                                        class="fa-regular fa-heart"></i></a>
+                                                @endif
                                             @endif
+
+                                            
                                             
                                         </div>
                                         <div class="detail-row">

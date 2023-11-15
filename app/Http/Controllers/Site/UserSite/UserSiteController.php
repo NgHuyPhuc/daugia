@@ -9,7 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 class UserSiteController extends Controller
 {
     //
@@ -107,6 +108,7 @@ class UserSiteController extends Controller
             return redirect()->back()->with('message', 'Email đã được đăng ký');
         } else {
             if ($request->password == $request->repassword) {
+                $token = Str::random(20);
                 $user = new User();
                 $user->email = $request->email;
                 $user->password = bcrypt($request->password);
@@ -129,14 +131,46 @@ class UserSiteController extends Controller
                 $user->account_holder_name = $request->account_holder_name;
                 $user->bank = $request->bank;
                 $user->bank_branch = $request->bank_branch;
+                $user->checkmail = 0;
+                $user->token = $token;
                 $user->level = 0;
-
+            
                 $user->save();
-                // $request->session()->flash('message', 'Đã thêm mới thành công!');
+                $emailsend = $request->email;
+                $name = $request->name;
+                $id = $user->id;
+                $request->session()->flash('message', 'Đã thêm mới thành công!');
+                Mail::send('email.checkmail', ['id'=>$id,'emailsend' => $emailsend, 'name' => $name, 'token' => $token]
+                , function($email) use($emailsend,$name){
+                    $email->to($emailsend,$name);
+                    $email->subject('Xác nhận email tài khoản');
+                });
                 return redirect()->route('user.login')->with('message','Bạn đã đăng ký thành công hãy đăng nhập');
             } else {
                 return redirect()->back()->with('message', 'Password không trùng khớp');
             }
+        }
+    }
+    public function checkmail(Request $request)
+    {
+        $id = $request->customer;
+        $token = $request->token;
+        // dd($id,$token);
+        $user = User::findorfail($id);
+        $emailsend = $user->email;
+        $name = $user->name;
+        if($user->token === $token) {
+            $user->checkmail = 1;
+            $user->save();
+            Mail::send('email.checkmailsuccess', ['id'=>$id,'emailsend' => $emailsend, 'name' => $name, 'token' => $token]
+                , function($email) use($emailsend,$name){
+                    $email->to($emailsend,$name);
+                    $email->subject('Xác nhận email thành công');
+                });
+            return redirect()->route('user.login');
+        }
+        else{
+            dd('Mã không hợp lệ');
         }
     }
 }

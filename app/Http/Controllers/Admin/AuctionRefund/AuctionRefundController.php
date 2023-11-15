@@ -40,12 +40,6 @@ class AuctionRefundController extends Controller
     public function postedit(Request $request)
     {
         $payment = Payment::findOrFail($request->id);
-        // $payment->id_user = $request->id_user;
-        // $payment->id_product  = $request->id_product ;
-        // $payment->bank_account_number = $request->bank_account_number;
-        // $payment->bank = $request->bank;
-        // $payment->account_holder_name = $request->account_holder_name;
-        // $payment->total_amount = $request->total_amount;
         $payment->state = $request->state;
 
         $payment->save();
@@ -72,29 +66,6 @@ class AuctionRefundController extends Controller
         }
         else{
             $searchTerm = $request->keyword;
-            // $data['payments'] = Payment::where('state','5')->orwhere('state','3')->orwhereHas('product', function ($query) use ($searchTerm) {
-            //     $query->where('product_name', 'like', '%' . $searchTerm . '%');
-            // })
-            // ->orWhereHas('user', function ($query) use ($searchTerm) {
-            //     $query->where('name', 'like', '%' . $searchTerm . '%');
-            // })
-            // ->paginate(5);
-            // $data['payments'] = Payment::where(function ($query) use ($searchTerm) {
-            //     $query->where(function ($query) use ($searchTerm) {
-            //         $query->whereHas('product', function ($query) use ($searchTerm) {
-            //             $query->where('state', '3')
-            //                 ->orWhere('state', '5')
-            //                 ->orWhere('product_name', 'like', '%' . $searchTerm . '%');
-            //         });
-            //     })->orWhere(function ($query) use ($searchTerm) {
-            //         $query->whereHas('user', function ($query) use ($searchTerm) {
-            //             $query->where('state', '3')
-            //                 ->orWhere('state', '5')
-            //                 ->orWhere('name', 'like', '%' . $searchTerm . '%');
-            //         });
-            //     });
-            // })
-            // ->paginate(5);
             $data['payments'] = Payment::where(function ($query) use ($searchTerm) {
                 $query->where('state', 5)
                       ->orWhere('state', 3);
@@ -108,10 +79,7 @@ class AuctionRefundController extends Controller
                 });
             })
             ;
-            // dd($data['payments']->toSql());
-            // ->paginate(5);
             $data['payments']->appends(['keyword'=>$searchTerm]);
-            // dd($data['payments']->toSql());
             return view('backend.refund.refundpaymentsearch', $data);
         }
     }

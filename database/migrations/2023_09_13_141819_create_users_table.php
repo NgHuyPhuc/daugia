@@ -36,6 +36,8 @@ class CreateUsersTable extends Migration
             $table->string('dgv_so_the_dgv')->nullable();
             $table->date('dgv_ngay_cap_the_dgv')->nullable();
             $table->string('dgv_noi_cap_the_dgv')->nullable();
+            $table->string('token')->nullable();
+            $table->integer('checkmail');
             $table->integer('level');
             $table->timestamps();
         });

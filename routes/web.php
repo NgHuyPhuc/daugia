@@ -170,7 +170,9 @@ Route::prefix('product')->group(function () {
 Route::post('/payment', [PaymentPaymentController::class, 'payment'])->name('paymentsite.post');
 Route::get('/register', [UserSiteController::class, 'register'])->name('user.register')->middleware('checkuser');
 Route::post('/postregister', [UserSiteController::class, 'postregister'])->name('user.postregister')->middleware('checkuser');
+Route::get('/checkmail/{customer}/{token}',[UserSiteController::class, 'checkmail'])->name('user.checkmail');
 Route::get('/about', [SiteController::class, 'about'])->name('user.about');
+Route::get('/mail', [SiteController::class, 'mail'])->name('user.mail');
 
 // Route::get('/listroom', [AuctionRoomAuctionRoomController::class, 'room'])->name('user.listroom');
 Route::prefix('room')->group(function () {

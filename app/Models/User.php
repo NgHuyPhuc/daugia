@@ -32,6 +32,8 @@ class User extends Authenticatable
         'dgv_so_the_dgv',
         'dgv_ngay_cap_the_dgv',
         'dgv_noi_cap_the_dgv',
+        'checkmail',
+        'token',
         'level',
     ];
 }

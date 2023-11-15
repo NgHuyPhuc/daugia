@@ -13,7 +13,6 @@ class LoginController extends Controller
         return view('frontend.login_register.login');
     }
     public function postlogin(Request $request){
-        // dd($request);
         $email = $request->email;
         $password = $request->password;
         if(Auth::attempt(['email' => $email, 'password' => $password])){
@@ -22,10 +21,6 @@ class LoginController extends Controller
         return redirect()->back()->with('error','invalid');
     }
     public function logout(){
-        // dd(Auth::guard('web')->logout());
-        // Auth::guard('webadmin')->logout();
-        // return redirect()->route('admin.login');
-
         Auth::guard('web')->logout();
         return redirect()->route('site.home');
     }

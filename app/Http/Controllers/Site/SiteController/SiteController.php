@@ -13,7 +13,7 @@ use App\Models\Product;
 use App\Models\WishList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 use function PHPUnit\Framework\isEmpty;
 
 class SiteController extends Controller
@@ -21,7 +21,6 @@ class SiteController extends Controller
     //
     public function index()
     {
-        // dd(Auth::guard('webadmin')->check());
         $data['categories'] = Category::all();
         $data['notifiesTop'] = Notify::orderby('id', 'desc')->get()->take(12);
         $notifybot = Notify::orderby('id', 'desc')->get()->take(18);
@@ -31,7 +30,6 @@ class SiteController extends Controller
         }
         $data['products'] = Product::orderby('id', 'desc')->get()->take(9);
         $data['laws'] = Law::orderby('id', 'desc')->get()->take(8)->chunk(4);
-        // dd($data);
         return view('frontend.index', $data);
     }
 
@@ -46,26 +44,22 @@ class SiteController extends Controller
         $data['listpayment'] = Payment::where('id_product',$request->id)->where('state',1)->paginate(5);
         $data['check'] = null;
         $data['auctionroom'] = AuctionRoom::where('id_product', $request->id)->first();
-        $checkwishlist = WishList::where('id_user',Auth::user()->id)->where('id_product', $request->id)->count();
         $data['check_wishlist'] = false;
-        if($checkwishlist > 0){
-            $data['check_wishlist'] = true;
+        if(Auth::check())
+        {
+            $checkwishlist = WishList::where('id_user',Auth::user()->id)->where('id_product', $request->id)->count();
+            if($checkwishlist > 0){
+                $data['check_wishlist'] = true;
+            }
         }
-        // dd($data);
-        // dd($data);
-        // dd(Auth::guard('web')->check());
         if(Auth::guard('web')->check()){
             $data['check'] = Payment::where('id_product', $request->id)->where('id_user', Auth::user()->id)->first();
         }
-        // dd($data['check']->isEmpty());
         return view('frontend.product.detail',$data);
     }
     public function search(Request $request)
     {
         $keyword = $request->keyword;
-        // $data['payments'] = Payment::whereHas('product', function ($query) use ($searchTerm) {
-        //     $query->where('product_name', 'like', '%' . $searchTerm . '%');
-        // });
         $data['products'] = Product::where('product_name','like','%'.$request->keyword.'%')
         ->orwhereHas('category', function ($query) use ($keyword) {
             $query->where('name', 'like', '%' . $keyword. '%');
@@ -75,9 +69,14 @@ class SiteController extends Controller
     public function about()
     {
         $data['about'] = About::orderby('id','desc')->first();
-        // $data['about'] = About::get()->toarray();
-        // $data['about'] = About::all();
-        // dd($data);
         return view('frontend.about.about', $data);
+    }
+    public function mail(Request $request)
+    {
+        $name = 'Nguyen Van A';
+        Mail::send('email.test',compact('name'), function($email) use ($name) {
+            $email->subject('demo mail new');
+            $email->to('sumasa05@gmail.com', $name);
+        });
     }
 }
