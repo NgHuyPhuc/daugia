@@ -188,7 +188,8 @@ use Carbon\Carbon;
                                             <div class="modal fade" id="exampleModal" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <form action="{{ route('paymentsite.post') }}" method="post">
+                                                    {{-- <form action="{{ route('paymentsite.post') }}" method="post"> --}}
+                                                    <form action="{{ route('vnpaymentsite.post') }}" method="post">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Đăng ký
@@ -229,7 +230,18 @@ use Carbon\Carbon;
                                                                             <input type="hidden" name="total_amount"
                                                                                 type="text"
                                                                                 value="{{ $product->auction_deposit + $product->participation_costs }}">
+                                                                            @if (Auth::guard('web')->check())
+                                                                                <input type="hidden" name="id_user" value="{{Auth::user()->id}}">
+                                                                            @endif
+                                                                            <input type="hidden" name="id_product" value="{{$product->id}}">
+                                                                            
                                                                         </div>
+                                                                        {{-- $payment->id_user = $request->id_user;
+                                                                        $payment->id_product = $request->id_product;
+                                                                        $payment->total_amount = $request->total_amount;
+                                                                        $payment->bank_account_number = $request->bank_account_number;
+                                                                        $payment->account_holder_name = $request->account_holder_name;
+                                                                        $payment->bank = $request->bank; --}}
                                                                         <div class="col-7 pt-20"><span>Bằng chữ:</span>
                                                                         </div>
                                                                         <div class="col-5 pt-20">
@@ -289,7 +301,9 @@ use Carbon\Carbon;
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary">Thanh
+                                                                {{-- <button type="submit" class="btn btn-primary">Thanh
+                                                                    toán</button> --}}
+                                                                <button type="submit" name="redirect" class="btn btn-primary">Thanh
                                                                     toán</button>
                                                             </div>
                                                         </div>

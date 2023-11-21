@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <label>Ảnh sản phẩm</label>
                                         <input id="img" type="file" name="img" class="form-control hidden"
-                                            onchange="changeImg(this)">
+                                            onchange="changeImg(this)" required>
                                         <img id="avatar" class="thumbnail" width="100%" height="350px"
                                             src="img/import-img.png">
                                     </div>

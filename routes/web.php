@@ -168,6 +168,8 @@ Route::prefix('product')->group(function () {
     Route::get('/detail/{id}', [SiteController::class, 'detail'])->name('productsite.detail');
 });
 Route::post('/payment', [PaymentPaymentController::class, 'payment'])->name('paymentsite.post');
+Route::get('/payment/thanks', [PaymentPaymentController::class, 'payment_success'])->name('payment.success.site.post');
+Route::post('/vnpay-payment', [PaymentPaymentController::class, 'vnpay_payment'])->name('vnpaymentsite.post');
 Route::get('/register', [UserSiteController::class, 'register'])->name('user.register')->middleware('checkuser');
 Route::post('/postregister', [UserSiteController::class, 'postregister'])->name('user.postregister')->middleware('checkuser');
 Route::get('/checkmail/{customer}/{token}',[UserSiteController::class, 'checkmail'])->name('user.checkmail');

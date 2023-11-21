@@ -103,7 +103,7 @@ return [
 
     'from' => [
         'address' => 'sumasa05@gmail.com',
-        'name' => 'demo',
+        'name' => 'Website Đấu Giá',
     ],
     // 'from' => [
     //     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
