@@ -152,7 +152,8 @@ if ($check == false) {
                         @if (Auth::guard('web')->user()->level == 1)
                             <div class="col-lg-6">
                                 <!-- Trả giá -->
-                                <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post">
+                                {{-- <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post"> --}}
+                                <form id="post-price-auction">
                                     {{-- <div class="row md-sm-mgt-10px"> --}}
                                     <div class="row">
                                         <div class="col-lg-1 col-md-2 col-sm-2 sm-pdt-5px">
@@ -249,13 +250,13 @@ if ($check == false) {
 
                 <div class="messages">
                     <!-- Tin nhắn của người dùng khác -->
-                    @include('/frontend/chat/receive', ['message' => "Chào mừng vào phòng chat  👋"])
+                    @include('/frontend/chat/receive', ['message' => 'Chào mừng vào phòng chat  👋'])
 
                 </div>
                 <form class="chat-input">
-                    <input style="word-wrap: break-word;max-width: 100%;overflow-wrap: break-word;" type="text" id="message" name="message" placeholder="Nhập tin nhắn..."
-                        autocomplete="off">
-                    <input id="name" type="hidden" name="name" value="{{Auth::user()->name}}">
+                    <input style="word-wrap: break-word;max-width: 100%;overflow-wrap: break-word;" type="text"
+                        id="message" name="message" placeholder="Nhập tin nhắn..." autocomplete="off">
+                    <input id="name" type="hidden" name="name" value="{{ Auth::user()->name }}">
                     <button type="submit">Gửi</button>
                 </form>
             </div>
@@ -343,7 +344,7 @@ if ($check == false) {
 
         //Receive messages
         channel.bind('chat', function(data) {
-            console.log(data)
+            // console.log(data)
 
             $.post("/room/receive", {
                     _token: '{{ csrf_token() }}',
@@ -410,7 +411,7 @@ if ($check == false) {
 
         function increaseQuantity() {
             var quantityInput = document.getElementById('quantity');
-            var currentQuantity = parseInt(quantityInput.value);
+            var currentQuantity = parseInt(quantityInput.value);    
             var quantityText = document.getElementById('quantity-text');
 
             quantityInput.value = currentQuantity + {{ $info->product->price_step }};
@@ -476,6 +477,7 @@ if ($check == false) {
         // var pricenow ;
         $(document).ready(function() {
             setInterval(function() {
+
                 $.ajax({
                     url: '/room/auctiondata/{{ $info->id }}',
                     type: 'GET',
@@ -514,9 +516,12 @@ if ($check == false) {
                                     // '<td>' + response.info[i]['created_at'] + '</td>' +
                                     '<td>' + formattedDate + '</td>' +
                                     '</tr>' + '</tbody>';
+                                    // console.log(response.info[0]['bidding_price']);
+                                    
                             }
                             $('#data').empty();
                             $('#data').append(info);
+                            
                         }
                     },
                     error: function(err) {
@@ -526,6 +531,31 @@ if ($check == false) {
             }, 2000);
             // },100000);
             // console.log(pricenow);
+        });
+
+        // user.postautionroom
+        $(function() {
+            $('#post-price-auction').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'post',
+                    url: '{{ route('user.postautionroom', ['id' => $info->id]) }}',
+                    data: $('#post-price-auction').serialize(),
+                    success: function(response) {
+                        // xu ly thanh cong
+                        console.log($('#post-price-auction').serialize());
+                    },
+                    error: function(response,xhr, status, error) {
+                        // Xử lý lỗi
+                        // alert('Có lỗi xảy ra');
+
+                        // console.error(status);
+                        // console.error(error);
+                        console.log(response.responseJSON.errors[0]);
+                    }
+                });
+            });
         });
     </script>
 
