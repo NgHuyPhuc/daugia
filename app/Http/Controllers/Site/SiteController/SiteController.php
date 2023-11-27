@@ -7,6 +7,7 @@ use App\Models\About;
 use App\Models\AuctionRoom;
 use App\Models\Category;
 use App\Models\Law;
+use App\Models\MoreImageProduct;
 use App\Models\Notify;
 use App\Models\Payment;
 use App\Models\Product;
@@ -41,10 +42,11 @@ class SiteController extends Controller
     public function detail(Request $request)
     {
         $data['product'] = Product::findOrFail($request->id);
-        $data['listpayment'] = Payment::where('id_product',$request->id)->where('state',1)->paginate(5);
+        $data['listpayment'] = Payment::where('id_product',$request->id)->where('state','!=',2)->paginate(5);
         $data['check'] = null;
         $data['auctionroom'] = AuctionRoom::where('id_product', $request->id)->first();
         $data['check_wishlist'] = false;
+        $data['more_img'] = MoreImageProduct::where('id_product', $request->id)->where('state',1)->get();
         if(Auth::check())
         {
             $checkwishlist = WishList::where('id_user',Auth::user()->id)->where('id_product', $request->id)->count();

@@ -12,6 +12,7 @@ class MoreImageProduct extends Model
         'id',
         'id_product',
         'img',
+        'state',
     ];
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MoreImageProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,19 @@ class ProductController extends Controller
             $product->auction_deposit = $request->auction_deposit;
             $product->main_image = $request->img->getClientOriginalName();
             $product->save();
+
+            if($request->file('img_multi') != null)
+            {
+                $files = $request->file('img_multi');
+                foreach($files as $image){
+                    $image->move("upload/img", $image->getClientOriginalName());
+                    $detail_img = new MoreImageProduct();
+                    $detail_img->id_product = $product->id;
+                    $detail_img->state = 1;
+                    $detail_img->img = $image->getClientOriginalName();
+                    $detail_img->save();
+                }
+            }
             $request->session()->flash('alert', 'Đã thêm thành công');
             return redirect()->route('product.home');
 
@@ -53,6 +67,9 @@ class ProductController extends Controller
     }
     public function postedit(Request $request)
     {
+        // $files = $request->file('img_multi');
+        // dd($files);
+
         $product = Product::find($request->id);
         if ($request->hasFile("img")) {
             $file = $request->img;
@@ -72,6 +89,32 @@ class ProductController extends Controller
         $product->participation_costs = $request->participation_costs;
         $product->auction_deposit = $request->auction_deposit;
         $product->save();
+
+        // dd($request->has('img-multi[]'));
+        // dd($request->file('img_multi'));
+        if($request->file('img_multi') != null)
+        {
+            $clear_img = MoreImageProduct::where('id_product','=',$request->id)->get();
+            // dd($clear_img->count());
+            // dd($clear_img);
+            if($clear_img->count()>0){
+                foreach($clear_img as $value){
+                    $value->state = 0;
+                    $value->save();
+                }
+            }
+            $files = $request->file('img_multi');
+            // dd(count($files));
+            foreach($files as $image){
+                $image->move("upload/img", $image->getClientOriginalName());
+                $detail_img = new MoreImageProduct();
+                $detail_img->id_product = $request->id;
+                $detail_img->state = 1;
+                $detail_img->img = $image->getClientOriginalName();
+                $detail_img->save();
+            }
+        }
+
         $request->session()->flash('alert', 'Đã sửa thành công');
         return redirect()->route('product.home');
 

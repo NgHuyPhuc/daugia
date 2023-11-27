@@ -547,11 +547,6 @@ if ($check == false) {
                         console.log($('#post-price-auction').serialize());
                     },
                     error: function(response,xhr, status, error) {
-                        // Xử lý lỗi
-                        // alert('Có lỗi xảy ra');
-
-                        // console.error(status);
-                        // console.error(error);
                         console.log(response.responseJSON.errors[0]);
                     }
                 });

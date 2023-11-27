@@ -39,18 +39,21 @@ use Carbon\Carbon;
                                                     <img src="../upload/img/{{ $product->main_image }}"
                                                         class="d-block w-100" alt="...">
                                                 </div>
+                                                @foreach ($more_img as $item)
                                                 <div class="carousel-item" data-bs-interval="3000">
-                                                    <img src="img/96546842_p0_master1200.jpg" class="d-block w-100"
+                                                    <img src="../upload/img/{{ $item->img }}" class="d-block w-100"
                                                         alt="...">
                                                 </div>
-                                                <div class="carousel-item" data-bs-interval="2000">
+                                                    
+                                                @endforeach
+                                                {{-- <div class="carousel-item" data-bs-interval="2000">
                                                     <img src="img/anh-nen-2k-cho-may-tinh_014252436.jpg"
                                                         class="d-block w-100" alt="...">
                                                 </div>
                                                 <div class="carousel-item">
                                                     <img src="img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg"
                                                         class="d-block w-100" alt="...">
-                                                </div>
+                                                </div> --}}
                                             </div>
                                             <button class="carousel-control-prev" type="button"
                                                 data-bs-target="#carouselExampleInterval" data-bs-slide="prev">

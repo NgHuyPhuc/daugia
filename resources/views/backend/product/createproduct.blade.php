@@ -73,6 +73,11 @@
                                         <img id="avatar" class="thumbnail" width="100%" height="350px"
                                             src="img/import-img.png">
                                     </div>
+                                    <div class="form-group">
+                                        <label>Ảnh sản phẩm chi tiết</label>
+                                        <input id="img_multi" type="file" name="img_multi[]" class="form-control" multiple>
+
+                                    </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
