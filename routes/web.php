@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\User\UserAdminController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Site\AuctionRoom\AuctionRoomController as AuctionRoomAuctionRoomController;
 use App\Http\Controllers\Site\Auth\LoginController;
+use App\Http\Controllers\Site\Category\CategoryController as CategoryCategoryController;
 use App\Http\Controllers\Site\Chat\PusherController;
 use App\Http\Controllers\Site\Payment\PaymentController as PaymentPaymentController;
 use App\Http\Controllers\Site\ResultAuction\ResultAuctionController;
@@ -184,10 +185,10 @@ Route::prefix('room')->group(function () {
     Route::post('/postauction/{id}',[AuctionRoomAuctionRoomController::class, 'postautionroom'])->name('user.postautionroom')->middleware('auth:web')->middleware('checkroom');
     Route::post('/postendauction/{id}',[AuctionRoomAuctionRoomController::class, 'postendauction'])->name('user.postendauction')->middleware('auth:web');
     // ->middleware('postcheckauctionroomadmin');
-    Route::post('/broadcast', [PusherController::class, 'broadcast']);
-    // ->middleware('auth:web');
-    Route::post('/receive', [PusherController::class, 'receive']);
-    // ->middleware('auth:web');
+    Route::post('/broadcast', [PusherController::class, 'broadcast'])
+    ->middleware('auth:web');
+    Route::post('/receive', [PusherController::class, 'receive'])
+    ->middleware('auth:web');
 });
 // Route::get('/listroom', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
 // Route::get('/listroom', [AuctionRoomController, 'room'])->name('user.room');
@@ -210,6 +211,9 @@ Route::prefix('result')->group(function () {
 Route::prefix('wishlist')->group(function () {
     Route::post('/add', [WishlistController::class, 'add'])->name('wishlist.add');
     Route::post('/remove', [WishlistController::class, 'remove'])->name('wishlist.remove');
+});
+Route::prefix('category')->group(function () {
+    Route::get("/{slug}.html",[CategoryCategoryController::class,"getCategory"])->name('site.category');
 });
 
 //end site

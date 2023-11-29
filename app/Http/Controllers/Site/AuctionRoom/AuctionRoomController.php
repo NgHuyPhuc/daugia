@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AuctionRoom;
 use App\Models\AuctionRoomFinal;
 use App\Models\DetailAuctionRoom;
+use App\Models\MoreImageProduct;
 use App\Models\Payment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -30,6 +31,7 @@ class AuctionRoomController extends Controller
         $data['info'] = AuctionRoom::findOrFail($request->id);
         $data['detail'] = DetailAuctionRoom::where('id_auction_room', $request->id)->orderby('bidding_price', 'desc')->first();
         $data['check'] = true;
+        $data['more_img'] = MoreImageProduct::where('id_product','=', $data['info']->id_product)->where('state', '=', 1)->get();
         if ($data['detail'] == null) {
             $data['check'] = false;
             $detail = ["bidding_price" => $data['info']->product->starting_price + $data['info']->product->price_step];

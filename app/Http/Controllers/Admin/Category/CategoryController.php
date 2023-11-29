@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Slug\Slug;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -22,6 +23,7 @@ class CategoryController extends Controller
         // dd($request);
         $category = new Category();
         $category->name = $request->name;
+        $category->slug = Slug::getslug($request->name);
         $category->save();
         $request->session()->flash('alert', 'Đã thêm thành công');
         return redirect()->route('category.home');
@@ -30,12 +32,14 @@ class CategoryController extends Controller
     {
         $data['categories'] = Category::all();
         $data['category'] = Category::find($request->id);
+        // dd(Slug::getslug($data['category']->name));
         return view('backend.category.editcategory',$data);
     }
     public function postedit(Request $request)
     {
         $category = Category::find($request->id);
         $category->name = $request->name;
+        $category->slug = Slug::getslug($request->name);
         $category->save();
         $request->session()->flash('alert', 'Đã sửa thành công');
         return redirect()->route('category.home');

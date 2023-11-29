@@ -63,13 +63,11 @@ class ProductController extends Controller
     {
         $data['product'] = Product::find($request->id);
         $data['categories'] = Category::all();
+        $data['more_img'] = MoreImageProduct::where('id_product', '=', $request->id)->get();
         return view('backend.product.editproduct',$data);
     }
     public function postedit(Request $request)
     {
-        // $files = $request->file('img_multi');
-        // dd($files);
-
         $product = Product::find($request->id);
         if ($request->hasFile("img")) {
             $file = $request->img;
@@ -90,13 +88,9 @@ class ProductController extends Controller
         $product->auction_deposit = $request->auction_deposit;
         $product->save();
 
-        // dd($request->has('img-multi[]'));
-        // dd($request->file('img_multi'));
         if($request->file('img_multi') != null)
         {
             $clear_img = MoreImageProduct::where('id_product','=',$request->id)->get();
-            // dd($clear_img->count());
-            // dd($clear_img);
             if($clear_img->count()>0){
                 foreach($clear_img as $value){
                     $value->state = 0;
@@ -129,15 +123,11 @@ class ProductController extends Controller
     public function detail(Request $request)
     {
         $data['product'] = Product::findOrFail($request->id);
-        // $data['product'] = Product::find($request->id);
-        // dd($data['product']->category);
-        // dd($data['product']);
         return view('backend.product.productdetail', $data);
     }
     public function search(Request $request)
     {
         $data['products'] = Product::where('id','like','%'.$request->keyword.'%')->orwhere('product_name','like','%'.$request->keyword.'%')->paginate(5);
-        // dd($data);
         return view('backend.product.search', $data);
     }
 

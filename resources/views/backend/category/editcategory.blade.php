@@ -30,7 +30,7 @@
 									<input value="{{$category->name}}" type="text" class="form-control" name="name" id="" placeholder="Tên danh mục mới">
 
 								</div>
-								<button type="submit" class="btn btn-primary">Thêm danh mục</button>
+								<button type="submit" class="btn btn-primary">Sửa tên danh mục</button>
 							</div>
                             @csrf
                         </form>

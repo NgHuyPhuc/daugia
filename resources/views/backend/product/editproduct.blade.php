@@ -7,7 +7,6 @@
             <h1 class="page-header">Sửa sản phẩm</h1>
         </div>
     </div>
-    <!--/.row-->
     <div class="row">
         <div class="col-xs-6 col-md-12 col-lg-12">
             <form method="post" enctype="multipart/form-data" action="{{ route('product.postedit',["id"=>$product->id]) }}">
@@ -19,10 +18,6 @@
                                 <div class="form-group">
                                     <label>Danh mục</label>
                                     <select name="category" class="form-control">
-                                        {{-- <option value='1' selected>Nam</option>
-                                        <option value='3'>---|Áo khoác nam</option>
-                                        <option value='2'>Nữ</option>
-                                        <option value='4'>---|Áo khoác nữ</option> --}}
                                         @foreach ($categories as $item)
                                             <option value='{{ $item->id }}' {{$item->id == $product->categories_id? 'selected' : ''}} >{{ $item->name }}</option>
                                         @endforeach
@@ -80,6 +75,14 @@
                                 <div class="form-group">
                                     <label>Ảnh sản phẩm chi tiết</label>
                                     <input id="img_multi" type="file" name="img_multi[]" class="form-control" multiple>
+
+                                    @foreach ($more_img as $item)
+                                        <div class="col-md-6">
+                                            <a href="javascript:void(0)" class="thumbnail">
+                                                <img src="../upload/img/{{$item->img}}" alt="">
+                                            </a>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -91,10 +94,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                {{-- <div class="form-group">
-                                <label>Miêu tả</label>
-                                <textarea id="editor" name="describe" style="width: 100%;height: 100px;"></textarea>
-                            </div> --}}
                                 <button class="btn btn-success" type="submit">Sửa sản phẩm</button>
                                 <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                             </div>

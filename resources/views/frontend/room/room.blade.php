@@ -29,8 +29,44 @@ if ($check == false) {
             </div>
             <div class="row pt-30">
                 <div class="col-lg-5">
-                    <img class="inpdg-img" src="../upload/img/{{ $info->product->main_image }}" alt="">
+                    {{-- <img class="inpdg-img" src="../upload/img/{{ $info->product->main_image }}" alt=""> --}}
+                    <div class="detail-img">
+                        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-bs-interval="10000">
+                                    <img src="../upload/img/{{ $info->product->main_image }}"
+                                        class="d-block w-100" alt="...">
+                                </div>
+                                @foreach ($more_img as $item)
+                                <div class="carousel-item" data-bs-interval="3000">
+                                    <img src="../upload/img/{{ $item->img }}" class="d-block w-100"
+                                        alt="...">
+                                </div>
+                                    
+                                @endforeach
+                                {{-- <div class="carousel-item" data-bs-interval="2000">
+                                    <img src="img/anh-nen-2k-cho-may-tinh_014252436.jpg"
+                                        class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg"
+                                        class="d-block w-100" alt="...">
+                                </div> --}}
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="detail-info">
