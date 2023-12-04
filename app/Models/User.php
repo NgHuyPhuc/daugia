@@ -15,6 +15,7 @@ class User extends Authenticatable
         'password',
         'name',
         'phone',
+        'avatar',
         'imgccdtrc',
         'imgccdsau',
         'dob',

@@ -3,6 +3,7 @@ if ($check == false) {
     $detail = json_decode($detail);
 }
 ?>
+
 @extends('frontend/master/master')
 @section('title', 'Danh sách phòng đấu giá')
 @section('main')
@@ -34,15 +35,13 @@ if ($check == false) {
                         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active" data-bs-interval="10000">
-                                    <img src="../upload/img/{{ $info->product->main_image }}"
-                                        class="d-block w-100" alt="...">
-                                </div>
-                                @foreach ($more_img as $item)
-                                <div class="carousel-item" data-bs-interval="3000">
-                                    <img src="../upload/img/{{ $item->img }}" class="d-block w-100"
+                                    <img src="../upload/img/{{ $info->product->main_image }}" class="d-block w-100"
                                         alt="...">
                                 </div>
-                                    
+                                @foreach ($more_img as $item)
+                                    <div class="carousel-item" data-bs-interval="3000">
+                                        <img src="../upload/img/{{ $item->img }}" class="d-block w-100" alt="...">
+                                    </div>
                                 @endforeach
                                 {{-- <div class="carousel-item" data-bs-interval="2000">
                                     <img src="img/anh-nen-2k-cho-may-tinh_014252436.jpg"
@@ -53,20 +52,20 @@ if ($check == false) {
                                         class="d-block w-100" alt="...">
                                 </div> --}}
                             </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                                data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                             </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                                data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-7">
                     <div class="row">
                         <div class="detail-info">
@@ -182,7 +181,8 @@ if ($check == false) {
                         <div class="col-lg-6">
                             <div class="timmer">
                                 Thời gian còn lại
-                                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                                <span id="hours">00</span>:<span id="minutes">00</span>:<span
+                                    id="seconds">00</span>
                             </div>
                         </div>
                         @if (Auth::guard('web')->user()->level == 1)
@@ -286,13 +286,23 @@ if ($check == false) {
 
                 <div class="messages">
                     <!-- Tin nhắn của người dùng khác -->
-                    @include('/frontend/chat/receive', ['message' => 'Chào mừng vào phòng chat  👋'])
+                    @include('/frontend/chat/receive', ['message' => 'Chào mừng vào phòng chat  👋',
+                                                        'avatar'=>'hinh-anh-4k-con-duong-va-hang-cay.jpg',
+                                                        'level' =>'0'])
 
                 </div>
                 <form class="chat-input">
                     <input style="word-wrap: break-word;max-width: 100%;overflow-wrap: break-word;" type="text"
                         id="message" name="message" placeholder="Nhập tin nhắn..." autocomplete="off">
                     <input id="name" type="hidden" name="name" value="{{ Auth::user()->name }}">
+
+                    @if (Auth::user()->avatar == null)
+                        <input id="avatar" type="hidden" name="avatar" value="default-thumbnail.jpg">
+                    @else
+                        <input id="avatar" type="hidden" name="avatar" value="{{ Auth::user()->avatar }}">
+                    @endif
+                    <input id="level" type="hidden" name="level" value="{{ Auth::user()->level }}">
+
                     <button type="submit">Gửi</button>
                 </form>
             </div>
@@ -386,6 +396,8 @@ if ($check == false) {
                     _token: '{{ csrf_token() }}',
                     message: data.message,
                     name: data.name,
+                    avatar: data.avatar,
+                    level: data.level,
                 })
                 .done(function(res) {
                     $(".messages > .message").last().after(res)
@@ -407,9 +419,11 @@ if ($check == false) {
                     _token: '{{ csrf_token() }}',
                     message: $(".chat-input #message").val(),
                     name: $(".chat-input #name").val(),
+                    avatar: $(".chat-input #avatar").val(),
+                    level: $(".chat-input #level").val(),
                 }
             }).done(function(res) {
-                console.log(res);
+                // console.log(res);
                 $(".messages > .message").last().after(res);
                 $(".chat-input #message").val('');
                 scrollToBottom();
@@ -447,7 +461,7 @@ if ($check == false) {
 
         function increaseQuantity() {
             var quantityInput = document.getElementById('quantity');
-            var currentQuantity = parseInt(quantityInput.value);    
+            var currentQuantity = parseInt(quantityInput.value);
             var quantityText = document.getElementById('quantity-text');
 
             quantityInput.value = currentQuantity + {{ $info->product->price_step }};
@@ -552,12 +566,12 @@ if ($check == false) {
                                     // '<td>' + response.info[i]['created_at'] + '</td>' +
                                     '<td>' + formattedDate + '</td>' +
                                     '</tr>' + '</tbody>';
-                                    // console.log(response.info[0]['bidding_price']);
-                                    
+                                // console.log(response.info[0]['bidding_price']);
+
                             }
                             $('#data').empty();
                             $('#data').append(info);
-                            
+
                         }
                     },
                     error: function(err) {
@@ -582,7 +596,7 @@ if ($check == false) {
                         // xu ly thanh cong
                         console.log($('#post-price-auction').serialize());
                     },
-                    error: function(response,xhr, status, error) {
+                    error: function(response, xhr, status, error) {
                         console.log(response.responseJSON.errors[0]);
                     }
                 });

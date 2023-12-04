@@ -54,6 +54,15 @@
                                 <option value="2">Nữ</option>
                             </select>
                         </div>
+                        {{-- <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="form-address">Ảnh mặt trước</label><code>*</code>
+                                    <input id="img" type="file" name="imgccdtrc" class="form-control hidden" onchange="changeImg(this)">
+                                    <img id="avatar" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
+                                </div>
+                            </div>
+                        </div> --}}
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
@@ -82,7 +91,7 @@
                             <label>Chi nhánh ngân hàng</label>
                             <input type="text" name="bank_branch" placeholder="Chi nhánh ngân hàng" class="form-control">
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="form-address">Ảnh mặt trước</label><code>*</code>
@@ -90,11 +99,27 @@
                                     <img id="avatar" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                        </div> --}}
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
                                 <div class="form-group">
-                                    <label for="form-address">Ảnh mặt sau</label><code>*</code>
-                                    <input id="img2" type="file" name="imgccdsau" class="form-control hidden" onchange="changeImg2(this)">
+                                    <label for="form-address">Ảnh đại diện</label><code>*</code>
+                                    <input id="img" type="file" name="avatar" class="form-control hidden" onchange="changeImg(this)">
+                                    <img id="avatar" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="form-address">Ảnh cccd mặt trước</label><code>*</code>
+                                    <input id="img2" type="file" name="imgccdtrc" class="form-control hidden" onchange="changeImg2(this)">
                                     <img id="avatar2" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="form-address">Ảnh cccd mặt sau</label><code>*</code>
+                                    <input id="img3" type="file" name="imgccdsau" class="form-control hidden" onchange="changeImg3(this)">
+                                    <img id="avatar3" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
                                 </div>
                             </div>
                         </div>
@@ -152,6 +177,23 @@
         $(document).ready(function() {
             $('#avatar2').click(function() {
                 $('#img2').click();
+            });
+        });
+        function changeImg3(input) {
+            //Nếu như tồn thuộc tính file, đồng nghĩa người dùng đã chọn file mới
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                //Sự kiện file đã được load vào website
+                reader.onload = function(e) {
+                    //Thay đổi đường dẫn ảnh
+                    $('#avatar3').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(document).ready(function() {
+            $('#avatar3').click(function() {
+                $('#img3').click();
             });
         });
     </script>

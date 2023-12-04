@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('phone');
+            $table->string('avatar')->nullable();
             $table->string('imgccdtrc')->nullable();
             $table->string('imgccdsau')->nullable();
             $table->date('dob')->nullable();
@@ -37,7 +38,8 @@ class CreateUsersTable extends Migration
             $table->date('dgv_ngay_cap_the_dgv')->nullable();
             $table->string('dgv_noi_cap_the_dgv')->nullable();
             $table->string('token')->nullable();
-            $table->integer('checkmail');
+            $table->integer('checkmail')->nullable();
+            $table->string('token')->nullable();
             $table->integer('level');
             $table->timestamps();
         });

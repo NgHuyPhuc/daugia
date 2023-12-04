@@ -28,7 +28,7 @@
                 </div> --}}
                 
             <div class="col-lg-12 col-md-12">
-                <form action="{{ route('user.postprofile') }}" method="POST">
+                <form action="{{ route('user.postprofile') }}" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -59,6 +59,19 @@
                             <div class="form-group">
                                 <label>Tên ngân hàng</label>
                                 <input type="text" name="bank" class="form-control" value="{{ $profile->bank }}">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="form-address">Ảnh đại diện</label><code>*</code>
+                                        <input id="img" type="file" name="avatar" class="form-control hidden" onchange="changeImg(this)">
+                                        @if ($profile->avatar == null)
+                                            <img id="avatar" class="thumbnail" width="100%" height="100%" src="img/default-thumbnail.jpg">
+                                        @else
+                                            <img id="avatar" class="thumbnail" width="100%" height="100%" src="../upload/img/{{$profile->avatar}}">
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -106,4 +119,23 @@
         </div>
     </div>
 
+    <script>
+        function changeImg(input) {
+            //Nếu như tồn thuộc tính file, đồng nghĩa người dùng đã chọn file mới
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                //Sự kiện file đã được load vào website
+                reader.onload = function(e) {
+                    //Thay đổi đường dẫn ảnh
+                    $('#avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(document).ready(function() {
+            $('#avatar').click(function() {
+                $('#img').click();
+            });
+        });
+    </script>
 @endsection

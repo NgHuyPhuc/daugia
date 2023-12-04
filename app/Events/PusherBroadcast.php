@@ -16,6 +16,8 @@ class PusherBroadcast implements ShouldBroadcast
 
     public string $message;
     public string $name;
+    public string $avatar;
+    public string $level;
     /**
      * Create a new event instance.
      *
@@ -26,11 +28,16 @@ class PusherBroadcast implements ShouldBroadcast
     //     //
     //     $this->message = $message;
     // }
-    public function __construct(string $message, string $name)
+    public function __construct(string $message, string $name
+    ,string $avatar
+    ,string $level
+    )
     {
         //
         $this->message = $message;
         $this->name = $name;
+        $this->avatar = $avatar;
+        $this->level = $level;
     }
 
     /**

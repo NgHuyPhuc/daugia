@@ -185,10 +185,10 @@ Route::prefix('room')->group(function () {
     Route::post('/postauction/{id}',[AuctionRoomAuctionRoomController::class, 'postautionroom'])->name('user.postautionroom')->middleware('auth:web')->middleware('checkroom');
     Route::post('/postendauction/{id}',[AuctionRoomAuctionRoomController::class, 'postendauction'])->name('user.postendauction')->middleware('auth:web');
     // ->middleware('postcheckauctionroomadmin');
-    Route::post('/broadcast', [PusherController::class, 'broadcast'])
-    ->middleware('auth:web');
-    Route::post('/receive', [PusherController::class, 'receive'])
-    ->middleware('auth:web');
+    Route::post('/broadcast', [PusherController::class, 'broadcast']);
+    // ->middleware('auth:web');
+    Route::post('/receive', [PusherController::class, 'receive']);
+    // ->middleware('auth:web');
 });
 // Route::get('/listroom', [SiteController::class, 'room'])->name('user.room')->middleware('auth:web');
 // Route::get('/listroom', [AuctionRoomController, 'room'])->name('user.room');

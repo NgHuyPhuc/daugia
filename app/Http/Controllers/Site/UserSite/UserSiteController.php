@@ -22,6 +22,8 @@ class UserSiteController extends Controller
     }
     public function postprofile(Request $request)
     {
+        // dd($request->file());
+
         $user = User::findOrFail(Auth::user()->id);
         // dd($request);
         $user->email = $request->email;
@@ -36,6 +38,11 @@ class UserSiteController extends Controller
         $user->account_holder_name = $request->account_holder_name;
         $user->bank = $request->bank;
         $user->bank_branch = $request->bank_branch;
+        if($request->hasFile("avatar"))
+        {
+            $user->avatar = $request->avatar->getClientOriginalName();
+            $request->avatar->move("upload/img", $request->avatar->getClientOriginalName());
+        }
         $user->save();
         $request->session()->flash('alert', 'Cập nhật thông tin thành công');
         return redirect()->route('user.profile');
@@ -114,12 +121,19 @@ class UserSiteController extends Controller
                 $user->password = bcrypt($request->password);
                 $user->name = $request->name;
                 $user->phone = $request->phone;
-
-                $user->imgccdtrc = $request->imgccdtrc->getClientOriginalName();
-                $request->imgccdtrc->move("upload/img", $request->imgccdtrc->getClientOriginalName());
-
-                $user->imgccdsau = $request->imgccdsau->getClientOriginalName();
-                $request->imgccdsau->move("upload/img", $request->imgccdsau->getClientOriginalName());
+                if($request->hasfile('avatar'))
+                {
+                    $user->avatar = $request->avatar->getClientOriginalName();
+                    $request->avatar->move("upload/img", $request->avatar->getClientOriginalName());
+                }
+                if($request->hasfile('imgccdtrc')){
+                    $user->imgccdtrc = $request->imgccdtrc->getClientOriginalName();
+                    $request->imgccdtrc->move("upload/img", $request->imgccdtrc->getClientOriginalName());
+                }
+                if($request->hasfile('imgccdsau')){
+                    $user->imgccdsau = $request->imgccdsau->getClientOriginalName();
+                    $request->imgccdsau->move("upload/img", $request->imgccdsau->getClientOriginalName());
+                }
 
                 $user->dob = $request->dob;
                 $user->gender = $request->gender;
