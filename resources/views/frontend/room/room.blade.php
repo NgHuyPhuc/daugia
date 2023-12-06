@@ -286,9 +286,11 @@ if ($check == false) {
 
                 <div class="messages">
                     <!-- Tin nhắn của người dùng khác -->
-                    @include('/frontend/chat/receive', ['message' => 'Chào mừng vào phòng chat  👋',
-                                                        'avatar'=>'hinh-anh-4k-con-duong-va-hang-cay.jpg',
-                                                        'level' =>'0'])
+                    @include('/frontend/chat/receive', [
+                        'message' => 'Chào mừng vào phòng chat  👋',
+                        'avatar' => 'hinh-anh-4k-con-duong-va-hang-cay.jpg',
+                        'level' => '0',
+                    ])
 
                 </div>
                 <form class="chat-input">
@@ -445,15 +447,13 @@ if ($check == false) {
     </script>
     <script>
         function decreaseQuantity() {
+            
             var quantityInput = document.getElementById('quantity');
             var currentQuantity = parseInt(quantityInput.value);
             var quantityText = document.getElementById('quantity-text');
 
-            // if (currentQuantity > {{ $info->product->starting_price }}) {
-            //     quantityInput.value = currentQuantity - {{ $info->product->price_step }};
-            //     quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
-            // }
-            if (currentQuantity > {{ $detail->bidding_price }}) {
+            // if (currentQuantity > {{ $detail->bidding_price }}) {
+            if (currentQuantity > start_price) {
                 quantityInput.value = currentQuantity - {{ $info->product->price_step }};
                 quantityText.value = new Intl.NumberFormat().format(quantityInput.value);
             }
@@ -525,7 +525,11 @@ if ($check == false) {
         // showdata 
         // let pricenow ;
         // var pricenow ;
+        var start_price = {{ $detail->bidding_price }};
+
         $(document).ready(function() {
+            // console.log(start_price);
+
             setInterval(function() {
 
                 $.ajax({
@@ -533,8 +537,17 @@ if ($check == false) {
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {
+
+                        // console.log(typeof response.info[0]['bidding_price'])
                         // console.log(response);
                         if (response.info.length > 0) {
+                            if (start_price < response.info[0]['bidding_price']) {
+                                start_price = response.info[0]['bidding_price'];
+                                $('#quantity-text').val(new Intl.NumberFormat().format(response.info[0]['bidding_price']));
+                                // $('#quantity').val(response.info[0]['bidding_price']);
+                                document.getElementById('quantity').value = response.info[0]['bidding_price'];
+                                $("#quantity").attr("min", response.info[0]['bidding_price']);
+                            }
                             // pricenow = response.info[0]['bidding_price'];
                             document.getElementById('max-price').textContent =
                                 'Giá cao nhất hiện tại: ' + new Intl.NumberFormat().format(

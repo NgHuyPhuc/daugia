@@ -30,7 +30,27 @@
                                 <img src="../upload/img/{{$item->product->main_image}}" alt="">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-5 ttpdg-cus-sm">
-                                <a href="{{route('productsite.detail',['id'=>$item->id_product])}}">{{$item->product->product_name}}</a>
+                                <a href="{{route('productsite.detail',['id'=>$item->id_product])}}">Tên cuộc đấu giá: <strong>{{$item->product->product_name}}</strong></a>
+                                <hr>
+                                {{-- <p>Thời gian bắt đầu: {{Carbon\Carbon::parse($item->thoi_gian_bat_dau)->format('d/m/Y')}}</p> --}}
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        <p>Thời gian bắt đầu: {{Carbon\Carbon::parse($item->thoi_gian_bat_dau)->format('d/m/Y H:i:s')}}</p>
+                                        {{-- <p>Thời gian bắt đầu: {{$item->thoi_gian_bat_dau}}</p> --}}
+                                        <p>Thời gian kết thúc: {{Carbon\Carbon::parse($item->thoi_gian_ket_thuc)->format('d/m/Y H:i:s')}}</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                        {{-- <p>Thời gian còn lại: {{Carbon\Carbon::parse($item->thoi_gian_ket_thuc)->diff(Carbon\Carbon::now())->format('d/m/Y H:i:s')}} </p> --}}
+                                        <p>Thời gian còn lại: 
+                                        {{
+                                            Carbon\Carbon::parse($item->thoi_gian_ket_thuc)
+                                              ->diff(Carbon\Carbon::now())
+                                              ->format('%a ngày %h giờ %i phút')
+                                          }}
+                                          </p>
+                                    </div>
+                                    
+                                </div>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-3 joinpdg-cus-sm">
                                 <div class="more-item">
