@@ -95,13 +95,6 @@
                                     </tbody>
                                 </table>
                                 <div align='right'>
-                                    {{-- <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Trở lại</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">tiếp theo</a></li>
-                                </ul> --}}
                                     @if ($error != null)
                                     @else
                                         {{ $details->links('backend.pagination.pagination') }}
@@ -125,8 +118,6 @@
     <!-- javascript -->
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/chart.min.js"></script>
-    <script src="js/chart-data.js"></script>
     <script>
         function offdiv() {
             var x = document.getElementById("offdiv");

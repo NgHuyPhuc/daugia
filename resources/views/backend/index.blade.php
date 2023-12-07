@@ -27,8 +27,8 @@
                             <span class="glyphicon glyphicon-signal icon-50" aria-hidden="true"></span>
                         </div>
                         <div class="col-sm-9 col-lg-8 widget-right">
-                            <div class="large">8.000.000 đ</div>
-                            <div class="text-muted">Doanh thu tháng 7</div>
+                            <div class="large">{{number_format($profit)}} đ</div>
+                            <div class="text-muted">Tổng doanh thu</div>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                             </svg>
                         </div>
                         <div class="col-sm-9 col-lg-7 widget-right">
-                            <div class="large">24</div>
+                            <div class="large">{{$count_payment}}</div>
                             <div class="text-muted">Số đơn hàng</div>
                         </div>
                     </div>
@@ -71,6 +71,10 @@
     <!--end main-->
 
     <!-- javascript -->
+    <script>
+        var chart = @json($all_profit);
+        // console.log(chart);
+    </script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/chart.min.js"></script>

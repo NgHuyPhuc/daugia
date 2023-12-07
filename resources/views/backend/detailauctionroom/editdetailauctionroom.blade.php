@@ -20,10 +20,6 @@
                                         <label>Tên thông báo</label>
                                         <input value="{{$detail->bidding_price}}" type="text" name="info" class="form-control">
                                     </div>
-                                    {{-- <div class="form-group">
-                                        <label>Link luật pháp cũ</label>
-                                        <label><a href="{{$detail->link}}" target="_blank">Xem link cũ</a></label>
-                                    </div> --}}
                                     <div class="form-group">
                                         <label>Link luật pháp mới</label>
                                         <input type="text" name="link" class="form-control">
@@ -51,10 +47,6 @@
     <!--end main-->
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/chart.min.js"></script>
-    <script src="js/chart-data.js"></script>
-
-
 
     <script>
         function changeImg(input) {

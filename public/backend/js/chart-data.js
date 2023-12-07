@@ -1,7 +1,18 @@
 
-	
+	// console.log(chart);
+	// Object.keys(chart).forEach(function(key) {
+	// 	console.log(key);
+	//   });
+	var keys = Object.keys(chart);
+	var keyArray = Array.from(keys);
+
+	var keys = Object.keys(chart);
+	var values = keys.map(function(key) {
+		return chart[key];
+	});
+	// console.log(values);
 	var lineChartData = {
-			labels : ["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7"],
+			labels : keyArray,
 			datasets : [
 			
 				{
@@ -12,7 +23,7 @@
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
 					pointHighlightStroke : "rgba(48, 164, 255, 1)",
-					data : [1000000,2000000,3000000,2000000,5000000,4000000,8000000]
+					data : values
 				}
 			]
 
@@ -28,15 +39,15 @@ window.onload = function(){
 	window.myLine = new Chart(chart1).Line(lineChartData, {
 		responsive: true
 	});
-	var chart2 = document.getElementById("bar-chart").getContext("2d");
-	window.myBar = new Chart(chart2).Bar(barChartData, {
-		responsive : true
-	});
-	var chart3 = document.getElementById("doughnut-chart").getContext("2d");
-	window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {responsive : true
-	});
-	var chart4 = document.getElementById("pie-chart").getContext("2d");
-	window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
-	});
+	// var chart2 = document.getElementById("bar-chart").getContext("2d");
+	// window.myBar = new Chart(chart2).Bar(barChartData, {
+	// 	responsive : true
+	// });
+	// var chart3 = document.getElementById("doughnut-chart").getContext("2d");
+	// window.myDoughnut = new Chart(chart3).Doughnut(doughnutData, {responsive : true
+	// });
+	// var chart4 = document.getElementById("pie-chart").getContext("2d");
+	// window.myPie = new Chart(chart4).Pie(pieData, {responsive : true
+	// });
 	
 };
