@@ -36,7 +36,7 @@ class SiteController extends Controller
 
     public function products()
     {
-        $data['products'] = Product::orderby('id', 'desc')->paginate(3);
+        $data['products'] = Product::orderby('id', 'desc')->paginate(6);
         return view('frontend.product.product',$data);
     }
     public function detail(Request $request)

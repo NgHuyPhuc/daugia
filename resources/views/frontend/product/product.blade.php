@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Str;
+    use App\Models\MoreImageProduct;
+@endphp
 @extends('frontend/master/master')
 @section('title', 'Danh sách sản phẩm đấu giá')
 @section('main')
@@ -123,7 +127,12 @@
                             <div class="single-new">
                                 <a target="_blank" href="{{ route('productsite.detail', ['id' => $item->id]) }}">
                                     <div class="new-img">
-                                        <img src="../upload/img/{{ $item->main_image }}" alt="">
+                                        <img src="../upload/img/{{ $item->main_image }}"
+                                        @if (MoreImageProduct::where('id_product', $item->id)->count()>0)
+                                            onmouseover="this.src='../upload/img/{{MoreImageProduct::where('id_product', $item->id)->first()->img}}';"
+                                            onmouseout="this.src='../upload/img/{{ $item->main_image }}';" 
+                                        @endif
+                                         alt="">
                                     </div>
                                     <div class="new-cap">
                                         <h4><a href="#" class="ellipsis">{{ $item->product_name }}</a></h4>
