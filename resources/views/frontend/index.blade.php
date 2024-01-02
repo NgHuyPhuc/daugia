@@ -20,7 +20,7 @@
                             </div>
                             <div class="category-list">
                                 @foreach ($categories as $item)
-                                    <a href="#" class="category-item">
+                                    <a href="../category/{{$item->slug}}.html" class="category-item">
                                         {{ $item->name }}
                                     </a>
                                 @endforeach

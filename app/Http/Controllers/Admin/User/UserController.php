@@ -114,7 +114,7 @@ class UserController extends Controller
     }
     public function verifiUser()
     {
-        $data['users'] = User::where('level', 0)->paginate(5);
+        $data['users'] = User::where('level', 0)->where('checkmail', '=', '0')->paginate(5);
         return view('backend.users.user.verification',$data);
     }
     public function detail(Request $request){

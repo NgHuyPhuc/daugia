@@ -1,36 +1,49 @@
 @extends('backend/master/master')
-@section('title', 'Thêm mới thông báo')
+@section('title', 'Sửa chi tiết phòng đấu giá')
 @section('main')
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Thêm thông báo</h1>
+                <h1 class="page-header">Sửa chi tiết phòng đấu giá</h1>
             </div>
         </div>
         <!--/.row-->
         <div class="row">
             <div class="col-xs-6 col-md-12 col-lg-12">
-                <form method="post" enctype="multipart/form-data" action="{{ route('detailauctionroom.edit',['id' => $detail->id]) }}">
+                <form method="post" enctype="multipart/form-data" action="{{ route('detailauctionroom.postedit',['id' => $auction_room->id]) }}">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Thêm thông báo</div>
+                        <div class="panel-heading">Sửa chi tiết phòng đấu giá</div>
                         <div class="panel-body">
                             <div class="row" style="margin-bottom:40px">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label>Tên thông báo</label>
-                                        <input value="{{$detail->bidding_price}}" type="text" name="info" class="form-control">
+                                        <label>id</label>
+                                        <input value="{{$auction_room->id}}" type="text" name="info" class="form-control" disabled>
                                     </div>
                                     <div class="form-group">
-                                        <label>Link luật pháp mới</label>
-                                        <input type="text" name="link" class="form-control">
+                                        <label>ID phòng đấu giá</label>
+                                        <input value="{{$auction_room->id_auction_room}}" type="text" name="id_auctionroom" class="form-control" disabled>
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>ID sản phẩm</label>
+                                        <input value="{{$auction_room->id_product}}" type="text" name="id_product" class="form-control" disabled>
+                                        <strong>{{$auction_room->product->product_name}}</strong>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ID Người đấu giá</label>
+                                        <input value="{{$auction_room->id_user}}" type="text" name="id_user" class="form-control">
+                                        <strong>{{$auction_room->user->name}}</strong>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Giá trả</label>
+                                        <input value="{{$auction_room->bidding_price}}" type="text" name="bidding_price" class="form-control">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-success" type="submit">Sửa thông báo</button>
-                                    <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
+                                    <button class="btn btn-success" type="submit">Sửa</button>
+                                    <button style="margin-left: 20px" class="btn btn-danger" type="reset">Huỷ bỏ</button>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
