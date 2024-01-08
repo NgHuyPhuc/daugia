@@ -3,7 +3,7 @@ use App\Models\Payment;
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 @extends('frontend/master/master')
-@section('title', 'Thông tin cá nhân')
+@section('title', 'Danh sách sản phẩm quan tâm')
 @section('main')
 
     <div class="container mb-50">

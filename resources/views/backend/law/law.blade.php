@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Danh sách thông báo')
+@section('title', 'Danh sách thông tin luật pháp')
 @section('main')
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
@@ -7,14 +7,14 @@
             <li><a href="#"><svg class="glyph stroked home">
                         <use xlink:href="#stroked-home"></use>
                     </svg></a></li>
-            <li class="active">Danh sách thông báo</li>
+            <li class="active">Danh sách thông tin luật pháp</li>
         </ol>
     </div>
     <!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Danh sách thông báo</h1>
+            <h1 class="page-header">Danh sách thông tin luật pháp</h1>
         </div>
     </div>
     <!--/.row-->
@@ -35,13 +35,13 @@
                             </div>
                             @endif
                             
-                            <a href="{{route('law.create')}}" class="btn btn-primary">Thêm thông báo mới</a>
+                            <a href="{{route('law.create')}}" class="btn btn-primary">Thêm thông tin luật pháp mới</a>
                             <table class="table table-bordered" style="margin-top:20px;">
 
                                 <thead>
                                     <tr class="bg-primary">
                                         <th>ID</th>
-                                        <th>Thông tin thông báo</th>
+                                        <th>Thông tin luật pháp</th>
                                         <th>Tài liệu liên kết</th>
                                         <th width='7%'>Tùy chọn</th>
                                     </tr>

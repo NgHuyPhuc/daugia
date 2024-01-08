@@ -1,5 +1,5 @@
 @extends('frontend/master/master')
-@section('title', 'Thông tin cá nhân')
+@section('title', 'Đổi mật khẩu')
 @section('main')
 
 <div class="container mb-50">

@@ -6,101 +6,90 @@
 @section('title', 'Danh sách sản phẩm đấu giá')
 @section('main')
 
-    <div class="trending-area">
-        <div class="container">
-            <div class="trending-main">
-                <div class="row">
-                    <div class="col-lg-3 d-my-sm-none">
-                        <div class="category-main mb-30">
-                            <div class="category-title">
-                                <h4>
-                                    <i class="fas fa-list-ul"></i>
-                                    Danh mục tài sản
-                                </h4>
-                            </div>
-                            <div class="category-list">
-                                <a href="#" class="category-item">
-                                    QUYỀN SỬ DỤNG ĐẤT ĐỂ GIAO ĐẤT HOẶC CHO THUÊ ĐẤT
+<div class="trending-area">
+    <div class="container">
+        <div class="trending-main">
+            <div class="row">
+                <div class="col-lg-3 d-my-sm-none">
+                    <div class="category-main mb-30">
+                        <div class="category-title">
+                            <h4>
+                                <i class="fas fa-list-ul"></i>
+                                Danh mục tài sản
+                            </h4>
+                        </div>
+                        <div class="category-list">
+                            @foreach ($categories as $item)
+                                <a href="../category/{{$item->slug}}.html" class="category-item">
+                                    {{ $item->name }}
                                 </a>
-                                <a href="#" class="category-item">
-                                    TÀI SẢN LÀ NỢ XẤU VÀ TÀI SẢN BẢO ĐẢM TẠI TỔ CHỨC TÍN DỤNG
-                                </a>
-                                <a href="#" class="category-item">
-                                    TÀI SẢN THI HÀNH ÁN
-                                </a>
-                                <a href="#" class="category-item">
-                                    TÀI SẢN LÀ TANG VẬT, PHƯƠNG TIỆN VI PHẠM HÀNH CHÍNH HOẶC TÀI SẢN KÊ BIÊN
-                                </a>
-                                <a href="#" class="category-item">
-                                    TÀI SẢN NHÀ NƯỚC
-                                </a>
-                                <a href="#" class="category-item">
-                                    CÁC LOẠI TÀI SẢN KHÁC
-                                </a>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                            <div class="carousel-indicators">
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                                    aria-label="Slide 2"></button>
-                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                                    aria-label="Slide 3"></button>
-                            </div>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="../upload/img/10_day_nui_dep_nhat_chau_au.jpg" class="d-block w-100"
-                                        alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="../upload/img/22017.jpg" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="../upload/img/236008.jpg" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                </div>
+                <div class="col-lg-6">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
                         </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="img/10_day_nui_dep_nhat_chau_au.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/22017.jpg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/236008.jpg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <div class="col-lg-3 my-sm-style-support">
-                        <div class="support mb-30">
-                            <div class="support-title">
-                                <h4>HỖ TRỢ:</h4>
-                            </div>
-                            <div class="support-list">
-                                <a href="">
-                                    <i class="fas fa-headphones"></i>
-                                    Hotline: 0243.7622619
-                                </a>
-                                <a href="#">Email: daugiatructuyen.nalaf@gmail.com</a>
-                            </div>
-                            <div class="support-title">
-                                <h4>HƯỚNG DẪN:</h4>
-                            </div>
-                            <div class="support-list">
-                                <a href="https://daugiaviet.vn/files/huong_dan_su_dung.pdf" target="_blank">Hướng dẫn
-                                    tham gia đấu giá</a>
-                                <a href="https://daugiaviet.vn/files/nguoi_co_tai_san.pdf" target="_blank">Hướng dẫn
-                                    người có tài sản</a>
-                            </div>
+                </div>
+                <div class="col-lg-3 my-sm-style-support">
+                    <div class="support mb-30">
+                        <div class="support-title">
+                            <h4>HỖ TRỢ:</h4>
+                        </div>
+                        <div class="support-list">
+                            <a href="javascript:void(0)">
+                                <i class="fas fa-headphones"></i>
+                                Hotline: 0243.7622619
+                            </a>
+                            <a href="#">Email: daugiatructuyen.nalaf@gmail.com</a>
+                        </div>
+                        <div class="support-title">
+                            <h4>HƯỚNG DẪN:</h4>
+                        </div>
+                        <div class="support-list">
+                            <a href="/huong_dan_su_dung.pdf" target="_blank">Hướng dẫn
+                                tham gia đấu giá</a>
+                            <a href="https://daugiaviet.vn/files/nguoi_co_tai_san.pdf" target="_blank">Hướng dẫn
+                                người có tài sản</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
+</div>
 
     <div class="container">
         <div class="row">

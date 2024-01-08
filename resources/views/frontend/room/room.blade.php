@@ -5,7 +5,7 @@ if ($check == false) {
 ?>
 
 @extends('frontend/master/master')
-@section('title', 'Danh sách phòng đấu giá')
+@section('title', 'Phòng đấu giá')
 @section('main')
 
     <div class="what-news pt-50 pb-20">
@@ -30,7 +30,6 @@ if ($check == false) {
             </div>
             <div class="row pt-30">
                 <div class="col-lg-5">
-                    {{-- <img class="inpdg-img" src="../upload/img/{{ $info->product->main_image }}" alt=""> --}}
                     <div class="detail-img">
                         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -43,14 +42,6 @@ if ($check == false) {
                                         <img src="../upload/img/{{ $item->img }}" class="d-block w-100" alt="...">
                                     </div>
                                 @endforeach
-                                {{-- <div class="carousel-item" data-bs-interval="2000">
-                                    <img src="img/anh-nen-2k-cho-may-tinh_014252436.jpg"
-                                        class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="img/_league-of-legends-lol-wallpaper-full-hd- 88.jpg"
-                                        class="d-block w-100" alt="...">
-                                </div> --}}
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                                 data-bs-slide="prev">
@@ -187,16 +178,12 @@ if ($check == false) {
                         </div>
                         @if (Auth::guard('web')->user()->level == 1)
                             <div class="col-lg-6">
-                                <!-- Trả giá -->
-                                {{-- <form action="{{ route('user.postautionroom', ['id' => $info->id]) }}" method="post"> --}}
                                 <form id="post-price-auction">
-                                    {{-- <div class="row md-sm-mgt-10px"> --}}
                                     <div class="row">
                                         <div class="col-lg-1 col-md-2 col-sm-2 sm-pdt-5px">
                                             <a class="button-price-decrease" href="javascript:void(0)"
                                                 onclick="decreaseQuantity()">-</a>
                                         </div>
-                                        {{-- @dd($detail); --}}
                                         <div class="col-lg-4 col-md-4 col-sm-4">
                                             <input type="text" id="quantity-text"
                                                 value="{{ number_format($detail->bidding_price, 0, '.', '.') }}" disabled>
@@ -217,8 +204,6 @@ if ($check == false) {
                                         <div class="col-lg-4 col-md-3 col-sm-4">
                                             <button class="submit-price" type="submit">Trả giá</button>
                                         </div>
-
-
                                     </div>
                                     @csrf
                                 </form>
@@ -521,15 +506,9 @@ if ($check == false) {
             }
         }, 10000);
 
-        // console.log('id'+{{ $info->id }})
-        // showdata 
-        // let pricenow ;
-        // var pricenow ;
         var start_price = {{ $detail->bidding_price }};
 
         $(document).ready(function() {
-            // console.log(start_price);
-
             setInterval(function() {
 
                 $.ajax({

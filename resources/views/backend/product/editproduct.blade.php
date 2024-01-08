@@ -11,7 +11,7 @@
         <div class="col-xs-6 col-md-12 col-lg-12">
             <form method="post" enctype="multipart/form-data" action="{{ route('product.postedit',["id"=>$product->id]) }}">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">Thêm sản phẩm</div>
+                    <div class="panel-heading">Sửa sản phẩm</div>
                     <div class="panel-body">
                         <div class="row" style="margin-bottom:40px">
                             <div class="col-md-8">

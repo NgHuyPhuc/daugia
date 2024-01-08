@@ -2,7 +2,7 @@
 use App\Models\Payment;
 ?>
 @extends('frontend/master/master')
-@section('title', 'Thông tin cá nhân')
+@section('title', 'Danh sách hóa đơn thanh toán')
 @section('main')
 
     <div class="container mb-50">

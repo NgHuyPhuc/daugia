@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 ?>
 @extends('frontend/master/master')
-@section('title', "Danh sách phòng đấu giá")
+@section('title', "Danh sách sản phẩm quan tâm")
 @section('main')
 <div class="container mb-50">
     @if (Auth::user()->level == 0)
