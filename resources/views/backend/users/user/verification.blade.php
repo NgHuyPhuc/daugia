@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Chỉnh sửa sản phẩm')
+@section('title', 'Xác thực tài khoản người dùng')
 @section('main')
 
     <!--main-->
@@ -9,14 +9,14 @@
                 <li><a href="#"><svg class="glyph stroked home">
                             <use xlink:href="#stroked-home"></use>
                         </svg></a></li>
-                <li class="active">Danh sách thành viên</li>
+                <li class="active">Danh sách thành viên cần xác thực</li>
             </ol>
         </div>
         <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Danh sách thành viên</h1>
+                <h1 class="page-header">Danh sách thành viên cần xác thực</h1>
             </div>
         </div>
         <!--/.row-->

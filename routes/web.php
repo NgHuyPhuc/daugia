@@ -152,6 +152,7 @@ Route::prefix('admin')->middleware('auth:webadmin')->group(function () {
     });
     Route::get('/get-product-name/{id}', [AuctionRoomController::class, 'getProductName']);
     Route::get('/get-dgv-name/{id}', [AuctionRoomController::class, 'getDgvName']);
+    Route::get('/get-user-name/{id}', [AuctionRoomController::class, 'getUserName']);
 
 });
 //end admin

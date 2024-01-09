@@ -1,10 +1,10 @@
 @extends('backend/master/master')
-@section('title', 'Sửa Đơn Hàng')
+@section('title', 'Sửa Đơn Hàng Hoàn Tiền')
 @section('main')
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Sửa Đơn Hàng</h1>
+                <h1 class="page-header">Sửa Đơn Hàng Hoàn Tiền</h1>
             </div>
         </div>
         <!--/.row-->
@@ -12,7 +12,7 @@
             <div class="col-xs-6 col-md-12 col-lg-12">
                 <form method="post" enctype="multipart/form-data" action="{{ route('paymentstate.postedit',['id' => $payment->id]) }}">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Sửa Đơn Hàng</div>
+                        <div class="panel-heading">Sửa Đơn Hàng Hoàn Tiền</div>
                         <div class="panel-body">
                             <div class="row" style="margin-bottom:40px">
                                 <div class="col-md-8">
@@ -25,8 +25,11 @@
                                         <label>ID sản phẩm</label>
                                         <input id="id_product" value="{{$payment->id_product }}" type="text" name="id_product" class="form-control" disabled>
                                         {{-- <input  name="id_prd" type="text"> --}}
-                                        <br>
-                                        <label id="prd_name" for="">{{$payment->product->product_name }}</label>
+                                        {{-- <br> --}}
+                                        <label> <a target="_blank" href="{{route('product.detail',['id' => $payment->id_product])}}">{{$payment->product->product_name }} </a></label>
+
+                                        {{-- <label id="prd_name" for="">{{$payment->product->product_name }}</label> --}}
+                                        
                                     </div>
                                     
                                     <div class="form-group">
@@ -60,7 +63,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-success" type="submit">Sửa Đơn Hàng</button>
+                                    <button class="btn btn-success" type="submit">Sửa Đơn Hàng Hoàn Tiền</button>
                                     <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                                 </div>
                             </div>

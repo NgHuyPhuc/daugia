@@ -78,4 +78,13 @@ class AuctionRoomController extends Controller
         // dd($user->user_name);
         return $user->name;
     }
+    public function getUserName(Request $request)
+    {
+        // dd($request->id);
+        $id = $request->id;
+        // $user = User::findOrFail($id);
+        $user = User::where('level', '1')->where('id', $id)->firstOrFail();
+        // dd($user->user_name);
+        return $user->name;
+    }
 }

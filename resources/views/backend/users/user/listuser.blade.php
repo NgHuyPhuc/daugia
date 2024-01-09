@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Chỉnh sửa sản phẩm')
+@section('title', 'Danh sách thành viên')
 @section('main')
 
     <!--main-->

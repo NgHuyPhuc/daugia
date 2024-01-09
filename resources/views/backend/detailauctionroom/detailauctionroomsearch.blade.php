@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Danh sách phòng đấu giá')
+@section('title', 'Danh sách chi tiết phòng đấu giá')
 @section('main')
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">

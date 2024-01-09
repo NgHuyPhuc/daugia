@@ -1,5 +1,5 @@
 @extends('backend/master/master')
-@section('title', 'Chỉnh sửa sản phẩm')
+@section('title', 'Danh sách đấu giá viên')
 @section('main')
 
     <!--main-->
@@ -9,14 +9,14 @@
                 <li><a href="#"><svg class="glyph stroked home">
                             <use xlink:href="#stroked-home"></use>
                         </svg></a></li>
-                <li class="active">Danh sách thành viên</li>
+                <li class="active">Danh sách đấu giá viên</li>
             </ol>
         </div>
         <!--/.row-->
 
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Danh sách thành viên</h1>
+                <h1 class="page-header">Danh sách đấu giá viên</h1>
             </div>
         </div>
         <!--/.row-->
@@ -37,7 +37,7 @@
                                             class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
                                     </div>
                                 @endif
-                                <a href="{{ route('useradminsite.create') }}" class="btn btn-primary">Thêm Thành viên</a>
+                                <a href="{{ route('useradminsite.create') }}" class="btn btn-primary">Thêm đấu giá viên</a>
                                 <form style="margin-top: 20px" action="{{ route('useradminsite.search') }}" method="get">
                                     <label for="">Nhập thông tin tìm kiếm:</label>
                                     <input type="text" name="keyword">

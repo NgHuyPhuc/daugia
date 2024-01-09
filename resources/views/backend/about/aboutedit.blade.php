@@ -1,10 +1,10 @@
 @extends('backend/master/master')
-@section('title', 'Thêm mới Thông tin giới thiệu')
+@section('title', 'Sửa mới Thông tin giới thiệu')
 @section('main')
     <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Thêm Thông tin giới thiệu</h1>
+                <h1 class="page-header">Sửa Thông tin giới thiệu</h1>
             </div>
         </div>
         <!--/.row-->
@@ -12,7 +12,7 @@
             <div class="col-xs-6 col-md-12 col-lg-12">
                 <form method="post" enctype="multipart/form-data" action="{{ route('about.postcreate') }}">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Thêm Thông tin giới thiệu</div>
+                        <div class="panel-heading">Sửa Thông tin giới thiệu</div>
                         <div class="panel-body">
                             <div class="row" style="margin-bottom:40px">
                                 <div class="col-md-8">
@@ -44,7 +44,7 @@
                                     <label>Miêu tả</label>
                                     <textarea id="editor" name="describe" style="width: 100%;height: 100px;"></textarea>
                                 </div> --}}
-                                    <button class="btn btn-success" type="submit">Thêm Thông tin giới thiệu</button>
+                                    <button class="btn btn-success" type="submit">Sửa Thông tin giới thiệu</button>
                                     <button class="btn btn-danger" type="reset">Huỷ bỏ</button>
                                 </div>
                             </div>
